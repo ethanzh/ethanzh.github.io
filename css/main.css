@@ -1,3 +1,13 @@
+
+@font-face {
+    font-family: vision;
+    src: url("https://ethanzh.github.io/fonts/vision/Vision.otf");
+}
+
+body {
+    font-family: vision;
+}
+
 .name_title {
 
     text-align: left;
