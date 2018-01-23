@@ -1,3 +1,17 @@
+
+---START_METADATA---
+{
+  "title": "My Internship Experience With MakeGamesWithUs (as a 13-year-old)",
+  "author": "Gautam Mittal",
+  "summary": "My experience hanging out at a Silicon Valley startup.",
+  "tags":[
+    "me",
+    "internships"
+  ]
+}
+---END_METADATA---
+
+
 ##First Blog Post
 
 Hello world, this is my first blog post I am using to test my website's 
