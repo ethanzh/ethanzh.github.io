@@ -1,7 +1,7 @@
 
 ---START_METADATA---
 {
-  "title": "Hello World!",
+  "title": "This is a test",
   "author": "Ethan Houston",
   "summary": "I'm just trying to see if my Python file works"
   
@@ -9,6 +9,7 @@
 ---END_METADATA---
 
 
-#First Blog Post
-
-Hello world, this is my first blog post
+This is my second thing I hope it works
+- one
+- two 
+- three
