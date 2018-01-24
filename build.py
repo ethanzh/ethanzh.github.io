@@ -1,11 +1,14 @@
 import markdown
-import os
+import os, errno
 import json
 import re
 
+# TO-DO:
+# Create new directories for each post, name file 'index.html'
+
 DIRECTORY_NAME = os.path.basename(os.path.dirname(os.path.realpath(__file__)))  # Name of current directory
 CURRENT_DIR = dir_path = os.path.dirname(os.path.realpath(__file__))  # Full path to current directory
-BLOG_DIR = CURRENT_DIR + "/content/markdown"  # Gets path to blog folder
+BLOG_DIR = CURRENT_DIR + "/content"  # Gets path to blog folder
 BLOG_FILE_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)), BLOG_DIR, i) for i in os.listdir(BLOG_DIR)]
 
 markdown_file_locations = []
@@ -51,13 +54,22 @@ def add_md_text_to_template(template, md_string, title):
     lower_title = spaceless_title.lower()
     final_title = re.sub(r'[^a-zA-Z0-9_]', '', lower_title)
 
-    directory_so_far = "content/generated/"
+    directory_so_far = "posts/"
 
-    new_html_location = directory_so_far + final_title + ".html"
-    post_links.append(new_html_location)
+    try:
+        os.makedirs(directory_so_far + final_title)
+        directory_so_far += final_title
 
-    new_html_file = open(new_html_location, "w")
-    new_html_file.write(new_html_contents)
+        post_links.append(directory_so_far + "/")
+        new_html_location = directory_so_far + "/index.html"
+
+        print(new_html_location)
+
+        new_html_file = open(new_html_location, "w")
+        new_html_file.write(new_html_contents)
+    except OSError as e:
+        if e.errno != errno.EEXIST:
+            raise
 
 
 def create_post_html(path):
@@ -89,11 +101,17 @@ def create_index():
 
         add_to_html = ""
 
-        for i in range(0, len(post_titles)):
-            add_to_html += "<div>"
-            add_to_html += "<a href=" + post_links[i] + ">" + post_titles[i] + "</a>"
-            add_to_html += "<p>" + post_dates[i] + ". " + post_summaries[i] + "</p>"
-            add_to_html += "</div><br />"
+        try:
+
+            for i in range(0, len(post_titles)):
+
+                add_to_html += "<div>"
+                add_to_html += "<a href=" + post_links[i] + ">" + post_titles[i] + "</a>"
+                add_to_html += "<p>" + post_dates[i] + ". " + post_summaries[i] + "</p>"
+                add_to_html += "</div><br />"
+
+        except IndexError:
+            pass
 
         new_html_contents = html_string.replace("{BLOG}", add_to_html)
 
@@ -111,3 +129,5 @@ for i in markdown_file_locations:  # Goes through locations and creates .html fi
     create_post_html(i)
 
 create_index()
+
+print(post_links)
