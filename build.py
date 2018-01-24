@@ -1,5 +1,5 @@
 import markdown
-import os, errno
+import os, errno, shutil
 import json
 import re
 
@@ -10,6 +10,9 @@ DIRECTORY_NAME = os.path.basename(os.path.dirname(os.path.realpath(__file__)))  
 CURRENT_DIR = dir_path = os.path.dirname(os.path.realpath(__file__))  # Full path to current directory
 BLOG_DIR = CURRENT_DIR + "/content"  # Gets path to blog folder
 BLOG_FILE_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)), BLOG_DIR, i) for i in os.listdir(BLOG_DIR)]
+
+CURRENT_POST_DIR = CURRENT_DIR + "/posts"
+CURRENT_POST_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)), CURRENT_POST_DIR, i) for i in os.listdir(CURRENT_POST_DIR)]
 
 markdown_file_locations = []
 
@@ -63,8 +66,6 @@ def add_md_text_to_template(template, md_string, title):
         post_links.append(directory_so_far + "/")
         new_html_location = directory_so_far + "/index.html"
 
-        print(new_html_location)
-
         new_html_file = open(new_html_location, "w")
         new_html_file.write(new_html_contents)
     except OSError as e:
@@ -101,6 +102,11 @@ def create_index():
 
         add_to_html = ""
 
+        index_already_exists = (os.path.exists("index.html"))
+
+        if index_already_exists:
+            os.remove("index.html")
+
         try:
 
             for i in range(0, len(post_titles)):
@@ -125,9 +131,13 @@ post_dates = []
 post_summaries = []
 
 
+posts_exists = os.path.exists("posts/")
+
+if posts_exists:
+    shutil.rmtree("posts")
+    os.makedirs("posts")
+
 for i in markdown_file_locations:  # Goes through locations and creates .html files
     create_post_html(i)
 
 create_index()
-
-print(post_links)
