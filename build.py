@@ -65,7 +65,7 @@ def add_md_text_to_template(template, md_string, title):
         os.makedirs(directory_so_far + final_title)
         directory_so_far += final_title
 
-        post_links.append(directory_so_far + "/")
+        # post_links.append(directory_so_far + "/")
         new_html_location = directory_so_far + "/index.html"
 
         new_html_file = open(new_html_location, "w")
@@ -90,13 +90,13 @@ def create_post_html(path):
     summary = json['summary']
     date = json['date']
 
-    post_titles.append(title)
-    post_summaries.append(summary)
+    # post_titles.append(title)
+    # post_summaries.append(summary)
 
     time = datetime.datetime.strptime(date, "%d %B %Y").timestamp()
 
-    post_dates.append(date)
-    post_time.append(time)
+    # post_dates.append(date)
+    # post_time.append(time)
 
     md_html = md_to_html(text)  # Converts markdown text to HTML
 
@@ -149,11 +149,6 @@ class PostObject(object):
         self.link = link
 
 
-post_titles = []
-post_links = []
-post_dates = []
-post_summaries = []
-post_time = []
 post_objects = []
 
 
