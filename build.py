@@ -56,6 +56,7 @@ def add_md_text_to_template(template, md_string, title):
     directory_so_far = "content/generated/"
 
     new_html_location = directory_so_far + final_title + ".html"
+    post_links.append(new_html_location)
 
     new_html_file = open(new_html_location, "w")
     new_html_file.write(new_html_contents)
@@ -73,6 +74,8 @@ def create_post_html(path):
     author = json['author']
     summary = json['summary']
 
+    post_titles.append(title)
+
     md_html = md_to_html(text)  # Converts markdown text to HTML
 
     add_md_text_to_template(template_html, md_html, title)  # Creates new file, adds markdown HTML text
@@ -82,13 +85,21 @@ def create_index():
     with open("templates/index.html", "r") as html_template:
         html_string = html_template.read()
 
-        new_html_contents = html_string.replace("{BLOG}", "<h1>Blog posts will go here!</h1>")
+        add_to_html = "";
+
+        for i in range(0, len(post_titles)):
+            add_to_html += "<a href=" + post_links[i] + ">" + post_titles[i] + "</a><br />"
+
+        print(add_to_html)
+
+        new_html_contents = html_string.replace("{BLOG}", add_to_html)
 
         new_html_file = open("index.html", "w")
         new_html_file.write(new_html_contents)
 
-        print(html_string)
 
+post_titles = []
+post_links = []
 
 for i in markdown_file_locations:
     create_post_html(i)

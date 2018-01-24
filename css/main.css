@@ -21,7 +21,7 @@ body {
     
 }
 
-.intro_block {
+.intro_block, .blog_posts {
 
     width: 33%;
     border-color: cornflowerblue;
