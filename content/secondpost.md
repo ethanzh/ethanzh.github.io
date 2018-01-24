@@ -3,7 +3,7 @@
   "title": "Second post",
   "author": "Ethan Houston",
   "summary": "Please work",
-  "date": "24 January 2018"
+  "date": "22 January 2018"
 }
 ---END_METADATA---
 

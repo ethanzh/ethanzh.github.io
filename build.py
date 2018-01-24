@@ -2,6 +2,8 @@ import markdown
 import os, errno, shutil
 import json
 import re
+import datetime
+import operator
 
 # TO-DO:
 # Create new directories for each post, name file 'index.html'
@@ -72,6 +74,8 @@ def add_md_text_to_template(template, md_string, title):
         if e.errno != errno.EEXIST:
             raise
 
+    return directory_so_far + "/"
+
 
 def create_post_html(path):
 
@@ -89,11 +93,16 @@ def create_post_html(path):
     post_titles.append(title)
     post_summaries.append(summary)
 
+    time = datetime.datetime.strptime(date, "%d %B %Y").timestamp()
+
     post_dates.append(date)
+    post_time.append(time)
 
     md_html = md_to_html(text)  # Converts markdown text to HTML
 
-    add_md_text_to_template(template_html, md_html, title)  # Creates new file, adds markdown HTML text
+    link = add_md_text_to_template(template_html, md_html, title)  # Creates new file, adds markdown HTML text
+
+    post_objects.append(PostObject(title, link, date, summary, time))
 
 
 def create_index():
@@ -109,11 +118,13 @@ def create_index():
 
         try:
 
-            for i in range(0, len(post_titles)):
+            sorted_list = sorted(post_objects, key=lambda x: x.time, reverse=True)
+
+            for i in range(0, len(sorted_list)):
 
                 add_to_html += "<div>"
-                add_to_html += "<a href=" + post_links[i] + ">" + post_titles[i] + "</a>"
-                add_to_html += "<p>" + post_dates[i] + ". " + post_summaries[i] + "</p>"
+                add_to_html += "<a href=" + sorted_list[i].link + ">" + sorted_list[i].title + "</a>"
+                add_to_html += "<p>" + sorted_list[i].date + ". " + sorted_list[i].summary + "</p>"
                 add_to_html += "</div><br />"
 
         except IndexError:
@@ -125,10 +136,25 @@ def create_index():
         new_html_file.write(new_html_contents)
 
 
+class PostObject(object):
+
+    def __init__(self, title, link, date, summary, time):
+        self.title = title
+        self.link = link
+        self.date = date
+        self.summary = summary
+        self.time = time
+
+    def set_link(self, link):
+        self.link = link
+
+
 post_titles = []
 post_links = []
 post_dates = []
 post_summaries = []
+post_time = []
+post_objects = []
 
 
 posts_exists = os.path.exists("posts/")
@@ -141,3 +167,7 @@ for i in markdown_file_locations:  # Goes through locations and creates .html fi
     create_post_html(i)
 
 create_index()
+
+#print(sorted(post_time)[::-1])
+
+
