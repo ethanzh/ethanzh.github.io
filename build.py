@@ -73,8 +73,12 @@ def create_post_html(path):
     title = json['title']
     author = json['author']
     summary = json['summary']
+    date = json['date']
 
     post_titles.append(title)
+    post_summaries.append(summary)
+
+    post_dates.append(date)
 
     md_html = md_to_html(text)  # Converts markdown text to HTML
 
@@ -85,10 +89,15 @@ def create_index():
     with open("templates/index.html", "r") as html_template:
         html_string = html_template.read()
 
-        add_to_html = "";
+        test = "HELLO"
+
+        add_to_html = ""
 
         for i in range(0, len(post_titles)):
-            add_to_html += "<a href=" + post_links[i] + ">" + post_titles[i] + "</a><br />"
+            add_to_html += "<div>"
+            add_to_html += "<a href=" + post_links[i] + ">" + post_titles[i] + "</a>"
+            add_to_html += "<p>" + post_dates[i] + ". " + post_summaries[i] + "</p>"
+            add_to_html += "</div><br />"
 
         print(add_to_html)
 
@@ -100,6 +109,9 @@ def create_index():
 
 post_titles = []
 post_links = []
+post_dates = []
+post_summaries = []
+
 
 for i in markdown_file_locations:
     create_post_html(i)
