@@ -12,9 +12,7 @@ markdown_file_locations = []
 
 for i in BLOG_FILE_NAMES:
     if i[-2:] == "md":  # Finds all .md files in blog directory
-        print(i)
         markdown_file_locations.append(i)
-        pass
 
 
 def get_template_html_as_text():
@@ -25,7 +23,7 @@ def get_template_html_as_text():
 def get_metadata_as_json(current_directory):
     with open(current_directory, "r") as md_file:
 
-        metadata = md_file.read().rsplit('---END_METADATA---', 1)[0].split("---START_METADATA---", 1)[1]
+        metadata = md_file.read().rsplit('---END_METADATA---', 1)[0].split("---START_METADATA---", 1)[1]  # Get metadata
 
         json_metadata = json.loads(metadata)
 
@@ -35,7 +33,7 @@ def get_metadata_as_json(current_directory):
 def get_md_as_text(current_directory):
     with open(current_directory, "r") as md_file:
 
-        return md_file.read().split("---END_METADATA---", 1)[1]
+        return md_file.read().split("---END_METADATA---", 1)[1]  # Gets all text after END_METADATA
 
 
 def process_markdown(current_directory):  # Returns [json, text]
@@ -89,8 +87,6 @@ def create_index():
     with open("templates/index.html", "r") as html_template:
         html_string = html_template.read()
 
-        test = "HELLO"
-
         add_to_html = ""
 
         for i in range(0, len(post_titles)):
@@ -98,8 +94,6 @@ def create_index():
             add_to_html += "<a href=" + post_links[i] + ">" + post_titles[i] + "</a>"
             add_to_html += "<p>" + post_dates[i] + ". " + post_summaries[i] + "</p>"
             add_to_html += "</div><br />"
-
-        print(add_to_html)
 
         new_html_contents = html_string.replace("{BLOG}", add_to_html)
 
@@ -113,7 +107,7 @@ post_dates = []
 post_summaries = []
 
 
-for i in markdown_file_locations:
+for i in markdown_file_locations:  # Goes through locations and creates .html files
     create_post_html(i)
 
 create_index()
