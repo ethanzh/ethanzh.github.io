@@ -108,8 +108,6 @@ def create_index():
     with open("templates/index.html", "r") as html_template:
         html_string = html_template.read()
 
-        print(html_string)
-
         add_to_html = ""
 
         index_already_exists = (os.path.exists("index.html"))
