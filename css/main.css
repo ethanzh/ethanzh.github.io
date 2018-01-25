@@ -11,7 +11,21 @@ body {
 }
 
 div {
+    border-style:dashed;
+}
 
+.middle_pic {
+    text-align: center;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+
+#inner {
+    margin: 0 auto;
+}
+#outer {
+    text-align: center;
 }
 
 a {
