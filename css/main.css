@@ -18,9 +18,7 @@
     font-size: 22pt;
     color: #42474f;
     text-decoration: none;
-    border-bottom: 0px dotted #000;
-    border-color: #42474f;
-    text-decoration: none;
+    border-bottom: 0px dotted #42474f;
 }
 
 
@@ -29,22 +27,19 @@
 }
 
 #linkedin:hover{
-    src: url("/img/logos/facebook_blue.png");
     background: url("/img/logos/facebook_blue.png");
 }
 
 #wechat:hover{
-    src: url("/img/logos/facebook_blue.png");
     background: url("/img/logos/facebook_blue.png");
 }
 
 #flickr:hover{
-    src: url("/img/logos/facebook_blue.png");
     background: url("/img/logos/facebook_blue.png");
 }
 
 body {
-    font-family: vision;
+    font-family: ProximaNova, sans-serif;
 }
 
 div {
