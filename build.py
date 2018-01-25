@@ -108,6 +108,8 @@ def create_index():
     with open("templates/index.html", "r") as html_template:
         html_string = html_template.read()
 
+        print(html_string)
+
         add_to_html = ""
 
         index_already_exists = (os.path.exists("index.html"))
@@ -124,7 +126,7 @@ def create_index():
                 add_to_html += "<div>"
                 add_to_html += "<a href=" + sorted_list[i].link + ">" + sorted_list[i].title + "</a>"
                 add_to_html += "<p>" + sorted_list[i].date + ". " + sorted_list[i].summary + "</p>"
-                add_to_html += "</div><br />\n            "
+                add_to_html += "</div><br />\n                "
 
         except IndexError:
             pass
