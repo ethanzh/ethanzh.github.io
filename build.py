@@ -117,7 +117,7 @@ def create_post_html(path):
 
     title_html = "<a id=\"title_button\" href=\"/\">" + title + "</a>"
 
-    reading_time_html = "<p>Reading time: " + reading_time + " minutes</p>"
+    reading_time_html = "<p class=\"read_time\">Reading time: " + reading_time + " minutes</p>"
 
     link = add_md_text_to_template(template_html, md_html, title, title_html, reading_time_html)  # Creates new file, adds markdown HTML text
 

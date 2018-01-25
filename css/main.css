@@ -84,9 +84,13 @@ a {
 }
 
 .body_text {
-    font-size: 80px;
-    background-color: red;
-    color: red;
+    font-size: 16px;
+    line-height: 170%;
+}
+
+.read_time {
+    font-style: italic;
+    font-size: 14px;
 }
 
 .name_title {
