@@ -83,6 +83,12 @@ a {
     text-decoration: none;
 }
 
+.body_text {
+    font-size: 80px;
+    background-color: red;
+    color: red;
+}
+
 .name_title {
 
     padding-top:8%;
