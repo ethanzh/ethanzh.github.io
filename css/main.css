@@ -1,7 +1,9 @@
 
 @font-face {
-    font-family: vision;
-    src: url("https://ethanzh.github.io/fonts/vision/Vision.otf");
+    font-family: "ProximaNova";
+    src: url("/fonts/ProximaNovaSemibold.ttf");
+    font-weight: bold;
+    font-style: italic, oblique;
 }
 
 body {
@@ -14,8 +16,10 @@ div {
 
 .name_title {
 
+    padding-top:8%;
     text-align: left;
-
+    font-size:20pt;
+    color: black;
 
 }
 
@@ -34,11 +38,14 @@ div {
 }
 
 header {
-    background-color: darkslategrey;
+    background-color: #1d1d1d;
     height: 20px;
 }
 
 body {
+    font-family: "ProximaNova", sans-serif;
+    font-size: 14pt;
+    color: #666666;
     margin: 0;
     padding: 0;
 }
