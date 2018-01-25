@@ -18,7 +18,7 @@
     font-size: 22pt;
     color: #42474f;
     text-decoration: none;
-    border-bottom: 0px dotted #42474f;
+    border-bottom: 0 dotted #42474f;
 }
 
 
@@ -65,9 +65,7 @@ div {
     font-size: 14pt;
     color: #42474f;
     text-decoration: none;
-    border-bottom: 0px dotted #000;
-    border-color: #42474f;
-    text-decoration: none;
+    border-bottom: 0 dotted #42474f;
 }
 
 .post_link:hover {
@@ -76,15 +74,12 @@ div {
 
 .image_link{
     text-decoration: none;
-    border-bottom: 0px dotted #000;
-    border-color: #FFFFFF;
-    text-decoration: none;
+    border-bottom: 0 dotted #FFFFFF;
 }
 
 a {
     color: #68b3ff;
-    border-bottom: 1px dotted #000;
-    border-color: #68b3ff;
+    border-bottom: 1px dotted #68b3ff;
     text-decoration: none;
 }
 
@@ -105,14 +100,6 @@ a {
 
     text-align: left;
     
-}
-
-.intro_block, .blog_posts {
-
-    width: 65%;
-    border-color: cornflowerblue;
-    margin: 0 auto;
-
 }
 
 header {
