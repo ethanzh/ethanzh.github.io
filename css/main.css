@@ -37,3 +37,8 @@ header {
     background-color: darkslategrey;
     height: 20px;
 }
+
+body {
+    margin: 0;
+    padding: 0;
+}
