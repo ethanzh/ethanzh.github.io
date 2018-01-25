@@ -6,6 +6,13 @@
     font-style: italic, oblique;
 }
 
+@font-face {
+    font-family: "ProximaNovaBold";
+    src: url("/fonts/ProximaNovaBold.ttf");
+    font-weight: bold;
+    font-style: italic, oblique;
+}
+
 body {
     font-family: vision;
 }
@@ -24,7 +31,22 @@ div {
     margin: 0 auto;
 }
 #outer {
+    padding-top: 22px;
     text-align: center;
+}
+
+.post_link {
+    font-family: "ProximaNovaBold", sans-serif;
+    font-size: 14pt;
+    color: #42474f;
+    text-decoration: none;
+    border-bottom: 0px dotted #000;
+    border-color: #42474f;
+    text-decoration: none;
+}
+
+.post_link:hover {
+    text-decoration: underline;
 }
 
 .image_link{

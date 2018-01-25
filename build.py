@@ -122,7 +122,7 @@ def create_index():
             for i in range(0, len(sorted_list)):
 
                 add_to_html += "<div>"
-                add_to_html += "<a href=" + sorted_list[i].link + ">" + sorted_list[i].title + "</a>"
+                add_to_html += "<a class=\"post_link\" href=" + sorted_list[i].link + ">" + sorted_list[i].title + "</a>"
                 add_to_html += "<p>" + sorted_list[i].date + ". " + sorted_list[i].summary + "</p>"
 
                 if i == (len(sorted_list) - 1):
