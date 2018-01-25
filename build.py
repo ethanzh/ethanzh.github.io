@@ -18,6 +18,9 @@ CURRENT_POST_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)), C
 
 markdown_file_locations = []
 
+WPM = 200
+WORD_LENGTH = 5
+
 for i in BLOG_FILE_NAMES:
     if i[-2:] == "md":  # Finds all .md files in blog directory
         markdown_file_locations.append(i)
@@ -41,7 +44,17 @@ def get_metadata_as_json(current_directory):
 def get_md_as_text(current_directory):
     with open(current_directory, "r") as md_file:
 
-        return md_file.read().split("---END_METADATA---", 1)[1]  # Gets all text after END_METADATA
+        body_text = md_file.read().split("---END_METADATA---", 1)[1]
+
+        length = len(body_text)
+
+        word_count = length / WORD_LENGTH  # / means divide and then round down
+
+        reading_time = str(word_count // WPM)
+
+        return_list = [body_text, reading_time]
+
+        return return_list  # Gets all text after END_METADATA
 
 
 def process_markdown(current_directory):  # Returns [json, text]
@@ -52,12 +65,17 @@ def md_to_html(md_string):
     return markdown.markdown(md_string)
 
 
-def add_md_text_to_template(template, md_string, title):
-    new_html_contents = template.replace('{TEST}', md_string)
+def add_md_text_to_template(template, md_string, title, title_html, reading_time_html):
 
-    spaceless_title = title.replace(" ", "_")
+    new_html_contents = template.replace('{TITLE}', title_html)
+
+    new_html_contents = new_html_contents.replace('{TIME}', reading_time_html)
+
+    new_html_contents = new_html_contents.replace('{BODY}', md_string)
+
+    spaceless_title = title.replace(" ", "-")
     lower_title = spaceless_title.lower()
-    final_title = re.sub(r'[^a-zA-Z0-9_]', '', lower_title)
+    final_title = re.sub(r'[^a-zA-Z0-9-]', '', lower_title)
 
     directory_so_far = "posts/"
 
@@ -83,25 +101,25 @@ def create_post_html(path):
 
     processed = process_markdown(path)  # [json, text]
     json = processed[0]
-    text = processed[1]
+    text = processed[1][0]
+    reading_time = str(processed[1][1])
 
     title = json['title']
     author = json['author']
     summary = json['summary']
     date = json['date']
 
-    # post_titles.append(title)
-    # post_summaries.append(summary)
-
     time = datetime.datetime.strptime(date, "%d %B %Y").timestamp()
 
-    # post_dates.append(date)
-    # post_time.append(time)
+    md_html = md_to_html(text)  # Adds the markdown HTML
 
-    md_html = md_to_html(text)  # Converts markdown text to HTML
-    link = add_md_text_to_template(template_html, md_html, title)  # Creates new file, adds markdown HTML text
+    title_html = "<h1>" + title + "</h1>"
 
-    post_objects.append(PostObject(title, link, date, summary, time))
+    reading_time_html = "<p>Reading time: " + reading_time + " minutes</p>"
+
+    link = add_md_text_to_template(template_html, md_html, title, title_html, reading_time_html)  # Creates new file, adds markdown HTML text
+
+    post_objects.append(PostObject(title, link, date, summary, time, reading_time))
 
 
 def create_index():
@@ -142,20 +160,19 @@ def create_index():
 
 class PostObject(object):
 
-    def __init__(self, title, link, date, summary, time):
+    def __init__(self, title, link, date, summary, time, reading_time):
         self.title = title
         self.link = link
         self.date = date
         self.summary = summary
         self.time = time
+        self.reading_time = reading_time
 
     def set_link(self, link):
         self.link = link
 
 
 post_objects = []
-
-
 posts_exists = os.path.exists("posts/")
 
 if posts_exists:
@@ -166,7 +183,5 @@ for i in markdown_file_locations:  # Goes through locations and creates .html fi
     create_post_html(i)
 
 create_index()
-
-#print(sorted(post_time)[::-1])
 
 
