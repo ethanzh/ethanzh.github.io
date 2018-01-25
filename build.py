@@ -113,7 +113,7 @@ def create_post_html(path):
 
     md_html = md_to_html(text)  # Adds the markdown HTML
 
-    title_html = "<h1>" + title + "</h1>"
+    title_html = "<a href=\"/\">" + title + "</a>"
 
     reading_time_html = "<p>Reading time: " + reading_time + " minutes</p>"
 
