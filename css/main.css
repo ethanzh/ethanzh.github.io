@@ -13,6 +13,15 @@
     font-style: italic, oblique;
 }
 
+#title_button {
+    font-family: "ProximaNovaBold", sans-serif;
+    font-size: 22pt;
+    color: #42474f;
+    text-decoration: none;
+    border-bottom: 0px dotted #000;
+    border-color: #42474f;
+    text-decoration: none;
+}
 
 
 #facebook:hover{
