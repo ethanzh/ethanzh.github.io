@@ -15,8 +15,9 @@ div {
 }
 
 a {
-    color: #afd7ff;
+    color: #68b3ff;
     border-bottom: 1px dotted #000;
+    border-color: #68b3ff;
     text-decoration: none;
 }
 
