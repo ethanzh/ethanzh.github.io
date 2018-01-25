@@ -92,6 +92,15 @@ a {
 
 }
 
+.name_title_index {
+
+    padding-top: calc(8% + 1px);
+    text-align: left;
+    font-size:20pt;
+    color: black;
+
+}
+
 .thoughts {
     color: black;
 }
