@@ -99,7 +99,6 @@ def create_post_html(path):
     # post_time.append(time)
 
     md_html = md_to_html(text)  # Converts markdown text to HTML
-
     link = add_md_text_to_template(template_html, md_html, title)  # Creates new file, adds markdown HTML text
 
     post_objects.append(PostObject(title, link, date, summary, time))
