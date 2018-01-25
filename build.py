@@ -67,7 +67,9 @@ def md_to_html(md_string):
 
 def add_md_text_to_template(template, md_string, title, title_html, reading_time_html):
 
-    new_html_contents = template.replace('{TITLE}', title_html)
+    new_html_contents = template.replace('{TABTITLE}', title)
+
+    new_html_contents = new_html_contents.replace('{TITLE}', title_html)
 
     new_html_contents = new_html_contents.replace('{TIME}', reading_time_html)
 
