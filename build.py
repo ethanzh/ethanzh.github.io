@@ -124,7 +124,12 @@ def create_index():
                 add_to_html += "<div>"
                 add_to_html += "<a href=" + sorted_list[i].link + ">" + sorted_list[i].title + "</a>"
                 add_to_html += "<p>" + sorted_list[i].date + ". " + sorted_list[i].summary + "</p>"
-                add_to_html += "</div><br />\n                "
+
+                if i == (len(sorted_list) - 1):
+                    add_to_html += "</div>\n                "
+
+                else:
+                    add_to_html += "</div><br />\n                "
 
         except IndexError:
             pass
