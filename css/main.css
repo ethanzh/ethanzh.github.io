@@ -13,6 +13,27 @@
     font-style: italic, oblique;
 }
 
+
+
+#facebook:hover{
+    background: url("/img/logos/facebook_blue.png");
+}
+
+#linkedin:hover{
+    src: url("/img/logos/facebook_blue.png");
+    background: url("/img/logos/facebook_blue.png");
+}
+
+#wechat:hover{
+    src: url("/img/logos/facebook_blue.png");
+    background: url("/img/logos/facebook_blue.png");
+}
+
+#flickr:hover{
+    src: url("/img/logos/facebook_blue.png");
+    background: url("/img/logos/facebook_blue.png");
+}
+
 body {
     font-family: vision;
 }
