@@ -15,9 +15,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="../../css/main.css">
 
-    <script src="instantclick.min.js" data-no-instant></script>
-    <script data-no-instant>InstantClick.init();</script>
-
     <meta charset="UTF-8">
     <title>{TABTITLE}</title>
 
@@ -30,13 +27,14 @@
         <div class="two columns"></div>
             <div class="eight columns">
 
-                <h1 class="name_title">Ethan Houston</h1>
+                <h1 class="name_title"><a class="name_title" href="/">Ethan Houston</a></h1>
 
-                {TITLE}
+                <div class="above_article">
 
-                <hr class="post_line">
+                    {TITLE}
+                    {TIME}
 
-                {TIME}
+                </div>
 
                 <div class="body_text">
                     {BODY}
@@ -45,6 +43,9 @@
             </div>
         <div class="two columns"></div>
     </div>
+
+    <script src="/instantclick.min.js" data-no-instant></script>
+    <script data-no-instant>InstantClick.init();</script>
 
 </body>
 </html>
