@@ -50,7 +50,7 @@ def get_md_as_text(current_directory):
 
         word_count = length / WORD_LENGTH  # / means divide and then round down
 
-        reading_time = str(word_count // WPM)
+        reading_time = (word_count / WPM)
 
         return_list = [body_text, reading_time]
 
@@ -104,7 +104,9 @@ def create_post_html(path):
     processed = process_markdown(path)  # [json, text]
     json = processed[0]
     text = processed[1][0]
-    reading_time = str(processed[1][1])
+    reading_time = processed[1][1]
+
+    reading_time = str(int(round(reading_time)))
 
     title = json['title']
     author = json['author']
@@ -117,7 +119,7 @@ def create_post_html(path):
 
     title_html = "<a id=\"title_button\" href=\"/\">" + title + "</a>"
 
-    reading_time_html = "<p class=\"read_time\">Reading time: " + reading_time + " minutes</p>"
+    reading_time_html = "<p class=\"read_time\">" + reading_time + " min read</p>"
 
     link = add_md_text_to_template(template_html, md_html, title, title_html, reading_time_html)  # Creates new file, adds markdown HTML text
 

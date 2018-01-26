@@ -19,6 +19,7 @@
     color: #42474f;
     text-decoration: none;
     border-bottom: 0 dotted #42474f;
+    text-align: center;
 }
 
 
@@ -84,13 +85,26 @@ a {
 }
 
 .body_text {
-    font-size: 16px;
-    line-height: 170%;
+    font-size: 17px;
+    line-height: 180%;
+    color: #313335;
+    letter-spacing: 0.2px;
+}
+
+.post_line {
+
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background: #000;
+    opacity: 0.15;
+
 }
 
 .read_time {
     font-style: italic;
     font-size: 14px;
+    text-align: center;
 }
 
 .name_title {
@@ -106,7 +120,7 @@ a {
 
     padding-top: calc(8% + 1px);
     text-align: left;
-    font-size:20pt;
+    font-size: 20pt;
     color: black;
 
 }
