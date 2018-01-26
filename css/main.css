@@ -16,12 +16,11 @@
 #title_button {
     font-family: "ProximaNovaBold", sans-serif;
     font-size: 22pt;
-    color: #42474f;
+    color: #2d2d2d;
     text-decoration: none;
     border-bottom: 0 dotted #42474f;
     text-align: center;
 }
-
 
 #facebook:hover{
     background: url("/img/logos/facebook_blue.png");
@@ -43,10 +42,6 @@ body {
     font-family: ProximaNova, sans-serif;
 }
 
-div {
-    //border-style:dashed;
-}
-
 .middle_pic {
     text-align: center;
     margin: 0 auto;
@@ -63,10 +58,10 @@ div {
 
 .post_link {
     font-family: "ProximaNovaBold", sans-serif;
-    font-size: 14pt;
-    color: #42474f;
+    font-size: 16pt;
+    color: #242526;
     text-decoration: none;
-    border-bottom: 0 dotted #42474f;
+    border-bottom: 0 dotted #242526;
 }
 
 .post_link:hover {
@@ -98,7 +93,14 @@ a {
     height: 1px;
     background: #000;
     opacity: 0.15;
+}
 
+#front_page_line {
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background: #000;
+    opacity: 0.15;
 }
 
 .read_time {
@@ -126,7 +128,10 @@ a {
 }
 
 .thoughts {
-    color: black;
+    border-bottom: 1px solid #a5a5a5;
+    width: 100%;
+    display: block;
+    color: #2d2d2d;
 }
 
 .summary_text {

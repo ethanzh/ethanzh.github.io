@@ -22,7 +22,7 @@ WPM = 200
 WORD_LENGTH = 5
 
 for i in BLOG_FILE_NAMES:
-    if i[-2:] == "md":  # Finds all .md files in blog directory
+    if (i[-2:] == "md") & (i[-11:] != "_private.md"):  # Finds all .md files in blog directory
         markdown_file_locations.append(i)
 
 
