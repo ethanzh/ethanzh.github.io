@@ -9,4 +9,4 @@
 
 Lorum ipsum blah blah blah
 
-![Text](/img/qr.JPG)
+<center><img align="middle" src="https://ethanhouston.com/img/qr.JPG"  height="500" /></center>
