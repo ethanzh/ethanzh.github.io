@@ -8,3 +8,5 @@
 ---END_METADATA---
 
 Lorum ipsum blah blah blah
+
+![Text](/img/qr.JPG)
