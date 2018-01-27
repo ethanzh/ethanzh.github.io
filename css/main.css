@@ -13,6 +13,11 @@
     font-style: italic, oblique;
 }
 
+@media (min-width: 2500px) and (min-height: 500px){
+    body {
+
+    }
+}
 
 #title_button {
     font-family: "ProximaNovaBold", sans-serif;
@@ -21,23 +26,8 @@
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 2px;
+    padding-top:24px;
 
-}
-
-#facebook:hover{
-    background: url("/img/logos/facebook_blue.png");
-}
-
-#linkedin:hover{
-    background: url("/img/logos/facebook_blue.png");
-}
-
-#wechat:hover{
-    background: url("/img/logos/facebook_blue.png");
-}
-
-#flickr:hover{
-    background: url("/img/logos/facebook_blue.png");
 }
 
 body {
@@ -122,28 +112,19 @@ a {
 }
 
 .name_title {
-
-    padding-top:8%;
-    // padding-left: 0.71%;
     text-align: left;
     font-size:20pt;
-    color: black;
+    color: #313335;
+    padding-top: 60px;
     text-decoration: none;
     border-bottom: 0px solid #a5a5a5;
-
 }
 
 .name_title_index {
-
     padding-top: calc(8%);
     text-align: left;
     font-size: 20pt;
     color: black;
-
-}
-
-.post_all {
-
 }
 
 .thoughts {
@@ -155,14 +136,22 @@ a {
 }
 
 .summary_text {
-
     text-align: left;
-    
 }
 
 header {
     background-color: #1d1d1d;
     height: 20px;
+}
+
+footer {
+    background-color: #1d1d1d;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow:hidden;
 }
 
 body {
@@ -177,7 +166,6 @@ body {
 
 .flex_container {
     display: flex;
-
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;

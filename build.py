@@ -119,8 +119,6 @@ def create_post_html(path):
 
     md_html += md_to_html(text)  # Adds the markdown HTML
 
-    print(md_html)
-
     title_html = "<h2 class=\"above_article\" id=\"title_button\" href=\"/\">" + title + "</h2>"
 
     reading_time_html = "<p class=\"read_time\">" + reading_time + " min read</p>"
