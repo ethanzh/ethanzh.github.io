@@ -27,7 +27,7 @@ for i in BLOG_FILE_NAMES:
 
 
 def get_template_html_as_text():
-    with open("templates/post_copy.html", "r") as html_file:
+    with open("templates/post.html", "r") as html_file:
         return html_file.read()
 
 
