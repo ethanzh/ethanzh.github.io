@@ -27,7 +27,7 @@ for i in BLOG_FILE_NAMES:
 
 
 def get_template_html_as_text():
-    with open("templates/post.html", "r") as html_file:
+    with open("templates/post_copy.html", "r") as html_file:
         return html_file.read()
 
 
@@ -115,7 +115,11 @@ def create_post_html(path):
 
     time = datetime.datetime.strptime(date, "%d %B %Y").timestamp()
 
-    md_html = md_to_html(text)  # Adds the markdown HTML
+    md_html = ""
+
+    md_html += md_to_html(text)  # Adds the markdown HTML
+
+    print(md_html)
 
     title_html = "<h2 class=\"above_article\" id=\"title_button\" href=\"/\">" + title + "</h2>"
 

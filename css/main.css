@@ -61,6 +61,10 @@ body {
     text-align: center;
 }
 
+.vert {
+    vertical-align: top;
+}
+
 .post_link {
     font-family: "ProximaNovaBold", sans-serif;
     font-size: 16pt;
@@ -123,6 +127,7 @@ a {
 .name_title {
 
     padding-top:8%;
+    // padding-left: 0.71%;
     text-align: left;
     font-size:20pt;
     color: black;
@@ -137,6 +142,10 @@ a {
     text-align: left;
     font-size: 20pt;
     color: black;
+
+}
+
+.post_all {
 
 }
 
