@@ -146,12 +146,8 @@ header {
 
 footer {
     background-color: #1d1d1d;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 100px;
-    width: 100%;
-    overflow:hidden;
+    flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+    padding: 10px;
 }
 
 body {
@@ -162,6 +158,8 @@ body {
     padding: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
 }
 
 .flex_container {
@@ -169,4 +167,8 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+.wrapper {
+    flex: 1 0 auto;
 }
