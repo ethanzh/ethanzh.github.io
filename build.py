@@ -18,11 +18,11 @@ CURRENT_POST_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)), C
 
 markdown_file_locations = []
 
-WPM = 200
+WPM = 275
 WORD_LENGTH = 5
 
 for i in BLOG_FILE_NAMES:
-    if (i[-2:] == "md") & (i[-11:] != "_private.md"):  # Finds all .md files in blog directory
+    if (i[-2:] == "md"):  # Finds all .md files in blog directory
         markdown_file_locations.append(i)
 
 
@@ -41,6 +41,17 @@ def get_metadata_as_json(current_directory):
         return json_metadata
 
 
+def calculate_reading_time(word_count, wpm, text):
+
+    number_images = text.count("![")
+
+    total_time = number_images * 0.2  # Assuming each picture takes 12 seconds to look at
+
+    total_time += (word_count / wpm)
+
+    return total_time
+
+
 def get_md_as_text(current_directory):
     with open(current_directory, "r") as md_file:
 
@@ -48,9 +59,9 @@ def get_md_as_text(current_directory):
 
         length = len(body_text)
 
-        word_count = length / WORD_LENGTH  # / means divide and then round down
+        word_count = length / WORD_LENGTH  # Assuming average word length is 5
 
-        reading_time = (word_count / WPM)
+        reading_time = calculate_reading_time(word_count, WPM, body_text)
 
         return_list = [body_text, reading_time]
 
@@ -112,6 +123,12 @@ def create_post_html(path):
     author = json['author']
     summary = json['summary']
     date = json['date']
+    private = json['private']
+
+    if private == "True":
+        private = True
+    else:
+        private = False
 
     time = datetime.datetime.strptime(date, "%d %B %Y").timestamp()
 
@@ -119,13 +136,13 @@ def create_post_html(path):
 
     md_html += md_to_html(text)  # Adds the markdown HTML
 
-    title_html = "<h2 class=\"above_article\" id=\"title_button\" href=\"/\">" + title + "</h2>"
+    title_html = "<h2 id=\"title_button\" href=\"/\">" + title + "</h2>"
 
     reading_time_html = "<p class=\"read_time\">" + reading_time + " min read</p>"
 
     link = add_md_text_to_template(template_html, md_html, title, title_html, reading_time_html)  # Creates new file, adds markdown HTML text
 
-    post_objects.append(PostObject(title, link, date, summary, time, reading_time))
+    post_objects.append(PostObject(title, link, date, summary, time, reading_time, private))
 
 
 def create_index():
@@ -145,15 +162,17 @@ def create_index():
 
             for i in range(0, len(sorted_list)):
 
-                add_to_html += "<div>"
-                add_to_html += "<a class=\"post_link\" href=" + sorted_list[i].link + ">" + sorted_list[i].title + "</a>"
-                add_to_html += "<p>" + sorted_list[i].date + ". " + sorted_list[i].summary + "</p>"
+                if not sorted_list[i].private:
 
-                if i == (len(sorted_list) - 1):
-                    add_to_html += "</div>\n                "
+                    add_to_html += "<div>"
+                    add_to_html += "<a class=\"post_link\" href=" + sorted_list[i].link + ">" + sorted_list[i].title + "</a>"
+                    add_to_html += "<p>" + sorted_list[i].date + ". " + sorted_list[i].summary + "</p>"
 
-                else:
-                    add_to_html += "</div><br />\n                "
+                    if i == (len(sorted_list) - 1):
+                        add_to_html += "</div>\n                "
+
+                    else:
+                        add_to_html += "</div><br />\n                "
 
         except IndexError:
             pass
@@ -166,13 +185,14 @@ def create_index():
 
 class PostObject(object):
 
-    def __init__(self, title, link, date, summary, time, reading_time):
+    def __init__(self, title, link, date, summary, time, reading_time, private):
         self.title = title
         self.link = link
         self.date = date
         self.summary = summary
         self.time = time
         self.reading_time = reading_time
+        self.private = private
 
     def set_link(self, link):
         self.link = link
@@ -189,5 +209,4 @@ for i in markdown_file_locations:  # Goes through locations and creates .html fi
     create_post_html(i)
 
 create_index()
-
 

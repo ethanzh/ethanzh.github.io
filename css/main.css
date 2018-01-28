@@ -19,37 +19,46 @@
     }
 }
 
-#title_button {
-    font-family: "ProximaNovaBold", sans-serif;
-    font-size: 22pt;
-    color: #2d2d2d;
-    text-align: center;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 2px;
-    padding-top:24px;
+a {
+    color: #68b3ff;
+    border-bottom: 1px dotted #68b3ff;
+    text-decoration: none;
+}
+
+html {
+    background-color: rgb(29,29,29);
+}
+
+header {
+    background-color: #1d1d1d;
+    height: 20px;
+}
+
+footer {
+    background-color: #1d1d1d;
+    flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+    padding: 30px;
+}
+
+img {
+
+}
+
+div {
 
 }
 
 body {
     font-family: ProximaNova, sans-serif;
-}
-
-.middle_pic {
-    text-align: center;
-    margin: 0 auto;
-    vertical-align: middle;
-}
-
-#inner {
-    margin: 0 auto;
-}
-#outer {
-    padding-top: 22px;
-    text-align: center;
-}
-
-.vert {
-    vertical-align: top;
+    font-size: 14pt;
+    color: #666666;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
 }
 
 .post_link {
@@ -57,6 +66,7 @@ body {
     font-size: 16pt;
     color: #242526;
     text-decoration: none;
+    font-weight: bold;
     border-bottom: 0 dotted #242526;
 }
 
@@ -69,12 +79,6 @@ body {
     border-bottom: 0 dotted #FFFFFF;
 }
 
-a {
-    color: #68b3ff;
-    border-bottom: 1px dotted #68b3ff;
-    text-decoration: none;
-}
-
 .body_text {
     font-size: 17px;
     line-height: 180%;
@@ -85,6 +89,18 @@ a {
 .above_article {
 
     padding-bottom: 8px;
+}
+
+#title_button {
+    font-family: "ProximaNovaBold", sans-serif;
+    font-size: 22pt;
+    color: #2d2d2d;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 2px;
+    padding-top:24px;
+
 }
 
 .post_line {
@@ -120,47 +136,31 @@ a {
     border-bottom: 0px solid #a5a5a5;
 }
 
+.name_title:hover {
+    color: lightgray;
+}
+
 .name_title_index {
     padding-top: calc(8%);
     text-align: left;
     font-size: 20pt;
     color: black;
+    font-weight: bold;
 }
 
-.thoughts {
+.musings_title {
     border-bottom: 1px solid #a5a5a5;
     width: 100%;
     display: block;
     color: #2d2d2d;
-    padding-bottom: 10px;
+    padding-bottom: 3px;
+    font-weight: normal;
 }
 
 .summary_text {
     text-align: left;
 }
 
-header {
-    background-color: #1d1d1d;
-    height: 20px;
-}
-
-footer {
-    background-color: #1d1d1d;
-    flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
-    padding: 10px;
-}
-
-body {
-    font-family: "ProximaNova", sans-serif;
-    font-size: 14pt;
-    color: #666666;
-    margin: 0;
-    padding: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    display: flex;
-    flex-direction: column;
-}
 
 .flex_container {
     display: flex;
