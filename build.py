@@ -13,21 +13,34 @@ CURRENT_DIR = dir_path = os.path.dirname(os.path.realpath(__file__))  # Full pat
 BLOG_DIR = CURRENT_DIR + "/content"  # Gets path to blog folder
 BLOG_FILE_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)), BLOG_DIR, i) for i in os.listdir(BLOG_DIR)]
 
+PROJECTS_DIR = CURRENT_DIR + "/projects"  # Gets path to blog folder
+PROJECTS_FILE_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)), PROJECTS_DIR, i) for i in os.listdir(PROJECTS_DIR)]
+
 CURRENT_POST_DIR = CURRENT_DIR + "/posts"
 CURRENT_POST_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)), CURRENT_POST_DIR, i) for i in os.listdir(CURRENT_POST_DIR)]
 
 markdown_file_locations = []
+project_file_locations = []
 
 WPM = 275
 WORD_LENGTH = 5
 
 for i in BLOG_FILE_NAMES:
-    if (i[-2:] == "md"):  # Finds all .md files in blog directory
+    if i[-2:] == "md":  # Finds all .md files in blog directory
         markdown_file_locations.append(i)
+
+for i in PROJECTS_FILE_NAMES:
+    if i[-4:] == "json":
+        project_file_locations.append(i)
 
 
 def get_template_html_as_text():
     with open("templates/post.html", "r") as html_file:
+        return html_file.read()
+
+
+def get_project_template_as_text():
+    with open("templates/projects.html", "r") as html_file:
         return html_file.read()
 
 
@@ -89,7 +102,6 @@ def add_md_text_to_template(template, md_string, title, title_html, reading_time
     summary_string = "content=\"" + summary + "\""
 
     new_html_contents = new_html_contents.replace('{SUMMARY}', summary_string)
-
 
     spaceless_title = title.replace(" ", "-")
     lower_title = spaceless_title.lower()
@@ -203,8 +215,51 @@ class PostObject(object):
         self.link = link
 
 
+class ProjectObject(object):
+
+    def __init__(self, name, link, summary):
+        self.name = name
+        self.link = link
+        self.summary = summary
+
+
+project_objects = []
+
+
+def create_projects():
+    for i in range(0, len(project_file_locations)):
+        with open(project_file_locations[i], "r") as json_file:
+            json_data = json.load(json_file)
+            project_objects.append(ProjectObject(json_data['name'], json_data['link'], json_data['summary']))
+
+    with open("templates/projects.html", "r") as html_template:
+        html_string = html_template.read()
+
+        add_to_html = ""
+
+        index_already_exists = (os.path.exists("projects.html"))
+
+        if index_already_exists:
+            os.remove("projects.html")
+
+        try:
+
+            for i in range(0, len(project_objects)):
+
+                add_to_html = project_objects[i].name + ": " + project_objects[i].link
+
+        except IndexError:
+            pass
+
+        new_html_contents = html_string.replace("{HERE}", add_to_html)
+
+        new_html_file = open("projects.html", "w")
+        new_html_file.write(new_html_contents)
+
+
 post_objects = []
 posts_exists = os.path.exists("posts/")
+
 
 if posts_exists:
     shutil.rmtree("posts")
@@ -215,3 +270,4 @@ for i in markdown_file_locations:  # Goes through locations and creates .html fi
 
 create_index()
 
+create_projects()

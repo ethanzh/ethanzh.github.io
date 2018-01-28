@@ -133,7 +133,7 @@ body {
     color: #313335;
     padding-top: 60px;
     text-decoration: none;
-    border-bottom: 0px solid #a5a5a5;
+    border-bottom: 0 solid #a5a5a5;
 }
 
 .name_title:hover {
