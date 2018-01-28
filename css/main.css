@@ -19,6 +19,10 @@
     }
 }
 
+html {
+    background-color: #1d1d1d;
+}
+
 #title_button {
     font-family: "ProximaNovaBold", sans-serif;
     font-size: 22pt;
@@ -32,6 +36,7 @@
 
 body {
     font-family: ProximaNova, sans-serif;
+    background-color: white;
 }
 
 .middle_pic {
@@ -149,6 +154,7 @@ footer {
     flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
     padding: 10px;
 }
+
 
 body {
     font-family: "ProximaNova", sans-serif;
