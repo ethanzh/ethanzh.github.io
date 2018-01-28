@@ -19,8 +19,39 @@
     }
 }
 
+a {
+    color: #68b3ff;
+    border-bottom: 1px dotted #68b3ff;
+    text-decoration: none;
+}
+
 html {
     background-color: rgb(29,29,29);
+}
+
+header {
+    background-color: #1d1d1d;
+    height: 20px;
+}
+
+footer {
+    background-color: #1d1d1d;
+    flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+    padding: 30px;
+}
+
+
+body {
+    font-family: ProximaNova, sans-serif;
+    font-size: 14pt;
+    color: #666666;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
 }
 
 #title_button {
@@ -32,29 +63,6 @@ html {
     padding-bottom: 2px;
     padding-top:24px;
 
-}
-
-body {
-    font-family: ProximaNova, sans-serif;
-    background-color: white;
-}
-
-.middle_pic {
-    text-align: center;
-    margin: 0 auto;
-    vertical-align: middle;
-}
-
-#inner {
-    margin: 0 auto;
-}
-#outer {
-    padding-top: 22px;
-    text-align: center;
-}
-
-.vert {
-    vertical-align: top;
 }
 
 .post_link {
@@ -72,12 +80,6 @@ body {
 .image_link{
     text-decoration: none;
     border-bottom: 0 dotted #FFFFFF;
-}
-
-a {
-    color: #68b3ff;
-    border-bottom: 1px dotted #68b3ff;
-    text-decoration: none;
 }
 
 .body_text {
@@ -125,6 +127,10 @@ a {
     border-bottom: 0px solid #a5a5a5;
 }
 
+.name_title:hover {
+    color: lightgray;
+}
+
 .name_title_index {
     padding-top: calc(8%);
     text-align: left;
@@ -145,29 +151,6 @@ a {
     text-align: left;
 }
 
-header {
-    background-color: #1d1d1d;
-    height: 20px;
-}
-
-footer {
-    background-color: #1d1d1d;
-    flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
-    padding: 30px;
-}
-
-
-body {
-    font-family: "ProximaNova", sans-serif;
-    font-size: 14pt;
-    color: #666666;
-    margin: 0;
-    padding: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    display: flex;
-    flex-direction: column;
-}
 
 .flex_container {
     display: flex;
