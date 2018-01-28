@@ -40,6 +40,13 @@ footer {
     padding: 30px;
 }
 
+img {
+
+}
+
+div {
+
+}
 
 body {
     font-family: ProximaNova, sans-serif;
@@ -54,22 +61,12 @@ body {
     flex-direction: column;
 }
 
-#title_button {
-    font-family: "ProximaNovaBold", sans-serif;
-    font-size: 22pt;
-    color: #2d2d2d;
-    text-align: center;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 2px;
-    padding-top:24px;
-
-}
-
 .post_link {
     font-family: "ProximaNovaBold", sans-serif;
     font-size: 16pt;
     color: #242526;
     text-decoration: none;
+    font-weight: bold;
     border-bottom: 0 dotted #242526;
 }
 
@@ -92,6 +89,18 @@ body {
 .above_article {
 
     padding-bottom: 8px;
+}
+
+#title_button {
+    font-family: "ProximaNovaBold", sans-serif;
+    font-size: 22pt;
+    color: #2d2d2d;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 2px;
+    padding-top:24px;
+
 }
 
 .post_line {
@@ -139,12 +148,13 @@ body {
     font-weight: bold;
 }
 
-.thoughts {
+.musings_title {
     border-bottom: 1px solid #a5a5a5;
     width: 100%;
     display: block;
     color: #2d2d2d;
-    padding-bottom: 10px;
+    padding-bottom: 3px;
+    font-weight: normal;
 }
 
 .summary_text {

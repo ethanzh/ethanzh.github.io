@@ -51,6 +51,7 @@ def calculate_reading_time(word_count, wpm, text):
 
     return total_time
 
+
 def get_md_as_text(current_directory):
     with open(current_directory, "r") as md_file:
 
@@ -135,7 +136,7 @@ def create_post_html(path):
 
     md_html += md_to_html(text)  # Adds the markdown HTML
 
-    title_html = "<h2 class=\"above_article\" id=\"title_button\" href=\"/\">" + title + "</h2>"
+    title_html = "<h2 id=\"title_button\" href=\"/\">" + title + "</h2>"
 
     reading_time_html = "<p class=\"read_time\">" + reading_time + " min read</p>"
 
