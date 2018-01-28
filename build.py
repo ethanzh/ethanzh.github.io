@@ -3,10 +3,12 @@ import os, errno, shutil
 import json
 import re
 import datetime
-import operator
+import time
 
 # TO-DO:
 # Create new directories for each post, name file 'index.html'
+
+start_time = time.time()
 
 DIRECTORY_NAME = os.path.basename(os.path.dirname(os.path.realpath(__file__)))  # Name of current directory
 CURRENT_DIR = dir_path = os.path.dirname(os.path.realpath(__file__))  # Full path to current directory
@@ -271,3 +273,5 @@ for i in markdown_file_locations:  # Goes through locations and creates .html fi
 create_index()
 
 create_projects()
+
+print("--- %s seconds ---" % (time.time() - start_time))
