@@ -159,6 +159,8 @@ body {
 
 .summary_text {
     text-align: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 
