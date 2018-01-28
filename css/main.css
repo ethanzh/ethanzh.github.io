@@ -20,7 +20,7 @@
 }
 
 html {
-    background-color: #1d1d1d;
+    background-color: rgb(29,29,29);
 }
 
 #title_button {
@@ -130,6 +130,7 @@ a {
     text-align: left;
     font-size: 20pt;
     color: black;
+    font-weight: bold;
 }
 
 .thoughts {
