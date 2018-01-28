@@ -76,7 +76,7 @@ def md_to_html(md_string):
     return markdown.markdown(md_string)
 
 
-def add_md_text_to_template(template, md_string, title, title_html, reading_time_html):
+def add_md_text_to_template(template, md_string, title, title_html, reading_time_html, summary):
 
     new_html_contents = template.replace('{TABTITLE}', title)
 
@@ -85,6 +85,11 @@ def add_md_text_to_template(template, md_string, title, title_html, reading_time
     new_html_contents = new_html_contents.replace('{TIME}', reading_time_html)
 
     new_html_contents = new_html_contents.replace('{BODY}', md_string)
+
+    summary_string = "content=\"" + summary + "\""
+
+    new_html_contents = new_html_contents.replace('{SUMMARY}', summary_string)
+
 
     spaceless_title = title.replace(" ", "-")
     lower_title = spaceless_title.lower()
@@ -140,7 +145,7 @@ def create_post_html(path):
 
     reading_time_html = "<p class=\"read_time\">" + reading_time + " min read</p>"
 
-    link = add_md_text_to_template(template_html, md_html, title, title_html, reading_time_html)  # Creates new file, adds markdown HTML text
+    link = add_md_text_to_template(template_html, md_html, title, title_html, reading_time_html, summary)  # Creates new file, adds markdown HTML text
 
     post_objects.append(PostObject(title, link, date, summary, time, reading_time, private))
 
