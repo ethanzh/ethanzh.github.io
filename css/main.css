@@ -21,21 +21,33 @@
 
 a {
     color: #68b3ff;
-    border-bottom: 1px dotted #68b3ff;
+    color: rgb(101, 137, 178);
+    border-bottom: 1px dotted rgb(101, 137, 178);
     text-decoration: none;
 }
 
 html {
     background-color: rgb(29,29,29);
+    background-color: rgb(101, 137, 178);
+
+    background-color: #a8a8a8;
 }
 
 header {
     background-color: #1d1d1d;
-    height: 20px;
+    background-color: #68b3ff;
+    background-color: rgb(101, 137, 178);
+
+    background-color: #a8a8a8;
+    height: 30px;
 }
 
 footer {
     background-color: #1d1d1d;
+    background-color: rgb(101, 137, 178);
+
+    background-color: #a8a8a8;
+
     flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
     padding: 30px;
 }
@@ -45,7 +57,6 @@ img {
 }
 
 div {
-
 }
 
 body {
@@ -173,4 +184,25 @@ body {
 
 .wrapper {
     flex: 1 0 auto;
+}
+
+.baylands {
+    height: 300px;
+    width: auto;
+
+    display: block;
+    margin: 0 auto;
+}
+
+#bottom {
+    padding-bottom: 40px;
+}
+
+#viewall {
+    text-align: right;
+}
+.centered_div {
+    display: inline-block;
+    align-content: center;
+    text-align: center;
 }

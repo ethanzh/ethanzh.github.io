@@ -164,27 +164,36 @@ def create_post_html(path):
     post_objects.append(PostObject(title, link, date, summary, time, reading_time, private))
 
 
-def create_index():
-    with open("templates/index.html", "r") as html_template:
+def add_index_to_template(number, template):
+
+    open_template = "templates/" + template + ".html"
+
+    with open(open_template, "r") as html_template:
         html_string = html_template.read()
 
         add_to_html = ""
 
-        index_already_exists = (os.path.exists("index.html"))
+        index_already_exists = (os.path.exists(template + ".html"))
+
+        if number == "all":
+            number = len(post_objects)
 
         if index_already_exists:
-            os.remove("index.html")
+            os.remove(template + ".html")
 
         try:
 
             sorted_list = sorted(post_objects, key=lambda x: x.time, reverse=True)
 
-            for i in range(0, len(sorted_list)):
+            for i in range(0, number):
+
+                print(sorted_list[i].date)
 
                 if not sorted_list[i].private:
 
                     add_to_html += "<div>"
-                    add_to_html += "<a class=\"post_link\" href=" + sorted_list[i].link + ">" + sorted_list[i].title + "</a>"
+                    add_to_html += "<a class=\"post_link\" href=" + sorted_list[i].link + ">" + sorted_list[
+                        i].title + "</a>"
                     add_to_html += "<p>" + sorted_list[i].date + ". " + sorted_list[i].summary + "</p>"
 
                     if i == (len(sorted_list) - 1):
@@ -196,9 +205,9 @@ def create_index():
         except IndexError:
             pass
 
-        new_html_contents = html_string.replace("{BLOG}", add_to_html)
+        new_html_contents = html_string.replace("{POSTS}", add_to_html)
 
-        new_html_file = open("index.html", "w")
+        new_html_file = open(template + ".html", "w")
         new_html_file.write(new_html_contents)
 
 
@@ -270,7 +279,9 @@ if posts_exists:
 for i in markdown_file_locations:  # Goes through locations and creates .html files
     create_post_html(i)
 
-create_index()
+#create_index()
+add_index_to_template(2, "index")
+add_index_to_template("all", "allposts")
 
 create_projects()
 
