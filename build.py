@@ -187,8 +187,6 @@ def add_index_to_template(number, template):
 
             for i in range(0, number):
 
-                print(sorted_list[i].date)
-
                 if not sorted_list[i].private:
 
                     add_to_html += "<div>"
