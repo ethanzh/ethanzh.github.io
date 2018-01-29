@@ -8,9 +8,16 @@
 
 {
   "name": "Jiaohuan",
-  "link": "yaoshi.io",
+  "link": "https://github.com/ethanzh/jiaohuan-android",
   "summary": "The new way to exchange business cards",
   "platforms": "Android, iOS",
+  "wip": false
+},
+  {
+  "name": "Gate Education",
+  "link": "",
+  "summary": "Online portal for Chinese education system",
+  "platforms": "Web",
   "wip": false
 }
   ]

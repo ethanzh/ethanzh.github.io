@@ -242,12 +242,6 @@ project_objects = []
 
 
 def create_projects():
-    #for i in range(0, len(project_file_locations)):
-    #    with open(project_file_locations[i], "r") as json_file:
-    #        json_data = json.load(json_file)
-#
-    #        for j in range(0, len(json_data)):
-    #            project_objects.append(ProjectObject(json_data[j]['name'], json_data[j]['link'], json_data[j]['summary']))
 
     with open("projects/list.json", "r", encoding="utf-8") as json_file:
 
@@ -317,7 +311,6 @@ if posts_exists:
 for i in markdown_file_locations:  # Goes through locations and creates .html files
     create_post_html(i)
 
-#create_index()
 add_index_to_template(2, "index")
 add_index_to_template("all", "all")
 
