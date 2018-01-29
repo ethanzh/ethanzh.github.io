@@ -1,13 +1,15 @@
 [{
   "name": "Formal Translate",
   "link": "https://formaltranslate.appspot.com",
-  "summary": "An app for simplifying complex text"
+  "summary": "An app for simplifying complex text (WORK IN PROGRESS)",
+  "platforms": "Web"
 },
 
 {
   "name": "Jiaohuan 交换",
   "link": "yaoshi.io",
-  "summary": "The new way to exchange business cards"
+  "summary": "The new way to exchange business cards",
+  "platforms": "Android, iOS"
 }
   ]
 

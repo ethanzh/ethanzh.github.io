@@ -230,10 +230,11 @@ class PostObject(object):
 
 class ProjectObject(object):
 
-    def __init__(self, name, link, summary):
+    def __init__(self, name, link, summary, platforms):
         self.name = name
         self.link = link
         self.summary = summary
+        self.platforms = platforms
 
 
 project_objects = []
@@ -252,7 +253,8 @@ def create_projects():
         json_data = json.load(json_file)
 
         for i in range(0, len(json_data)):
-            project_objects.append(ProjectObject(json_data[i]['name'], json_data[i]['link'], json_data[i]['summary']))
+            project_objects.append(ProjectObject(json_data[i]['name'], json_data[i]['link'],
+                                                 json_data[i]['summary'], json_data[i]['platforms']))
 
     with open("templates/projects.html", "r") as html_template:
         html_string = html_template.read()
@@ -270,7 +272,24 @@ def create_projects():
 
             for i in range(0, len(project_objects)):
 
-                add_to_html += "<p>" + project_objects[i].name + ": " + project_objects[i].link + "</p><br />\n"
+                platforms = project_objects[i].platforms.count(",")
+
+                add_to_html += "<div>"
+                add_to_html += "<a target=\"_blank\" class=\"post_link\" href=" + project_objects[i].link + ">" + project_objects[i].name + "</a>"
+                add_to_html += "<p>" + project_objects[i].summary + "</p>"
+
+                if platforms == 0:
+                    platform_text = "Platform: "
+                else:
+                    platform_text = "Platforms: "
+
+                add_to_html += "<p>" + platform_text + project_objects[i].platforms + "</p>"
+
+                if i == (len(project_objects) - 1):
+                    add_to_html += "</div>\n                "
+
+                else:
+                    add_to_html += "</div><br />\n                "
 
         except IndexError:
             pass
