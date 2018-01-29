@@ -182,10 +182,12 @@ body {
 }
 
 .baylands {
-    height: 300px;
-    width: auto;
+      display: block;
 
-    display: block;
+      max-width:250px;
+
+      width: auto;
+      height: auto;
     margin: 0 auto;
 }
 
