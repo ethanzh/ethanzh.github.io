@@ -166,7 +166,11 @@ def create_post_html(path):
 
 def add_index_to_template(number, template):
 
-    open_template = "templates/" + template + ".html"
+    if template == "all":
+        open_template = "templates/all.html"
+        template = "all/index"
+    else:
+        open_template = "templates/" + template + ".html"
 
     with open(open_template, "r") as html_template:
         html_string = html_template.read()
@@ -204,6 +208,8 @@ def add_index_to_template(number, template):
             pass
 
         new_html_contents = html_string.replace("{POSTS}", add_to_html)
+
+        print(template)
 
         new_html_file = open(template + ".html", "w")
         new_html_file.write(new_html_contents)
@@ -279,7 +285,7 @@ for i in markdown_file_locations:  # Goes through locations and creates .html fi
 
 #create_index()
 add_index_to_template(2, "index")
-add_index_to_template("all", "allposts")
+add_index_to_template("all", "all")
 
 create_projects()
 
