@@ -194,7 +194,7 @@ def add_index_to_template(number, template):
                 if not sorted_list[i].private:
 
                     add_to_html += "<div>"
-                    add_to_html += "<a class=\"post_link\" href=" + sorted_list[i].link + ">" + sorted_list[
+                    add_to_html += "<a class=\"post_link\" href=\"" + "/" + sorted_list[i].link + "\">" + sorted_list[
                         i].title + "</a>"
                     add_to_html += "<p>" + sorted_list[i].date + ". " + sorted_list[i].summary + "</p>"
 
@@ -249,7 +249,7 @@ def create_projects():
     #        for j in range(0, len(json_data)):
     #            project_objects.append(ProjectObject(json_data[j]['name'], json_data[j]['link'], json_data[j]['summary']))
 
-    with open("projects/list.json", "r") as json_file:
+    with open("projects/list.json", "r", encoding="utf-8") as json_file:
 
         json_data = json.load(json_file)
 
