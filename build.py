@@ -209,8 +209,6 @@ def add_index_to_template(number, template):
 
         new_html_contents = html_string.replace("{POSTS}", add_to_html)
 
-        print(template)
-
         new_html_file = open(template + ".html", "w")
         new_html_file.write(new_html_contents)
 
@@ -242,10 +240,19 @@ project_objects = []
 
 
 def create_projects():
-    for i in range(0, len(project_file_locations)):
-        with open(project_file_locations[i], "r") as json_file:
-            json_data = json.load(json_file)
-            project_objects.append(ProjectObject(json_data['name'], json_data['link'], json_data['summary']))
+    #for i in range(0, len(project_file_locations)):
+    #    with open(project_file_locations[i], "r") as json_file:
+    #        json_data = json.load(json_file)
+#
+    #        for j in range(0, len(json_data)):
+    #            project_objects.append(ProjectObject(json_data[j]['name'], json_data[j]['link'], json_data[j]['summary']))
+
+    with open("projects/list.json", "r") as json_file:
+
+        json_data = json.load(json_file)
+
+        for i in range(0, len(json_data)):
+            project_objects.append(ProjectObject(json_data[i]['name'], json_data[i]['link'], json_data[i]['summary']))
 
     with open("templates/projects.html", "r") as html_template:
         html_string = html_template.read()
@@ -259,16 +266,18 @@ def create_projects():
 
         try:
 
+            add_to_html = ""
+
             for i in range(0, len(project_objects)):
 
-                add_to_html = project_objects[i].name + ": " + project_objects[i].link
+                add_to_html += "<p>" + project_objects[i].name + ": " + project_objects[i].link + "</p><br />\n"
 
         except IndexError:
             pass
 
         new_html_contents = html_string.replace("{HERE}", add_to_html)
 
-        new_html_file = open("projects.html", "w")
+        new_html_file = open("projects/index.html", "w")
         new_html_file.write(new_html_contents)
 
 
