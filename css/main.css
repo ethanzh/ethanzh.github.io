@@ -61,6 +61,12 @@ body {
     flex-direction: column;
 }
 
+.wip {
+    color: darkred;
+    font-weight: bold;
+    display: inline;
+}
+
 .post_link {
     font-family: "ProximaNovaBold", sans-serif;
     font-size: 16pt;

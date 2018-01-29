@@ -230,11 +230,12 @@ class PostObject(object):
 
 class ProjectObject(object):
 
-    def __init__(self, name, link, summary, platforms):
+    def __init__(self, name, link, summary, platforms, wip):
         self.name = name
         self.link = link
         self.summary = summary
         self.platforms = platforms
+        self.wip = wip
 
 
 project_objects = []
@@ -254,7 +255,8 @@ def create_projects():
 
         for i in range(0, len(json_data)):
             project_objects.append(ProjectObject(json_data[i]['name'], json_data[i]['link'],
-                                                 json_data[i]['summary'], json_data[i]['platforms']))
+                                                 json_data[i]['summary'], json_data[i]['platforms'],
+                                                 json_data[i]['wip']))
 
     with open("templates/projects.html", "r") as html_template:
         html_string = html_template.read()
@@ -276,6 +278,10 @@ def create_projects():
 
                 add_to_html += "<div>"
                 add_to_html += "<a target=\"_blank\" class=\"post_link\" href=" + project_objects[i].link + ">" + project_objects[i].name + "</a>"
+
+                if project_objects[i].wip:
+                    add_to_html += "<p class=\"wip\"> [WORK IN PROGRESS]</p>"
+
                 add_to_html += "<p>" + project_objects[i].summary + "</p>"
 
                 if platforms == 0:
