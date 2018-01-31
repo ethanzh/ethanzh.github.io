@@ -60,7 +60,17 @@ def calculate_reading_time(word_count, wpm, text):
 
     number_images = text.count("![")
 
-    total_time = number_images * 0.2  # Assuming each picture takes 12 seconds to look at
+    total_time = 0
+
+    if number_images > 10:
+        total_time += 1.25
+        total_time += (number_images - 10) * 0.05
+    elif number_images != 1:
+        total_time += ((number_images * 12) - (((number_images**2)+number_images)/(2)))
+    else:
+        total_time += 0.2
+
+    print(number_images)
 
     total_time += (word_count / wpm)
 
