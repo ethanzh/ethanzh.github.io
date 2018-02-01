@@ -48,6 +48,59 @@ div {
 
 }
 
+
+
+.facebook {
+    background: url("../img/logos/facebook_grey.png") no-repeat;
+}
+
+.wechat {
+    background: url("../img/logos/wechat_grey.png") no-repeat;
+}
+
+.linkedin {
+    background: url("../img/logos/linkedin_grey.png") no-repeat;
+}
+
+.flickr {
+    background: url("../img/logos/flickr_grey.png") no-repeat;
+}
+
+.facebook:hover {
+    background: url("../img/logos/facebook_blue.png") no-repeat;
+}
+
+.wechat:hover {
+    background: url("../img/logos/wechat_blue.png") no-repeat;
+}
+
+.linkedin:hover {
+    background: url("../img/logos/linkedin_blue.png") no-repeat;
+}
+
+.flickr:hover {
+    background: url("../img/logos/flickr_blue.png") no-repeat;
+}
+
+.social {
+    width: 42px;
+    height: 42px;
+    background-size: 42px 42px;
+    border:none;
+    outline:none;
+    text-indent: 100vw;
+}
+
+.social:hover {
+    width: 42px;
+    height: 42px;
+    background-size: 42px 42px;
+    border:none;
+    outline:none;
+    text-indent: 100vw;
+}
+
+
 body {
     font-family: ProximaNova, sans-serif;
     font-size: 14pt;
