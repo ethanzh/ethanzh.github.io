@@ -63,13 +63,13 @@ def calculate_reading_time(word_count, wpm, text):
 
     if number_images > 10:
         total_time += 1.25
-        total_time += (number_images - 10) * 0.05
+        total_time += (number_images - 10)
+
     elif number_images != 1:
-        total_time += ((number_images * 12) - (((number_images**2)+number_images)/(2)))
+        total_time += 0.01667 * ((number_images * 12) - (((number_images ** 2) + number_images) / 2))
+
     else:
         total_time += 0.2
-
-    print(number_images)
 
     total_time += (word_count / wpm)
 
