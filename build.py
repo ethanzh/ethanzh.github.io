@@ -164,6 +164,8 @@ def create_post_html(path):
 
     md_html += md_to_html(text)  # Adds the markdown HTML
 
+    md_html = md_html.replace("<img", "<img class=\"article_image\"")
+
     title_html = "<h2 id=\"title_button\" href=\"/\">" + title + "</h2>"
 
     reading_time_html = "<p class=\"read_time\">" + reading_time + " min read</p>"
