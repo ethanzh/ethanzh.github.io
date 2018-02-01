@@ -15,7 +15,7 @@
 },
   {
   "name": "Gate Education",
-  "link": "",
+  "link": "https://github.com/ethanzh/GateFrontEnd",
   "summary": "Online portal for Chinese education system",
   "platforms": "Web",
   "wip": false
