@@ -32,5 +32,4 @@ Github Pages, as it is their CDN that is being used, which is undoubtedly faster
 While this site's design is relatively basic for the time being (I've attached an image below for reference), I hope to make the
 site more and more my own, while still drawing inspiration from others.
 
-![https://ethanhouston.com/img/articles/screencap.JPG]
-This is what my homepage looked like at the time of publication.
+![This is what my homepage looked like at the time of publication.](https://ethanhouston.com/img/articles/screencap.JPG)
