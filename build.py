@@ -59,7 +59,6 @@ def get_metadata_as_json(current_directory):
 def calculate_reading_time(word_count, wpm, text):
 
     number_images = text.count("![")
-
     total_time = 0
 
     if number_images > 10:
