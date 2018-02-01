@@ -33,3 +33,4 @@ While this site's design is relatively basic for the time being (I've attached a
 site more and more my own, while still drawing inspiration from others.
 
 ![This is what my homepage looked like at the time of publication.](https://ethanhouston.com/img/articles/screencap.JPG)
+
