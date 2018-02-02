@@ -1,5 +1,7 @@
 import markdown
-import os, errno, shutil
+import os
+import errno
+import shutil
 import json
 import re
 import datetime
@@ -13,13 +15,16 @@ start_time = time.time()
 DIRECTORY_NAME = os.path.basename(os.path.dirname(os.path.realpath(__file__)))  # Name of current directory
 CURRENT_DIR = dir_path = os.path.dirname(os.path.realpath(__file__))  # Full path to current directory
 BLOG_DIR = CURRENT_DIR + "/content"  # Gets path to blog folder
-BLOG_FILE_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)), BLOG_DIR, i) for i in os.listdir(BLOG_DIR)]
+BLOG_FILE_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                BLOG_DIR, i) for i in os.listdir(BLOG_DIR)]
 
 PROJECTS_DIR = CURRENT_DIR + "/projects"  # Gets path to blog folder
-PROJECTS_FILE_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)), PROJECTS_DIR, i) for i in os.listdir(PROJECTS_DIR)]
+PROJECTS_FILE_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                    PROJECTS_DIR, i) for i in os.listdir(PROJECTS_DIR)]
 
 CURRENT_POST_DIR = CURRENT_DIR + "/posts"
-CURRENT_POST_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)), CURRENT_POST_DIR, i) for i in os.listdir(CURRENT_POST_DIR)]
+CURRENT_POST_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   CURRENT_POST_DIR, i) for i in os.listdir(CURRENT_POST_DIR)]
 
 markdown_file_locations = []
 project_file_locations = []
@@ -141,24 +146,24 @@ def create_post_html(path):
     template_html = get_template_html_as_text()  # Gets HTML template as string
 
     processed = process_markdown(path)  # [json, text]
-    json = processed[0]
+    processed_json = processed[0]
     text = processed[1][0]
     reading_time = processed[1][1]
 
     reading_time = str(int(round(reading_time)))
 
-    title = json['title']
-    author = json['author']
-    summary = json['summary']
-    date = json['date']
-    private = json['private']
+    title = processed_json['title']
+    # author = processed_json['author']
+    summary = processed_json['summary']
+    date = processed_json['date']
+    private = processed_json['private']
 
     if private == "True":
         private = True
     else:
         private = False
 
-    time = datetime.datetime.strptime(date, "%d %B %Y").timestamp()
+    post_time = datetime.datetime.strptime(date, "%d %B %Y").timestamp()
 
     md_html = ""
 
@@ -174,9 +179,10 @@ def create_post_html(path):
 
     reading_time_html = "<p class=\"read_time\">" + reading_time + " min read</p>"
 
-    link = add_md_text_to_template(template_html, md_html, title, title_html, reading_time_html, summary)  # Creates new file, adds markdown HTML text
+    # Creates new file, adds markdown HTML text
+    link = add_md_text_to_template(template_html, md_html, title, title_html, reading_time_html, summary)
 
-    post_objects.append(PostObject(title, link, date, summary, time, reading_time, private))
+    post_objects.append(PostObject(title, link, date, summary, post_time, reading_time, private))
 
 
 def custom_markdown_class(change_list, md_text):
@@ -239,12 +245,12 @@ def add_index_to_template(number, template):
 
 class PostObject(object):
 
-    def __init__(self, title, link, date, summary, time, reading_time, private):
+    def __init__(self, title, link, date, summary, post_time, reading_time, private):
         self.title = title
         self.link = link
         self.date = date
         self.summary = summary
-        self.time = time
+        self.time = post_time
         self.reading_time = reading_time
         self.private = private
 
@@ -295,7 +301,8 @@ def create_projects():
                 platforms = project_objects[i].platforms.count(",")
 
                 add_to_html += "<div>"
-                add_to_html += "<a target=\"_blank\" class=\"post_link\" href=" + project_objects[i].link + ">" + project_objects[i].name + "</a>"
+                add_to_html += "<a target=\"_blank\" class=\"post_link\" href=" + \
+                               project_objects[i].link + ">" + project_objects[i].name + "</a>"
 
                 if project_objects[i].wip:
                     add_to_html += "<p class=\"wip\"> [WORK IN PROGRESS]</p>"
