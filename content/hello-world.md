@@ -22,7 +22,7 @@ I plan to use this blog to discuss various issues important to me, as well as ta
 and also to keep tabs on what tech projects I'm working on at the moment.
 
 This website is hosted on [Github Pages](https://pages.github.com/), a very useful feature I was not aware of until recently. This 
-allows me to host this (static) site for free, while only paying for a domain name. For things I host that need to by dynamic, I've
+allows me to host this (static) site for free, while only paying for a domain name. For things I host that need to be dynamic, I've
 started learning more and more about Google Cloud, and specifically Google Compute Engine, which I feel is a lot easier to use than
 Amazon Web Service's Elastic Compute.
 
