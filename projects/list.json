@@ -1,4 +1,13 @@
-[{
+[
+  {
+  "name": "kass.art",
+  "link": "https://github.com/kassiakarras/kassiakarras.github.io",
+  "summary": "A website storefront for my friend's art",
+  "platforms": "Web",
+  "wip": true
+  },
+
+  {
   "name": "Formal Translate",
   "link": "https://formaltranslate.appspot.com",
   "summary": "An app for simplifying complex text",
