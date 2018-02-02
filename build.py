@@ -41,13 +41,8 @@ for i in PROJECTS_FILE_NAMES:
         project_file_locations.append(i)
 
 
-def get_template_html_as_text():
-    with open("templates/post.html", "r") as html_file:
-        return html_file.read()
-
-
-def get_project_template_as_text():
-    with open("templates/projects.html", "r") as html_file:
+def get_template(template):
+    with open("templates/" + template + ".html", "r") as html_file:
         return html_file.read()
 
 
@@ -143,7 +138,7 @@ def add_md_text_to_template(template, md_string, title, title_html, reading_time
 
 def create_post_html(path):
 
-    template_html = get_template_html_as_text()  # Gets HTML template as string
+    template_html = get_template("post")
 
     processed = process_markdown(path)  # [json, text]
     processed_json = processed[0]
@@ -282,53 +277,52 @@ def create_projects():
                                                  json_data[i]['summary'], json_data[i]['platforms'],
                                                  json_data[i]['wip']))
 
-    with open("templates/projects.html", "r") as html_template:
-        html_string = html_template.read()
+    html_string = get_template("projects")
+
+    add_to_html = ""
+
+    index_already_exists = (os.path.exists("projects.html"))
+
+    if index_already_exists:
+        os.remove("projects.html")
+
+    try:
 
         add_to_html = ""
 
-        index_already_exists = (os.path.exists("projects.html"))
+        for i in range(0, len(project_objects)):
 
-        if index_already_exists:
-            os.remove("projects.html")
+            platforms = project_objects[i].platforms.count(",")
 
-        try:
+            add_to_html += "<div>"
+            add_to_html += "<a target=\"_blank\" class=\"post_link\" href=" + \
+                           project_objects[i].link + ">" + project_objects[i].name + "</a>"
 
-            add_to_html = ""
+            if project_objects[i].wip:
+                add_to_html += "<p class=\"wip\"> [WORK IN PROGRESS]</p>"
 
-            for i in range(0, len(project_objects)):
+            add_to_html += "<p>" + project_objects[i].summary + "</p>"
 
-                platforms = project_objects[i].platforms.count(",")
+            if platforms == 0:
+                platform_text = "Platform: "
+            else:
+                platform_text = "Platforms: "
 
-                add_to_html += "<div>"
-                add_to_html += "<a target=\"_blank\" class=\"post_link\" href=" + \
-                               project_objects[i].link + ">" + project_objects[i].name + "</a>"
+            add_to_html += "<p>" + platform_text + project_objects[i].platforms + "</p>"
 
-                if project_objects[i].wip:
-                    add_to_html += "<p class=\"wip\"> [WORK IN PROGRESS]</p>"
+            if i == (len(project_objects) - 1):
+                add_to_html += "</div>\n                "
 
-                add_to_html += "<p>" + project_objects[i].summary + "</p>"
+            else:
+                add_to_html += "</div><br />\n                "
 
-                if platforms == 0:
-                    platform_text = "Platform: "
-                else:
-                    platform_text = "Platforms: "
+    except IndexError:
+        pass
 
-                add_to_html += "<p>" + platform_text + project_objects[i].platforms + "</p>"
+    new_html_contents = html_string.replace("{HERE}", add_to_html)
 
-                if i == (len(project_objects) - 1):
-                    add_to_html += "</div>\n                "
-
-                else:
-                    add_to_html += "</div><br />\n                "
-
-        except IndexError:
-            pass
-
-        new_html_contents = html_string.replace("{HERE}", add_to_html)
-
-        new_html_file = open("projects/index.html", "w")
-        new_html_file.write(new_html_contents)
+    new_html_file = open("projects/index.html", "w")
+    new_html_file.write(new_html_contents)
 
 
 post_objects = []
