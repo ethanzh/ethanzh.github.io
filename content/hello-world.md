@@ -2,7 +2,7 @@
 {
   "title": "Hello World!",
   "author": "Ethan Houston",
-  "summary": "I'm just hoping my Python script compiles this properly",
+  "summary": "I'm just hoping my Python script compiles this properly.",
   "date": "1 February 2018",
   "private": "False"
 }
@@ -34,3 +34,4 @@ site more and more my own, while still drawing inspiration from others.
 
 ![This is what my homepage looked like at the time of publication.](https://ethanhouston.com/img/articles/screencap.JPG)
 
+###### This is what my site looked like at time of publication

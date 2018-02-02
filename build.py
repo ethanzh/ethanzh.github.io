@@ -164,7 +164,11 @@ def create_post_html(path):
 
     md_html += md_to_html(text)  # Adds the markdown HTML
 
-    md_html = md_html.replace("<img", "<img class=\"article_image\"")
+    change_list = \
+        [["img", "h6"],
+         ["article_image", "caption"]]
+
+    md_html = custom_markdown_class(change_list, md_html)
 
     title_html = "<h2 id=\"title_button\" href=\"/\">" + title + "</h2>"
 
@@ -173,6 +177,15 @@ def create_post_html(path):
     link = add_md_text_to_template(template_html, md_html, title, title_html, reading_time_html, summary)  # Creates new file, adds markdown HTML text
 
     post_objects.append(PostObject(title, link, date, summary, time, reading_time, private))
+
+
+def custom_markdown_class(change_list, md_text):
+
+    for i in range(0, len(change_list[0])):
+        md_text = md_text.replace("<" + change_list[0][i], "<" + change_list[0][i] +
+                                  " class=\"" + change_list[1][i] + "\"")
+
+    return md_text
 
 
 def add_index_to_template(number, template):

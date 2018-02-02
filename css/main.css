@@ -150,12 +150,21 @@ body {
     padding-bottom: 8px;
 }
 
+.caption {
+    padding-top: 0;
+    color: #6d6c6c;
+    font-size:14px;
+    text-align: center;
+    font-style: italic;
+}
+
 .article_image {
     max-height: 500px;
     width: auto;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 0;
 }
 
 #title_button {
