@@ -158,6 +158,11 @@ body {
     font-style: italic;
 }
 
+.four {
+    margin: 0 auto;
+    padding-top: 35%;
+}
+
 .article_image {
     max-height: 500px;
     width: auto;
