@@ -345,7 +345,20 @@ def create_tag_pages():
 
             tag_dict[i] = current_list
 
-    print(tag_dict["one"])
+
+    insert_string = ""
+
+    for tag in tag_dict:
+
+        iter_string = tag
+
+        for i in range(0, len(tag_dict[tag])):
+
+            iter_string += "<p>" + tag_dict[tag][i].title + "</p>"
+
+        insert_string += iter_string
+
+    print(insert_string)
 
 
 post_objects = []
