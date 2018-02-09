@@ -152,6 +152,11 @@ def create_post_html(path):
     summary = processed_json['summary']
     date = processed_json['date']
     private = processed_json['private']
+    tags = processed_json['tags']
+
+    for i in tags:
+        if i not in tag_list:
+            tag_list.append(i)
 
     if private == "True":
         private = True
@@ -177,7 +182,7 @@ def create_post_html(path):
     # Creates new file, adds markdown HTML text
     link = add_md_text_to_template(template_html, md_html, title, title_html, reading_time_html, summary)
 
-    post_objects.append(PostObject(title, link, date, summary, post_time, reading_time, private))
+    post_objects.append(PostObject(title, link, date, summary, post_time, reading_time, private, tags))
 
 
 def custom_markdown_class(change_list, md_text):
@@ -240,7 +245,7 @@ def add_index_to_template(number, template):
 
 class PostObject(object):
 
-    def __init__(self, title, link, date, summary, post_time, reading_time, private):
+    def __init__(self, title, link, date, summary, post_time, reading_time, private, tags):
         self.title = title
         self.link = link
         self.date = date
@@ -248,6 +253,7 @@ class PostObject(object):
         self.time = post_time
         self.reading_time = reading_time
         self.private = private
+        self.tags = tags
 
     def set_link(self, link):
         self.link = link
@@ -325,9 +331,27 @@ def create_projects():
     new_html_file.write(new_html_contents)
 
 
+def create_tag_pages():
+
+    tag_dict = {}
+
+    for i in tag_list:
+        current_list = []
+
+        for j in range(0, len(post_objects)):
+
+            if i in post_objects[j].tags:
+                current_list.append(post_objects[j])
+
+            tag_dict[i] = current_list
+
+    print(tag_dict["one"])
+
+
 post_objects = []
 posts_exists = os.path.exists("posts/")
 
+tag_list = []
 
 if posts_exists:
     shutil.rmtree("posts")
@@ -340,5 +364,7 @@ add_index_to_template(2, "index")
 add_index_to_template("all", "all")
 
 create_projects()
+
+create_tag_pages()
 
 print("--- %s seconds ---" % (time.time() - start_time))
