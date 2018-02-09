@@ -32,13 +32,31 @@ project_file_locations = []
 WPM = 275
 WORD_LENGTH = 5
 
-for i in BLOG_FILE_NAMES:
-    if i[-2:] == "md":  # Finds all .md files in blog directory
-        markdown_file_locations.append(i)
 
-for i in PROJECTS_FILE_NAMES:
-    if i[-4:] == "json":
-        project_file_locations.append(i)
+class PostObject(object):
+
+    def __init__(self, title, link, date, summary, post_time, reading_time, private, tags):
+        self.title = title
+        self.link = link
+        self.date = date
+        self.summary = summary
+        self.time = post_time
+        self.reading_time = reading_time
+        self.private = private
+        self.tags = tags
+
+    def set_link(self, link):
+        self.link = link
+
+
+class ProjectObject(object):
+
+    def __init__(self, name, link, summary, platforms, wip):
+        self.name = name
+        self.link = link
+        self.summary = summary
+        self.platforms = platforms
+        self.wip = wip
 
 
 def get_template(template):
@@ -243,32 +261,6 @@ def add_index_to_template(number, template):
         new_html_file.write(new_html_contents)
 
 
-class PostObject(object):
-
-    def __init__(self, title, link, date, summary, post_time, reading_time, private, tags):
-        self.title = title
-        self.link = link
-        self.date = date
-        self.summary = summary
-        self.time = post_time
-        self.reading_time = reading_time
-        self.private = private
-        self.tags = tags
-
-    def set_link(self, link):
-        self.link = link
-
-
-class ProjectObject(object):
-
-    def __init__(self, name, link, summary, platforms, wip):
-        self.name = name
-        self.link = link
-        self.summary = summary
-        self.platforms = platforms
-        self.wip = wip
-
-
 project_objects = []
 
 
@@ -331,8 +323,7 @@ def create_projects():
     new_html_file.write(new_html_contents)
 
 
-def create_tag_pages():
-
+def create_tag_dict():
     tag_dict = {}
 
     for i in tag_list:
@@ -345,8 +336,12 @@ def create_tag_pages():
 
             tag_dict[i] = current_list
 
+    return tag_dict
 
-    insert_string = ""
+
+def create_tag_pages():
+
+    tag_dict = create_tag_dict()
 
     for tag in tag_dict:
 
@@ -356,19 +351,40 @@ def create_tag_pages():
 
             iter_string += "<p>" + tag_dict[tag][i].title + "</p>"
 
-        insert_string += iter_string
+        try:
+            os.makedirs("tags/" + tag)
 
-    print(insert_string)
+            directory_so_far = "tags/" + tag + "/"
 
+            new_tag_html = open(directory_so_far + "index.html", "w")
+            new_tag_html.write(iter_string)
+
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
+
+
+for i in BLOG_FILE_NAMES:
+    if i[-2:] == "md":  # Finds all .md files in blog directory
+        markdown_file_locations.append(i)
+
+for i in PROJECTS_FILE_NAMES:
+    if i[-4:] == "json":
+        project_file_locations.append(i)
 
 post_objects = []
 posts_exists = os.path.exists("posts/")
+tags_exists = os.path.exists("tags/")
 
 tag_list = []
 
 if posts_exists:
     shutil.rmtree("posts")
     os.makedirs("posts")
+
+if tags_exists:
+    shutil.rmtree("tags")
+    os.makedirs("tags")
 
 for i in markdown_file_locations:  # Goes through locations and creates .html files
     create_post_html(i)
@@ -377,7 +393,6 @@ add_index_to_template(2, "index")
 add_index_to_template("all", "all")
 
 create_projects()
-
 create_tag_pages()
 
 print("--- %s seconds ---" % (time.time() - start_time))
