@@ -4,7 +4,7 @@
   "author": "Ethan Houston",
   "summary": "I'm just hoping my Python script compiles this properly.",
   "date": "1 February 2018",
-  "private": "True",
+  "private": "False",
   "tags": ["one", "two", "three"]
 }
 ---END_METADATA---
