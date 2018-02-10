@@ -118,7 +118,7 @@ def md_to_html(md_string):
     return markdown.markdown(md_string)
 
 
-def add_md_text_to_template(template, md_string, title, title_html, reading_time_html, summary):
+def add_md_text_to_template(template, md_string, title, title_html, reading_time_html, summary, tags):
 
     new_html_contents = template.replace('{TABTITLE}', title)
 
@@ -127,6 +127,13 @@ def add_md_text_to_template(template, md_string, title, title_html, reading_time
     new_html_contents = new_html_contents.replace('{TIME}', reading_time_html)
 
     new_html_contents = new_html_contents.replace('{BODY}', md_string)
+
+    new_tag_html = ""
+
+    for i in tags:
+        new_tag_html += "<a href=\"/tags/" + i + "\">" + i + "</a>"
+
+    new_html_contents = new_html_contents.replace("{TAGS}", new_tag_html)
 
     summary_string = "content=\"" + summary + "\""
 
@@ -198,7 +205,7 @@ def create_post_html(path):
     reading_time_html = "<p class=\"read_time\">" + reading_time + " min read</p>"
 
     # Creates new file, adds markdown HTML text
-    link = add_md_text_to_template(template_html, md_html, title, title_html, reading_time_html, summary)
+    link = add_md_text_to_template(template_html, md_html, title, title_html, reading_time_html, summary, tags)
 
     post_objects.append(PostObject(title, link, date, summary, post_time, reading_time, private, tags))
 
