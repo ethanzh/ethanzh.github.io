@@ -257,6 +257,17 @@ def add_index_to_template(number, template):
 
         new_html_contents = html_string.replace("{POSTS}", add_to_html)
 
+        if template == "all/index":
+            tag_dict = create_tag_dict()
+
+            tag_html = ""
+
+            for tag in tag_dict:
+
+                tag_html += "<a href=\"" + "/tags/" + tag + "/\">" + tag + "</a>"
+
+            new_html_contents = new_html_contents.replace("{TAGS}", tag_html)
+
         new_html_file = open(template + ".html", "w")
         new_html_file.write(new_html_contents)
 
@@ -345,11 +356,10 @@ def create_tag_pages():
 
     for tag in tag_dict:
 
-        iter_string = tag
-
         for i in range(0, len(tag_dict[tag])):
 
-            iter_string += "<p>" + tag_dict[tag][i].title + "</p>"
+            iter_string = "<a href=\"/" + tag_dict[tag][i].link + "\">" + tag_dict[tag][i].title + "</a>"
+
 
         try:
             os.makedirs("tags/" + tag)
@@ -392,7 +402,10 @@ for i in markdown_file_locations:  # Goes through locations and creates .html fi
 add_index_to_template(2, "index")
 add_index_to_template("all", "all")
 
+# create_tag_pages()
+
+
 create_projects()
-create_tag_pages()
+
 
 print("--- %s seconds ---" % (time.time() - start_time))
