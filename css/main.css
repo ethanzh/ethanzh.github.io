@@ -236,6 +236,18 @@ body {
     margin: 24px auto auto;
 }
 
+.post_tags {
+    text-align: center;
+
+}
+
+.post_tag_links {
+    text-decoration: none;
+    border-bottom: 0px;
+    color: #2d2d2d;
+    font-weight: bold;
+}
+
 .tag_name_title {
     padding-top: 61px;
     text-align: left;

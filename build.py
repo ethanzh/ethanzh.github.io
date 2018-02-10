@@ -128,10 +128,15 @@ def add_md_text_to_template(template, md_string, title, title_html, reading_time
 
     new_html_contents = new_html_contents.replace('{BODY}', md_string)
 
-    new_tag_html = ""
+    new_tag_html = "<p class=\"post_tags\">Tags: </p>"
 
-    for i in tags:
-        new_tag_html += "<a href=\"/tags/" + i + "\">" + i + "</a>"
+    for i in range(0, len(tags)):
+        new_tag_html += "<a class=\"post_tag_links\" href=\"/tags/" + tags[i] + "\">" + tags[i]
+
+        if i != len(tags):
+            new_tag_html += ", "
+
+        new_tag_html += "</a>"
 
     new_html_contents = new_html_contents.replace("{TAGS}", new_tag_html)
 
