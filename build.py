@@ -185,8 +185,11 @@ def create_post_html(path):
     tags = processed_json['tags']
 
     for i in tags:
+
         if i not in tag_list:
-            tag_list.append(i)
+
+                if private == "False":
+                    tag_list.append(i)
 
     if private == "True":
         private = True
@@ -359,6 +362,7 @@ def create_tag_dict():
 
             tag_dict[i] = current_list
 
+    print(tag_dict)
     return tag_dict
 
 
