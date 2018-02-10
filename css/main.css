@@ -228,11 +228,12 @@ body {
 .tags_title {
     text-align: center;
     border-bottom: 1px solid #a5a5a5;
-    width: 100%;
+    width: 50%;
     display: block;
     color: #2d2d2d;
     padding-bottom: 3px;
     font-weight: normal;
+    margin: 25px auto auto;
 }
 
 .tag_name_title {
