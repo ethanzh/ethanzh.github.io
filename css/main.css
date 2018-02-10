@@ -218,10 +218,37 @@ body {
 }
 
 .tags {
-    padding-top: 60px;
     display: block;
     white-space: pre-wrap;
     text-align: center;
+
+
+}
+
+.tags_title {
+    text-align: center;
+    border-bottom: 1px solid #a5a5a5;
+    width: 100%;
+    display: block;
+    color: #2d2d2d;
+    padding-bottom: 3px;
+    font-weight: normal;
+}
+
+.tag_name_title {
+    padding-top: 61px;
+    text-align: left;
+    font-size: 20pt;
+    color: white;
+    font-weight: bold;
+}
+
+.tag_links {
+    color: black;
+    padding-top: 0;
+    margin-top: -4px;
+    line-height: 1;
+    vertical-align: top;
 }
 
 .name_title:hover {
@@ -285,3 +312,4 @@ body {
     align-content: center;
     text-align: center;
 }
+

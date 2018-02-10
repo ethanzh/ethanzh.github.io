@@ -264,7 +264,7 @@ def add_index_to_template(number, template):
 
             for tag in tag_dict:
 
-                tag_html += "\n<a href=\"" + "/tags/" + tag + "/\">" + tag + "</a>\n"
+                tag_html += "\n<a class=\"tag_links\" href=\"" + "/tags/" + tag + "/\">" + tag + "</a>\n"
 
             new_html_contents = new_html_contents.replace("{TAGS}", tag_html)
 
