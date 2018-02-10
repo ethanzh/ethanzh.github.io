@@ -402,9 +402,7 @@ for i in markdown_file_locations:  # Goes through locations and creates .html fi
 add_index_to_template(2, "index")
 add_index_to_template("all", "all")
 
-# create_tag_pages()
-
-
+create_tag_pages()
 create_projects()
 
 
