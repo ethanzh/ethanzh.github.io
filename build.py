@@ -356,18 +356,23 @@ def create_tag_pages():
 
     for tag in tag_dict:
 
+        iter_string = ""
+
         for i in range(0, len(tag_dict[tag])):
 
-            iter_string = "<a href=\"/" + tag_dict[tag][i].link + "\">" + tag_dict[tag][i].title + "</a>"
-
+            iter_string += "<a href=\"/" + tag_dict[tag][i].link + "\">" + tag_dict[tag][i].title + "</a>"
 
         try:
             os.makedirs("tags/" + tag)
 
             directory_so_far = "tags/" + tag + "/"
 
+            template_html = get_template("tag")
+
+            template_html = template_html.replace("{TAGS}", iter_string)
+
             new_tag_html = open(directory_so_far + "index.html", "w")
-            new_tag_html.write(iter_string)
+            new_tag_html.write(template_html)
 
         except OSError as e:
             if e.errno != errno.EEXIST:
