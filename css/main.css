@@ -217,6 +217,13 @@ body {
     border-bottom: 0 solid #a5a5a5;
 }
 
+.tags {
+    padding-top: 60px;
+    display: block;
+    white-space: pre-wrap;
+    text-align: center;
+}
+
 .name_title:hover {
     color: lightgray;
 }
