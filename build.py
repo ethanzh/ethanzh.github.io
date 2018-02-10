@@ -133,7 +133,7 @@ def add_md_text_to_template(template, md_string, title, title_html, reading_time
     for i in range(0, len(tags)):
         new_tag_html += "<a class=\"post_tag_links\" href=\"/tags/" + tags[i] + "\">" + tags[i]
 
-        if i != len(tags):
+        if i != len(tags) - 1:
             new_tag_html += ", "
 
         new_tag_html += "</a>"
