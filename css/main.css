@@ -260,10 +260,11 @@ body {
 
 .tag_links {
     color: black;
-    padding-top: 0;
     margin-top: -4px;
     line-height: 1;
     vertical-align: top;
+    padding-top:10px;
+    padding-bottom:10px;
 }
 
 .name_title:hover {
