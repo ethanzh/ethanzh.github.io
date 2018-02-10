@@ -371,6 +371,10 @@ def create_tag_pages():
 
             template_html = template_html.replace("{TAGS}", iter_string)
 
+            template_html = template_html.replace("{TAGNAME}", tag.title())
+
+            template_html = template_html.replace("{HEADTITLE}", "Tag: " + tag.title())
+
             new_tag_html = open(directory_so_far + "index.html", "w")
             new_tag_html.write(template_html)
 
