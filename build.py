@@ -127,35 +127,40 @@ def md_to_html(md_string):
 
 def add_md_text_to_template(template, md_string, title, title_html, reading_time_html, summary, tags):
 
-    new_html_contents = template.replace('{TABTITLE}', title)
-
-    new_html_contents = new_html_contents.replace('{TITLE}', title_html)
-
-    new_html_contents = new_html_contents.replace('{TIME}', reading_time_html)
-
-    new_html_contents = new_html_contents.replace('{BODY}', md_string)
-
     new_tag_html = create_html_tag("p", "Tags: ", css="post_tags")
 
     for i in range(0, len(tags)):
-        new_tag_html += "<a class=\"post_tag_links\" href=\"/tags/" + tags[i] + "\">" + tags[i]
+
+        tag_string = tags[i]
 
         if i != len(tags) - 1:
-            new_tag_html += ", "
+            tag_string += " - "
 
-        new_tag_html += "</a>"
-
-    new_html_contents = new_html_contents.replace("{TAGS}", new_tag_html)
+        new_tag_html += create_html_tag("a", tag_string, css="post_tag_links", href="/tags/" + tags[i])
 
     summary_string = "content=\"" + summary + "\""
-
-    new_html_contents = new_html_contents.replace('{SUMMARY}', summary_string)
-
     spaceless_title = title.replace(" ", "-")
     lower_title = spaceless_title.lower()
     final_title = re.sub(r'[^a-zA-Z0-9-]', '', lower_title)
-
     directory_so_far = "posts/"
+
+    replacements = {
+
+        "TABTITLE": title,
+
+        "TITLE": title_html,
+
+        "TIME": reading_time_html,
+
+        "BODY": md_string,
+
+        "TAGS": new_tag_html,
+
+        "SUMMARY": summary_string
+
+    }
+
+    new_html_contents = html_replace(template, replacements)
 
     try:
         os.makedirs(directory_so_far + final_title)
@@ -333,7 +338,7 @@ def create_projects():
                                            href=project_objects[i].link, target="_blank")
 
             if project_objects[i].wip:
-                add_to_html += create_html_tag("p", "[WORK IN PROGRESS]", css="wip")
+                add_to_html += create_html_tag("p", " [WORK IN PROGRESS]", css="wip")
 
             add_to_html += create_html_tag("p", project_objects[i].summary)
 
@@ -394,11 +399,17 @@ def create_tag_pages():
 
             template_html = get_template("tag")
 
-            template_html = template_html.replace("{TAGS}", iter_string)
+            replacements = {
 
-            template_html = template_html.replace("{TAGNAME}", tag.title())
+                "TAGS": iter_string,
 
-            template_html = template_html.replace("{HEADTITLE}", "Tag: " + tag.title())
+                "TAGNAME": tag.title(),
+
+                "HEADTITLE": "Tag: " + tag.title()
+
+            }
+
+            template_html = html_replace(template_html, replacements)
 
             new_tag_html = open(directory_so_far + "index.html", "w")
             new_tag_html.write(template_html)
@@ -406,6 +417,17 @@ def create_tag_pages():
         except OSError as e:
             if e.errno != errno.EEXIST:
                 raise
+
+
+def html_replace(original, replace_dict):
+
+    for key, value in replace_dict.items():
+        original = original.replace(
+            "{" + key + "}",
+            str(value)
+        )
+
+    return original
 
 
 def create_html_tag(tag, content, **kwargs):
@@ -422,9 +444,6 @@ def create_html_tag(tag, content, **kwargs):
     html += ">" + content + "</" + tag + ">"
 
     return html
-
-
-print(create_html_tag("a", "this is a picture", css="inline_img", href="https://ethanhouston.com"))
 
 
 def run():
