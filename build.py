@@ -6,6 +6,7 @@ import json
 import re
 import datetime
 import time
+import cProfile
 
 # TO-DO:
 # Create new directories for each post, name file 'index.html'
@@ -31,6 +32,12 @@ project_file_locations = []
 
 WPM = 275
 WORD_LENGTH = 5
+
+post_objects = []
+posts_exists = os.path.exists("posts/")
+tags_exists = os.path.exists("tags/")
+
+tag_list = []
 
 
 class PostObject(object):
@@ -128,7 +135,7 @@ def add_md_text_to_template(template, md_string, title, title_html, reading_time
 
     new_html_contents = new_html_contents.replace('{BODY}', md_string)
 
-    new_tag_html = "<p class=\"post_tags\">Tags: </p>"
+    new_tag_html = create_html_tag("p", "Tags: ", css="post_tags")
 
     for i in range(0, len(tags)):
         new_tag_html += "<a class=\"post_tag_links\" href=\"/tags/" + tags[i] + "\">" + tags[i]
@@ -208,9 +215,9 @@ def create_post_html(path):
 
     md_html = custom_markdown_class(change_list, md_html)
 
-    title_html = "<h2 id=\"title_button\" href=\"/\">" + title + "</h2>"
+    title_html = create_html_tag("h2", title, id="title_button", href="/")
 
-    reading_time_html = "<p class=\"read_time\">" + reading_time + " min read</p>"
+    reading_time_html = create_html_tag("p", reading_time + " min read", css="read_time")
 
     # Creates new file, adds markdown HTML text
     link = add_md_text_to_template(template_html, md_html, title, title_html, reading_time_html, summary, tags)
@@ -257,9 +264,11 @@ def add_index_to_template(number, template):
                 if not sorted_list[i].private:
 
                     add_to_html += "<div>"
-                    add_to_html += "<a class=\"post_link\" href=\"" + "/" + sorted_list[i].link + "\">" + sorted_list[
-                        i].title + "</a>"
-                    add_to_html += "<p>" + sorted_list[i].date + ". " + sorted_list[i].summary + "</p>"
+
+                    add_to_html += create_html_tag("a", sorted_list[i].title, css="post_link",
+                                                   href="/" + sorted_list[i].link)
+
+                    add_to_html += create_html_tag("p", sorted_list[i].date + ". " + sorted_list[i].summary)
 
                     if i == (len(sorted_list) - 1):
                         add_to_html += "</div>\n                "
@@ -279,7 +288,7 @@ def add_index_to_template(number, template):
 
             for tag in tag_dict:
 
-                tag_html += "\n<a class=\"tag_links\" href=\"" + "/tags/" + tag + "/\">" + tag + "</a>\n"
+                tag_html += create_html_tag("a", tag, css="tag_links", href="/tags/" + tag + "/") + "\n"
 
             new_html_contents = new_html_contents.replace("{TAGS}", tag_html)
 
@@ -319,20 +328,21 @@ def create_projects():
             platforms = project_objects[i].platforms.count(",")
 
             add_to_html += "<div>"
-            add_to_html += "<a target=\"_blank\" class=\"post_link\" href=" + \
-                           project_objects[i].link + ">" + project_objects[i].name + "</a>"
+
+            add_to_html += create_html_tag("a", project_objects[i].name, css="post_link",
+                                           href=project_objects[i].link, target="_blank")
 
             if project_objects[i].wip:
-                add_to_html += "<p class=\"wip\"> [WORK IN PROGRESS]</p>"
+                add_to_html += create_html_tag("p", "[WORK IN PROGRESS]", css="wip")
 
-            add_to_html += "<p>" + project_objects[i].summary + "</p>"
+            add_to_html += create_html_tag("p", project_objects[i].summary)
 
             if platforms == 0:
                 platform_text = "Platform: "
             else:
                 platform_text = "Platforms: "
 
-            add_to_html += "<p>" + platform_text + project_objects[i].platforms + "</p>"
+            add_to_html += create_html_tag("p", platform_text + project_objects[i].platforms)
 
             if i == (len(project_objects) - 1):
                 add_to_html += "</div>\n                "
@@ -362,7 +372,6 @@ def create_tag_dict():
 
             tag_dict[i] = current_list
 
-    print(tag_dict)
     return tag_dict
 
 
@@ -376,7 +385,7 @@ def create_tag_pages():
 
         for i in range(0, len(tag_dict[tag])):
 
-            iter_string += "<a href=\"/" + tag_dict[tag][i].link + "\">" + tag_dict[tag][i].title + "</a>"
+            iter_string += create_html_tag("a", tag_dict[tag][i].title, href=tag_dict[tag][i].link)
 
         try:
             os.makedirs("tags/" + tag)
@@ -399,36 +408,55 @@ def create_tag_pages():
                 raise
 
 
-for i in BLOG_FILE_NAMES:
-    if i[-2:] == "md":  # Finds all .md files in blog directory
-        markdown_file_locations.append(i)
+def create_html_tag(tag, content, **kwargs):
 
-for i in PROJECTS_FILE_NAMES:
-    if i[-4:] == "json":
-        project_file_locations.append(i)
+    html = "<" + tag
 
-post_objects = []
-posts_exists = os.path.exists("posts/")
-tags_exists = os.path.exists("tags/")
+    for key, value in kwargs.items():
 
-tag_list = []
+        if key == "css":
+            key = "class"
 
-if posts_exists:
-    shutil.rmtree("posts")
-    os.makedirs("posts")
+        html += " " + key + "=\"" + value + "\""
 
-if tags_exists:
-    shutil.rmtree("tags")
-    os.makedirs("tags")
+    html += ">" + content + "</" + tag + ">"
 
-for i in markdown_file_locations:  # Goes through locations and creates .html files
-    create_post_html(i)
-
-add_index_to_template(2, "index")
-add_index_to_template("all", "all")
-
-create_tag_pages()
-create_projects()
+    return html
 
 
-print("--- %s seconds ---" % (time.time() - start_time))
+print(create_html_tag("a", "this is a picture", css="inline_img", href="https://ethanhouston.com"))
+
+
+def run():
+
+    for i in BLOG_FILE_NAMES:
+        if i[-2:] == "md":  # Finds all .md files in blog directory
+            markdown_file_locations.append(i)
+
+    for i in PROJECTS_FILE_NAMES:
+        if i[-4:] == "json":
+            project_file_locations.append(i)
+
+    if posts_exists:
+        shutil.rmtree("posts")
+        os.makedirs("posts")
+
+    if tags_exists:
+        shutil.rmtree("tags")
+        os.makedirs("tags")
+
+    for i in markdown_file_locations:  # Goes through locations and creates .html files
+        create_post_html(i)
+
+    add_index_to_template(2, "index")
+    add_index_to_template("all", "all")
+
+    create_tag_pages()
+    create_projects()
+
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+
+#  cProfile.run('run()')
+
+run()
