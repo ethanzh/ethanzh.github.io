@@ -293,7 +293,7 @@ def add_index_to_template(number, template):
 
             for tag in tag_dict:
 
-                tag_html += create_html_tag("a", tag, css="tag_links", href="/tags/" + tag + "/") + "\n"
+                tag_html += create_html_tag("a", tag, css="tag_links", href="/tags/" + tag + "/") + "<br />"
 
             new_html_contents = new_html_contents.replace("{TAGS}", tag_html)
 
@@ -390,7 +390,7 @@ def create_tag_pages():
 
         for i in range(0, len(tag_dict[tag])):
 
-            iter_string += create_html_tag("a", tag_dict[tag][i].title, href=tag_dict[tag][i].link) + "<br />"
+            iter_string += create_html_tag("a", tag_dict[tag][i].title, href=tag_dict[tag][i].link)
 
         try:
             os.makedirs("tags/" + tag)
