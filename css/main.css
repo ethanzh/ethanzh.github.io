@@ -127,7 +127,6 @@ body {
     text-decoration: none;
     font-weight: bold;
     border-bottom: 0 dotted #242526;
-    target: _bla;
 }
 
 .post_link:hover {
@@ -173,7 +172,7 @@ body {
     padding-bottom: 0;
 }
 
-#title_button {
+.title_button {
     font-family: "ProximaNovaBold", sans-serif;
     font-size: 22pt;
     color: #2d2d2d;
@@ -183,6 +182,12 @@ body {
     padding-bottom: 2px;
     padding-top:24px;
 
+}
+
+.tags_title {
+    .title_button;
+
+    font-size: 14px;
 }
 
 .post_line {
@@ -224,17 +229,6 @@ body {
     text-align: center;
 
 
-}
-
-.tags_title {
-    text-align: center;
-    border-bottom: 1px solid #a5a5a5;
-    width: 50%;
-    display: block;
-    color: #2d2d2d;
-    padding-bottom: 3px;
-    font-weight: normal;
-    margin: 24px auto auto;
 }
 
 .post_tags {
