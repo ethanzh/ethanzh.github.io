@@ -220,7 +220,7 @@ def create_post_html(path):
 
     md_html = custom_markdown_class(change_list, md_html)
 
-    title_html = create_html_tag("h2", title, id="title_button", href="/")
+    title_html = create_html_tag("h2", title, css="title_button")
 
     reading_time_html = create_html_tag("p", reading_time + " min read", css="read_time")
 
