@@ -53,17 +53,17 @@
 Weebly, and Wordpress. I immediately discounted these as it defeated the whole point of delving into web development.</p>
 <p>I was initially daunted by the prospect of writing an entire website, CSS and all, from scratch. After expressing these
 concerns to a friend, I was introduced to the notion of 'static site generation', something I have started to
-(possibly inaccurately) refer to as a 'templating system'. Although there are <a href="https://www.staticgen.com/">many</a> of these
+(possibly inaccurately) refer to as a 'templating system'. Although there are <a target="_blank" href="https://www.staticgen.com/">many</a> of these
 services already in existence, I wanted to make my own.</p>
-<p>This site is (at the moment) built by just one file, my <a href="https://github.com/ethanzh/ethanzh.github.io/blob/master/build.py">build.py</a>.
+<p>This site is (at the moment) built by just one file, my <a target="_blank" href="https://github.com/ethanzh/ethanzh.github.io/blob/master/build.py">build.py</a>.
 I chose Python for this simply because I thought it would be the quickest to set up, and easiest to maintain.</p>
 <h4>How does build.py work?</h4>
-<p>When I write a blog post (as I'm doing right now), I write it in <a href="http://kirkstrobeck.github.io/whatismarkdown.com/">Markdown</a>, as it is
+<p>When I write a blog post (as I'm doing right now), I write it in <a target="_blank" href="http://kirkstrobeck.github.io/whatismarkdown.com/">Markdown</a>, as it is
 easily translated into HTML later, and I don't want to deal with writing HTML as I create a blog post. At the top of these Markdown files,
 I have some metadata in the form of JSON, with information such as the post title, summary, date, tags, etc.</p>
 <p>Although my build.py has become more and more complicated over the past few weeks, this is an oversimplified view of how it works:
 1. Build.py finds all of the Markdown files in a certain directory (in my case, the 'content' folder)
-2. The contents of each Markdown file are processed as strings, and then turned into HTML through <a href="https://pypi.python.org/pypi/Markdown">a Python Markdown library</a>
+2. The contents of each Markdown file are processed as strings, and then turned into HTML through <a target="_blank" href="https://pypi.python.org/pypi/Markdown">a Python Markdown library</a>
 3. These strings of newly-created HTML are then added into template HTML files I've created.</p>
 <p><img class="article_image" alt="Site structure" src="https://ethanhouston.com/img/articles/site-structure.png" /></p>
 <p>This is still the basic function of build.py, but I've found myself adding more features I would never have thought of even a week ago.

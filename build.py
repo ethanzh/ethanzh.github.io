@@ -220,6 +220,8 @@ def create_post_html(path):
 
     md_html = custom_markdown_class(change_list, md_html)
 
+    md_html = md_html.replace("<a", "<a target=\"_blank\"")
+
     title_html = create_html_tag("h2", title, css="title_button")
 
     reading_time_html = create_html_tag("p", reading_time + " min read", css="read_time")
