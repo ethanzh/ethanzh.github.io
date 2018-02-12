@@ -5,7 +5,7 @@
   "summary": "I'm just hoping my Python script compiles this properly.",
   "date": "1 February 2018",
   "private": "False",
-  "tags": ["blog", "python", "web"]
+  "tags": ["me", "python", "web"]
 }
 ---END_METADATA---
 
