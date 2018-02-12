@@ -56,5 +56,8 @@ DNS settings, I've spend far, *far* more time than I would like to admit on tryi
 
 ###### This is quickly becoming one of my most-visited websites.
 
+Previously, I had been worried about the viability of having one file process every website-related HTML file (as it also generated the home page, the "projects" view, 
+the "all posts" view, etc), but it really just comes down to simple file I/O and string manipulation, so even when I run build.py with 50,000 Markdown files, it still takes
+less than a second to run. If I ever organically get to that many posts, something good must have happened along the way.
 
 

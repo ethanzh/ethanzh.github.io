@@ -79,6 +79,9 @@ the fact that the site is hosted on GitHub pages, meaning it's GitHub's CDN bein
 DNS settings, I've spend far, <em>far</em> more time than I would like to admit on trying to diagnose CSS errors that were simply due to Cloudflare having cached old versions</p>
 <p><img class="article_image" alt="Cloudflare Caching panel" src="https://ethanhouston.com/img/articles/cloudflare.JPG" /></p>
 <h6 class="caption">This is quickly becoming one of my most-visited websites.</h6>
+<p>Previously, I had been worried about the viability of having one file process every website-related HTML file (as it also generated the home page, the "projects" view, 
+the "all posts" view, etc), but it really just comes down to simple file I/O and string manipulation, so even when I run build.py with 50,000 Markdown files, it still takes
+less than a second to run. If I ever organically get to that many posts, something good must have happened along the way.</p>
 
                     <div class="post_tags">
 
