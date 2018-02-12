@@ -390,7 +390,9 @@ def create_tag_pages():
 
         for i in range(0, len(tag_dict[tag])):
 
-            iter_string += create_html_tag("a", tag_dict[tag][i].title, href= "/" + tag_dict[tag][i].link)
+            if not tag_dict[tag][i].private:
+
+                iter_string += create_html_tag("a", tag_dict[tag][i].title, href="/" + tag_dict[tag][i].link)
 
         try:
             os.makedirs("tags/" + tag)
