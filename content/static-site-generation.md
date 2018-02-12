@@ -4,7 +4,7 @@
   "author": "Ethan Houston",
   "summary": "Specifics about how I set up this website, and why I believe in it",
   "date": "11 February 2018",
-  "private": "True",
+  "private": "False",
   "tags": ["html", "python", "web"]
 }
 ---END_METADATA---
