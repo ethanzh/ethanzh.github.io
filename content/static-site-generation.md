@@ -4,7 +4,7 @@
   "author": "Ethan Houston",
   "summary": "Specifics about how I set up this website, and why I believe in it",
   "date": "11 February 2018",
-  "private": "False",
+  "private": "True",
   "tags": ["html", "python", "web"]
 }
 ---END_METADATA---
@@ -41,6 +41,20 @@ Among these is a 'tags' system, which I saw as an interesting problem to work on
 Python's weird mix of being part functional, part object-oriented has been useful in the creation of this site. For instance, every
 blog post is turned into what I call a 'PostObject', that has information such as post length, link, and author (which will likely always be me).
 
+Part of the beauty of this site (in my eyes) is its quick performance, which is something I've put a lot of effort into. This is what influenced me
+to do (almost) all the design from scratch, rather than use something like Bootstrap (which could significantly slow down load times).
+
+![Chrome F12](https://ethanhouston.com/img/articles/inspect.JPG)
+
+Apart from my style sheets and compressed images, this website doesn't need a whole lot to run, which I find helpful. This is also helped by
+the fact that the site is hosted on GitHub pages, meaning it's GitHub's CDN being used, which is without a doubt more powerful than anything I could host myself.
+
+Cloudflare (the reason this site has HTTPS) is both a godsend and an annoyance. While it does provide a great set of tools for monitoring the site, and changing
+DNS settings, I've spend far, *far* more time than I would like to admit on trying to diagnose CSS errors that were simply due to Cloudflare having cached old versions
+
+![Cloudflare Caching panel](https://ethanhouston.com/img/articles/cloudflare.JPG)
+
+###### This is quickly becoming one of my most-visited websites.
 
 
 

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-41978381-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-41978381-3');
+    </script>
+    <link rel="stylesheet" href="../../css/pills.min.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../../css/main.css">
+
+
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.jpg"/>
+    <link ref="icon" href="../../img/favicon.jpg" />
+
+    <title> How I Built This Site </title>
+
+    <meta name="description" content="Specifics about how I set up this website, and why I believe in it" />
+
+</head>
+
+
+<body>
+    <header></header>
+
+
+    <div class="wrapper">
+
+        <div class="row">
+
+            <div class="two columns"></div>
+
+
+            <div class="eight columns">
+
+
+                <div class="above_article">
+
+                    <h2 class="title_button">How I Built This Site</h2>
+                    <p class="read_time">3 min read</p>
+
+                </div>
+
+                <div class="body_text">
+                    <p>This website was born out of my desire to try something new: web development.</p>
+<p>Make no mistake, there is no shortage of tools that make it easy and simple to create a website, like Squarespace,
+Weebly, and Wordpress. I immediately discounted these as it defeated the whole point of delving into web development.</p>
+<p>I was initially daunted by the prospect of writing an entire website, CSS and all, from scratch. After expressing these
+concerns to a friend, I was introduced to the notion of 'static site generation', something I have started to
+(possibly inaccurately) refer to as a 'templating system'. Although there are <a href="https://www.staticgen.com/">many</a> of these
+services already in existence, I wanted to make my own.</p>
+<p>This site is (at the moment) built by just one file, my <a href="https://github.com/ethanzh/ethanzh.github.io/blob/master/build.py">build.py</a>.
+I chose Python for this simply because I thought it would be the quickest to set up, and easiest to maintain.</p>
+<h4>How does build.py work?</h4>
+<p>When I write a blog post (as I'm doing right now), I write it in <a href="http://kirkstrobeck.github.io/whatismarkdown.com/">Markdown</a>, as it is
+easily translated into HTML later, and I don't want to deal with writing HTML as I create a blog post. At the top of these Markdown files,
+I have some metadata in the form of JSON, with information such as the post title, summary, date, tags, etc.</p>
+<p>Although my build.py has become more and more complicated over the past few weeks, this is an oversimplified view of how it works:
+1. Build.py finds all of the Markdown files in a certain directory (in my case, the 'content' folder)
+2. The contents of each Markdown file are processed as strings, and then turned into HTML through <a href="https://pypi.python.org/pypi/Markdown">a Python Markdown library</a>
+3. These strings of newly-created HTML are then added into template HTML files I've created.</p>
+<p><img class="article_image" alt="Site structure" src="https://ethanhouston.com/img/articles/site-structure.png" /></p>
+<p>This is still the basic function of build.py, but I've found myself adding more features I would never have thought of even a week ago.
+Among these is a 'tags' system, which I saw as an interesting problem to work on.</p>
+<p>Python's weird mix of being part functional, part object-oriented has been useful in the creation of this site. For instance, every
+blog post is turned into what I call a 'PostObject', that has information such as post length, link, and author (which will likely always be me).</p>
+<p>Part of the beauty of this site (in my eyes) is its quick performance, which is something I've put a lot of effort into. This is what influenced me
+to do (almost) all the design from scratch, rather than use something like Bootstrap (which could significantly slow down load times).</p>
+<p><img class="article_image" alt="Chrome F12" src="https://ethanhouston.com/img/articles/inspect.JPG" /></p>
+<p>Apart from my style sheets and compressed images, this website doesn't need a whole lot to run, which I find helpful. This is also helped by
+the fact that the site is hosted on GitHub pages, meaning it's GitHub's CDN being used, which is without a doubt more powerful than anything I could host myself.</p>
+<p>Cloudflare (the reason this site has HTTPS) is both a godsend and an annoyance. While it does provide a great set of tools for monitoring the site, and changing
+DNS settings, I've spend far, <em>far</em> more time than I would like to admit on trying to diagnose CSS errors that were simply due to Cloudflare having cached old versions</p>
+<p><img class="article_image" alt="Cloudflare Caching panel" src="https://ethanhouston.com/img/articles/cloudflare.JPG" /></p>
+<h6 class="caption">This is quickly becoming one of my most-visited websites.</h6>
+
+                    <div class="post_tags">
+
+                        <p class="post_tags">Tags: </p><a class="post_tag_links" href="/tags/html">html - </a><a class="post_tag_links" href="/tags/python">python - </a><a class="post_tag_links" href="/tags/web">web</a>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="two columns"></div>
+        </div>
+
+    </div>
+
+
+    <footer></footer>
+
+    <!-- <script src="/instantclick.min.js" data-no-instant></script>
+    <script data-no-instant>InstantClick.init();</script> -->
+
+</body>
+</html>
