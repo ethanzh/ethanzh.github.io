@@ -36,6 +36,7 @@ post_objects = []
 posts_exists = os.path.exists("posts/")
 tags_exists = os.path.exists("tags/")
 
+project_objects = []
 tag_list = []
 
 
@@ -298,9 +299,6 @@ def add_index_to_template(number, template):
 
         new_html_file = open(template + ".html", "w")
         new_html_file.write(new_html_contents)
-
-
-project_objects = []
 
 
 def create_projects():
