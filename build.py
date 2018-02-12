@@ -1,12 +1,11 @@
-import markdown
-import os
-import errno
-import shutil
-import json
-import re
 import datetime
+import errno
+import json
+import os
+import re
+import shutil
 import time
-import cProfile
+import markdown
 
 # TO-DO:
 # Create new directories for each post, name file 'index.html'
