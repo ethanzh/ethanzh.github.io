@@ -70,6 +70,6 @@ I hope this article was helpful in explaining the way in which I've chosen to bu
 concept of not hand-coding every HTML page, but it's definitely a terrific time-saver, with changes to the template being reflected in a fraction of a second throughout
 the entire website 
 
-![Chrome F12](https://ethanhouston.com/img/articles/time.JPG)
+![PyCharm build time](https://ethanhouston.com/img/articles/time.JPG)
 
 
