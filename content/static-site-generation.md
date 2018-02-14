@@ -3,8 +3,8 @@
   "title": "How I Built This Site",
   "author": "Ethan Houston",
   "summary": "Specifics about how I set up this website, and why I believe in it",
-  "date": "11 February 2018",
-  "private": "True",
+  "date": "13 February 2018",
+  "private": "False",
   "tags": ["html", "python", "web"]
 }
 ---END_METADATA---
@@ -59,5 +59,17 @@ DNS settings, I've spend far, *far* more time than I would like to admit on tryi
 Previously, I had been worried about the viability of having one file process every website-related HTML file (as it also generated the home page, the "projects" view, 
 the "all posts" view, etc), but it really just comes down to simple file I/O and string manipulation, so even when I run build.py with 50,000 Markdown files, it still takes
 less than a second to run. If I ever organically get to that many posts, something good must have happened along the way.
+
+I set up the 'tags' system I mentioned before with the goal of filling this personal site with not only traditional 'blog' posts about things that are
+important to me, but to also write articles to help people understand how things work (such as this article). I'm doing this because although I find
+StackOverflow to be an invaluable resource when I'm working on something, one can sometimes be inundated with too many conflicting answers, whereas one
+article written by one person is normally much easier to follow, and, in my experience, slightly more likely to work. Using tags will help me
+differentiate between 'blog' posts, and tutorials (which will be tagged by the related programming languages and concepts used).
+
+I hope this article was helpful in explaining the way in which I've chosen to build this website. It took a little while for me to wrap my head around the
+concept of not hand-coding every HTML page, but it's definitely a terrific time-saver, with changes to the template being reflected in a fraction of a second throughout
+the entire website 
+
+![Chrome F12](https://ethanhouston.com/img/articles/time.JPG)
 
 
