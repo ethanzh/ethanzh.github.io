@@ -190,7 +190,8 @@ body {
     color: #2d2d2d;
     text-align: center;
     font-weight: bold;
-    padding-top:46px;
+    padding-top:47px;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .post_line {
@@ -227,8 +228,12 @@ body {
 }
 
 .tags {
-    display: inline;
-    text-align: center;
+
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: space-between;
 
 }
 
@@ -256,6 +261,17 @@ body {
 }
 
 .tag_links {
+color: black;
+    margin-top:-6px;
+    margin-bottom:-6px;
+    line-height: 1;
+    vertical-align: top;
+        text-align: center;
+    text-decoration: none;
+    border-bottom: 0;
+}
+
+.old_tag_links {
     color: black;
     margin-top: -4px;
     line-height: 1;
