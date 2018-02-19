@@ -29,8 +29,11 @@ easily translated into HTML later, and I don't want to deal with writing HTML as
 I have some metadata in the form of JSON, with information such as the post title, summary, date, tags, etc.
 
 Although my build.py has become more and more complicated over the past few weeks, this is an oversimplified view of how it works:
+
 1. Build.py finds all of the Markdown files in a certain directory (in my case, the 'content' folder)
+
 2. The contents of each Markdown file are processed as strings, and then turned into HTML through [a Python Markdown library](https://pypi.python.org/pypi/Markdown)
+
 3. These strings of newly-created HTML are then added into template HTML files I've created.
 
 ![Site structure](https://ethanhouston.com/img/articles/site-structure.png)

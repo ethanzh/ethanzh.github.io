@@ -264,24 +264,13 @@ def add_index_to_template(number, template):
 
         try:
 
-            sorted_list = sorted(post_objects, key=lambda x: x.time, reverse=True)
+            sorted_list = sort_by_time(post_objects)
 
             for i in range(0, number):
 
                 if not sorted_list[i].private:
 
-                    add_to_html += "<div>"
-
-                    add_to_html += create_html_tag("a", sorted_list[i].title, css="post_link",
-                                                   href="/" + sorted_list[i].link)
-
-                    add_to_html += create_html_tag("p", sorted_list[i].date + ". " + sorted_list[i].summary)
-
-                    if i == (len(sorted_list) - 1):
-                        add_to_html += "</div>\n                "
-
-                    else:
-                        add_to_html += "</div><br />\n                "
+                    add_to_html += create_blurb(sorted_list[i])
 
         except IndexError:
             pass
@@ -379,6 +368,24 @@ def create_tag_dict():
     return tag_dict
 
 
+def create_blurb(post):
+
+    iter_string = "<div>"
+
+    iter_string += create_html_tag("a", post.title, css="post_link",
+                                   href="/" + post.link)
+
+    iter_string += create_html_tag("p", post.date + ". " + post.summary)
+
+    iter_string += "</div>"
+
+    return iter_string
+
+
+def sort_by_time(post_list):
+    return sorted(post_list, key=lambda x: x.time, reverse=True)
+
+
 def create_tag_pages():
 
     tag_dict = create_tag_dict()
@@ -389,9 +396,11 @@ def create_tag_pages():
 
         for i in range(0, len(tag_dict[tag])):
 
+            tag_dict[tag] = sort_by_time(tag_dict[tag])  # This somehow works.
+
             if not tag_dict[tag][i].private:
 
-                iter_string += create_html_tag("a", tag_dict[tag][i].title, href="/" + tag_dict[tag][i].link)
+                iter_string += create_blurb(tag_dict[tag][i])
 
         try:
             os.makedirs("tags/" + tag)
@@ -404,9 +413,9 @@ def create_tag_pages():
 
                 "TAGS": iter_string,
 
-                "TAGNAME": tag.title(),
+                "TAGNAME": "#" + tag.lower(),
 
-                "HEADTITLE": "Tag: " + tag.title()
+                "HEADTITLE": "#" + tag.lower()
 
             }
 
