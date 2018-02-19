@@ -52,40 +52,57 @@ div {
 
 .facebook {
     background: url("../img/logos/facebook_grey.png") no-repeat;
+    border:none;
+    border-color:transparent; border-color:initial;
 }
 
 .wechat {
     background: url("../img/logos/wechat_grey.png") no-repeat;
+    border:none;
+    border-color:transparent; border-color:initial;
 }
 
 .linkedin {
     background: url("../img/logos/linkedin_grey.png") no-repeat;
+    border:none;
+    border-color:transparent; border-color:initial;
 }
 
 .flickr {
     background: url("../img/logos/flickr_grey.png") no-repeat;
+    border:none;
+    border-color:transparent; border-color:initial;
 }
 
 .facebook:hover {
     background: url("../img/logos/facebook_blue.png") no-repeat;
+    border:none;
+    border-color:transparent; border-color:initial;
 }
 
 .wechat:hover {
     background: url("../img/logos/wechat_blue.png") no-repeat;
+    border:none;
+    border-color:transparent; border-color:initial;
 }
 
 .linkedin:hover {
     background: url("../img/logos/linkedin_blue.png") no-repeat;
+    border:none;
+    border-color:transparent; border-color:initial;
 }
 
 .flickr:hover {
     background: url("../img/logos/flickr_blue.png") no-repeat;
+    border:none;
+    border-color:transparent; border-color:initial;
 }
 
 .social {
     width: 42px;
     height: 42px;
     background-size: 42px 42px;
+    border-color:transparent; border-color:initial;
     border:none;
     outline:none;
     text-indent: 100vw;
@@ -95,6 +112,7 @@ div {
     width: 42px;
     height: 42px;
     background-size: 42px 42px;
+    border-color:transparent; border-color:initial;
     border:none;
     outline:none;
     text-indent: 100vw;
