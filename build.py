@@ -7,9 +7,6 @@ import shutil
 import time
 import markdown
 
-# TO-DO:
-# Create new directories for each post, name file 'index.html'
-
 start_time = time.time()
 
 DIRECTORY_NAME = os.path.basename(os.path.dirname(os.path.realpath(__file__)))  # Name of current directory
@@ -36,6 +33,9 @@ WORD_LENGTH = 5
 post_objects = []
 project_objects = []
 tag_list = []
+
+# TODO: For 'all' page, make max 8 posts per page: ethanhouston.com/all/2, etc
+# TODO: Natural Language Analysis (think more about this)
 
 
 class PostObject(object):
@@ -169,7 +169,10 @@ def add_md_text_to_template(template, md_string, title, title_html, reading_time
 
         new_html_file = open(new_html_location, "w")
         new_html_file.write(new_html_contents)
+
     except OSError as e:
+
+        index_less_location = None
         if e.errno != errno.EEXIST:
             raise
 
@@ -476,13 +479,13 @@ def build_lists():
 
 
 def reset_dirs():
-    if os.path.exists("posts"):
-        shutil.rmtree("posts")
-        os.makedirs("posts")
 
-    if os.path.exists("tags"):
-        shutil.rmtree("tags")
-        os.makedirs("tags")
+    folders_to_reset = ["posts", "tags"]
+
+    for i in folders_to_reset:
+        if os.path.exists(i):
+            shutil.rmtree(i)
+            os.makedirs(i)
 
 
 def run():
