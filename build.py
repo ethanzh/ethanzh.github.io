@@ -14,15 +14,16 @@ start_time = time.time()
 
 DIRECTORY_NAME = os.path.basename(os.path.dirname(os.path.realpath(__file__)))  # Name of current directory
 CURRENT_DIR = dir_path = os.path.dirname(os.path.realpath(__file__))  # Full path to current directory
-BLOG_DIR = CURRENT_DIR + "/content"  # Gets path to blog folder
+
+BLOG_DIR = os.path.join(CURRENT_DIR, "content")  # Gets path to blog folder
 BLOG_FILE_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                 BLOG_DIR, i) for i in os.listdir(BLOG_DIR)]
 
-PROJECTS_DIR = CURRENT_DIR + "/projects"  # Gets path to blog folder
+PROJECTS_DIR = os.path.join(CURRENT_DIR, "projects")  # Gets path to blog folder
 PROJECTS_FILE_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     PROJECTS_DIR, i) for i in os.listdir(PROJECTS_DIR)]
 
-CURRENT_POST_DIR = CURRENT_DIR + "/posts"
+CURRENT_POST_DIR = os.path.join(CURRENT_DIR, "posts")
 CURRENT_POST_NAMES = [os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                    CURRENT_POST_DIR, i) for i in os.listdir(CURRENT_POST_DIR)]
 
@@ -32,10 +33,10 @@ project_file_locations = []
 WPM = 275
 WORD_LENGTH = 5
 
-post_objects = []
-posts_exists = os.path.exists("posts/")
-tags_exists = os.path.exists("tags/")
+posts_exists = os.path.exists("posts")
+tags_exists = os.path.exists("tags")
 
+post_objects = []
 project_objects = []
 tag_list = []
 
@@ -67,7 +68,7 @@ class ProjectObject(object):
 
 
 def get_template(template):
-    with open("templates/" + template + ".html", "r") as html_file:
+    with open(os.path.join("templates", template + ".html"), "r") as html_file:
         return html_file.read()
 
 
@@ -142,7 +143,7 @@ def add_md_text_to_template(template, md_string, title, title_html, reading_time
     spaceless_title = title.replace(" ", "-")
     lower_title = spaceless_title.lower()
     final_title = re.sub(r'[^a-zA-Z0-9-]', '', lower_title)
-    directory_so_far = "posts/"
+    directory_so_far = "posts"
 
     replacements = {
 
@@ -163,11 +164,10 @@ def add_md_text_to_template(template, md_string, title, title_html, reading_time
     new_html_contents = html_replace(template, replacements)
 
     try:
-        os.makedirs(directory_so_far + final_title)
-        directory_so_far += final_title
 
-        # post_links.append(directory_so_far + "/")
-        new_html_location = directory_so_far + "/index.html"
+        os.makedirs(os.path.join(directory_so_far, final_title))
+
+        new_html_location = os.path.join("posts", final_title, "index.html")
 
         new_html_file = open(new_html_location, "w")
         new_html_file.write(new_html_contents)
@@ -243,24 +243,26 @@ def custom_markdown_class(change_list, md_text):
 
 def add_index_to_template(number, template):
 
+    template_file = template + ".html"
+
     if template == "all":
-        open_template = "templates/all.html"
+        open_template = os.path.join("templates", "all.html")
         template = "all/index"
     else:
-        open_template = "templates/" + template + ".html"
+        open_template = os.path.join("templates", template_file)
 
     with open(open_template, "r") as html_template:
         html_string = html_template.read()
 
         add_to_html = ""
 
-        index_already_exists = (os.path.exists(template + ".html"))
+        index_already_exists = os.path.exists(template_file)
 
         if number == "all":
             number = len(post_objects)
 
         if index_already_exists:
-            os.remove(template + ".html")
+            os.remove(template_file)
 
         try:
 
@@ -294,7 +296,7 @@ def add_index_to_template(number, template):
 
 def create_projects():
 
-    with open("projects/list.json", "r", encoding="utf-8") as json_file:
+    with open(os.path.join("projects", "list.json"), "r", encoding="utf-8") as json_file:
 
         json_data = json.load(json_file)
 
@@ -348,7 +350,7 @@ def create_projects():
 
     new_html_contents = html_string.replace("{HERE}", add_to_html)
 
-    new_html_file = open("projects/index.html", "w")
+    new_html_file = open(os.path.join("projects", "index.html"), "w")
     new_html_file.write(new_html_contents)
 
 
@@ -456,8 +458,7 @@ def create_html_tag(tag, content, **kwargs):
     return html
 
 
-def run():
-
+def build_lists():
     for i in BLOG_FILE_NAMES:
         if i[-2:] == "md":  # Finds all .md files in blog directory
             markdown_file_locations.append(i)
@@ -466,6 +467,8 @@ def run():
         if i[-4:] == "json":
             project_file_locations.append(i)
 
+
+def reset_dirs():
     if posts_exists:
         shutil.rmtree("posts")
         os.makedirs("posts")
@@ -473,6 +476,13 @@ def run():
     if tags_exists:
         shutil.rmtree("tags")
         os.makedirs("tags")
+
+
+def run():
+
+    build_lists()
+
+    reset_dirs()
 
     for i in markdown_file_locations:  # Goes through locations and creates .html files
         create_post_html(i)
@@ -485,7 +495,5 @@ def run():
 
     print("--- %s seconds ---" % (time.time() - start_time))
 
-
-#  cProfile.run('run()')
 
 run()
