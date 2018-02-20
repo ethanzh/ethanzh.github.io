@@ -33,9 +33,6 @@ project_file_locations = []
 WPM = 275
 WORD_LENGTH = 5
 
-posts_exists = os.path.exists("posts")
-tags_exists = os.path.exists("tags")
-
 post_objects = []
 project_objects = []
 tag_list = []
@@ -167,6 +164,7 @@ def add_md_text_to_template(template, md_string, title, title_html, reading_time
 
         os.makedirs(os.path.join(directory_so_far, final_title))
 
+        index_less_location = os.path.join("posts", final_title)
         new_html_location = os.path.join("posts", final_title, "index.html")
 
         new_html_file = open(new_html_location, "w")
@@ -175,7 +173,7 @@ def add_md_text_to_template(template, md_string, title, title_html, reading_time
         if e.errno != errno.EEXIST:
             raise
 
-    return directory_so_far + "/"
+    return index_less_location
 
 
 def create_post_html(path):
@@ -218,6 +216,13 @@ def create_post_html(path):
         [["img", "h6"],
          ["article_image", "caption"]]
 
+    change_dict = {
+
+        "img": "article_image",
+        "h6": "caption"
+
+    }
+
     md_html = custom_markdown_class(change_list, md_html)
 
     md_html = md_html.replace("<a", "<a target=\"_blank\"")
@@ -233,6 +238,8 @@ def create_post_html(path):
 
 
 def custom_markdown_class(change_list, md_text):
+
+    # TODO: change from array to dictionary
 
     for i in range(0, len(change_list[0])):
         md_text = md_text.replace("<" + change_list[0][i], "<" + change_list[0][i] +
@@ -469,11 +476,11 @@ def build_lists():
 
 
 def reset_dirs():
-    if posts_exists:
+    if os.path.exists("posts"):
         shutil.rmtree("posts")
         os.makedirs("posts")
 
-    if tags_exists:
+    if os.path.exists("tags"):
         shutil.rmtree("tags")
         os.makedirs("tags")
 
