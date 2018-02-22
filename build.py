@@ -278,6 +278,8 @@ def add_index_to_template(number, template):
 
             sorted_list = sort_by_time(post_objects)
 
+            sorted_list = [i for i in sorted_list if not i.private]
+
             for i in range(0, number):
 
                 if not sorted_list[i].private:
