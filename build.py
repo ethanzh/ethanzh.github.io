@@ -230,7 +230,11 @@ def create_post_html(path):
 
     md_html = md_html.replace("<a", "<a target=\"_blank\"")
 
-    title_html = create_html_tag("h2", title, css="title_button")
+    title_html = create_html_tag("h2", "TEST", href="/", css="title_button")
+
+    title_html = title_html.replace("TEST", create_html_tag("a", title, css="title_link", href="/"))
+
+    print(title_html)
 
     reading_time_html = create_html_tag("p", reading_time + " min read", css="read_time")
 
