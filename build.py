@@ -234,8 +234,6 @@ def create_post_html(path):
 
     title_html = title_html.replace("TEST", create_html_tag("a", title, css="title_link", href="/"))
 
-    print(title_html)
-
     reading_time_html = create_html_tag("p", reading_time + " min read", css="read_time")
 
     # Creates new file, adds markdown HTML text
