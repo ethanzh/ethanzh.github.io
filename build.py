@@ -39,36 +39,29 @@ tag_list = []
 
 # TODO: For 'all' page, make max 8 posts per page: ethanhouston.com/all/2, etc
 # TODO: Natural Language Analysis (think more about this)
+#   Categorical analysis
 
+key_add_on = ("?key=" + API_KEY)
 
-SYNTAX_ENDPOINT = "https://language.googleapis.com/v1beta2/documents:analyzeSyntax"
-SYNTAX_ENDPOINT += ("?key=" + API_KEY)
+SYNTAX_ENDPOINT = "https://language.googleapis.com/v1beta2/documents:analyzeSyntax" + key_add_on
 
-ENTITIES_ENDPOINT = "https://language.googleapis.com/v1beta2/documents:analyzeEntities"
-ENTITIES_ENDPOINT += ("?key=" + API_KEY)
+ENTITIES_ENDPOINT = "https://language.googleapis.com/v1beta2/documents:analyzeEntities" + key_add_on
 
-SENTIMENT_ENDPOINT = "https://language.googleapis.com/v1/documents:analyzeSentiment"
-SENTIMENT_ENDPOINT += ("?key=" + API_KEY)
+SENTIMENT_ENDPOINT = "https://language.googleapis.com/v1/documents:analyzeSentiment" + key_add_on
+
+CLASSIFY_ENDPOINT = "https://language.googleapis.com/v1/documents:classifyText" + key_add_on
 
 json_data_template = {"document":
-            {"type":"PLAIN_TEXT",
-             "content":
-                    "null"
-                 }
-        }
-
-
-
-
-
-#print(data)
-
-#print(syntax_json_data["documentSentiment"])
+                          {"type": "PLAIN_TEXT",
+                           "content":
+                               "null"
+                           }
+                      }
 
 
 class PostObject(object):
 
-    def __init__(self, title, link, date, summary, post_time, reading_time, private, tags):
+    def __init__(self, title, link, date, summary, post_time, reading_time, private, tags, categories):
         self.title = title
         self.link = link
         self.date = date
@@ -77,6 +70,7 @@ class PostObject(object):
         self.reading_time = reading_time
         self.private = private
         self.tags = tags
+        self.categories = categories
 
     def set_link(self, link):
         self.link = link
@@ -91,7 +85,6 @@ class ProjectObject(object):
         self.platforms = platforms
         self.wip = wip
 
-
 def get_template(template):
     with open(os.path.join("templates", template + ".html"), "r") as html_file:
         return html_file.read()
@@ -99,7 +92,6 @@ def get_template(template):
 
 def get_metadata_as_json(current_directory):
     with open(current_directory, "r") as md_file:
-
         metadata = md_file.read().rsplit('---END_METADATA---', 1)[0].split("---START_METADATA---", 1)[1]  # Get metadata
 
         json_metadata = json.loads(metadata)
@@ -108,7 +100,6 @@ def get_metadata_as_json(current_directory):
 
 
 def calculate_reading_time(word_count, wpm, text):
-
     number_images = text.count("![")
     total_time = 0
 
@@ -127,107 +118,69 @@ def calculate_reading_time(word_count, wpm, text):
     return total_time
 
 
-def get_md_as_text(current_directory):
-    with open(current_directory, "r") as md_file:
+def make_classify_request(body_text):
+    current_json = json_data_template
+    current_json["document"]["content"] = body_text
 
-        body_text = md_file.read().split("---END_METADATA---", 1)[1]
+    classify_request = requests.post(url=CLASSIFY_ENDPOINT, json=current_json)
+    classify_data = classify_request.json()
 
-        current_json = json_data_template
-        current_json["document"]["content"] = body_text
+    categories_list = []
 
-        sentiment_request = requests.post(url=SENTIMENT_ENDPOINT, json=current_json)
-        syntax_json_data = sentiment_request.json()
+    for i in classify_data["categories"]:
+        categories_list.append(i["name"])
 
-        print(syntax_json_data["documentSentiment"])
-
-        length = len(body_text)
-
-        word_count = length / WORD_LENGTH  # Assuming average word length is 5
-
-        reading_time = calculate_reading_time(word_count, WPM, body_text)
-
-        return_list = [body_text, reading_time]
-
-        return return_list  # Gets all text after END_METADATA
+    return categories_list
 
 
-def process_markdown(current_directory):  # Returns [json, text]
-    return get_metadata_as_json(current_directory), get_md_as_text(current_directory)
+def create_tag_dict():
+    tag_dict = {}
+
+    for i in tag_list:
+        current_list = []
+
+        for j in range(0, len(post_objects)):
+
+            if i in post_objects[j].tags:
+                current_list.append(post_objects[j])
+
+            tag_dict[i] = current_list
+
+    return tag_dict
 
 
-def md_to_html(md_string):
-    return markdown.markdown(md_string)
+def create_blurb(post):
+    iter_string = "<div>"
+
+    iter_string += create_html_tag("a", post.title, css="post_link",
+                                   href="/" + post.link)
+
+    iter_string += create_html_tag("p", post.date + ". " + post.summary)
+
+    iter_string += "</div>"
+
+    return iter_string
 
 
-def add_md_text_to_template(template, md_string, title, title_html, reading_time_html, summary, tags):
-
-    new_tag_html = create_html_tag("p", "Tags: ", css="post_tags")
-
-    for i in range(0, len(tags)):
-
-        tag_string = tags[i]
-
-        if i != len(tags) - 1:
-            tag_string += " - "
-
-        new_tag_html += create_html_tag("a", tag_string, css="post_tag_links", href="/tags/" + tags[i])
-
-    summary_string = "content=\"" + summary + "\""
-    spaceless_title = title.replace(" ", "-")
-    lower_title = spaceless_title.lower()
-    final_title = re.sub(r'[^a-zA-Z0-9-]', '', lower_title)
-    directory_so_far = "posts"
-
-    replacements = {
-
-        "TABTITLE": title,
-
-        "TITLE": title_html,
-
-        "TIME": reading_time_html,
-
-        "BODY": md_string,
-
-        "TAGS": new_tag_html,
-
-        "SUMMARY": summary_string
-
-    }
-
-    new_html_contents = html_replace(template, replacements)
-
-    try:
-
-        os.makedirs(os.path.join(directory_so_far, final_title))
-
-        index_less_location = os.path.join("posts", final_title)
-        new_html_location = os.path.join("posts", final_title, "index.html")
-
-        new_html_file = open(new_html_location, "w")
-        new_html_file.write(new_html_contents)
-
-    except OSError as e:
-
-        index_less_location = None
-        if e.errno != errno.EEXIST:
-            raise
-
-    return index_less_location
+def sort_by_time(post_list):
+    return sorted(post_list, key=lambda x: x.time, reverse=True)
 
 
-def create_post_html(path):
-
+def create_post_object(path):
     template_html = get_template("post")
 
     processed = process_markdown(path)  # [json, text]
     processed_json = processed[0]
     text = processed[1][0]
+
+    categories = make_classify_request(text)
+
     reading_time = processed[1][1]
 
     reading_time = str(int(round(reading_time)))
 
     title = processed_json['title']
-    # author = processed_json['author']
+    # author = processed_json['author']  # Figure something to do with this
     summary = processed_json['summary']
     date = processed_json['date']
     private = processed_json['private']
@@ -237,8 +190,8 @@ def create_post_html(path):
 
         if i not in tag_list:
 
-                if private == "False":
-                    tag_list.append(i)
+            if private == "False":
+                tag_list.append(i)
 
     if private == "True":
         private = True
@@ -273,24 +226,22 @@ def create_post_html(path):
     reading_time_html = create_html_tag("p", reading_time + " min read", css="read_time")
 
     # Creates new file, adds markdown HTML text
-    link = add_md_text_to_template(template_html, md_html, title, title_html, reading_time_html, summary, tags)
+    create_post_title(template_html, md_html, title, title_html,
+                      reading_time_html, summary, tags, categories)
+    #  Maybe fix this mess of a line of code
 
-    post_objects.append(PostObject(title, link, date, summary, post_time, reading_time, private, tags))
+    spaceless_title = title.replace(" ", "-")
+    lower_title = spaceless_title.lower()
+    final_title = re.sub(r'[^a-zA-Z0-9-]', '', lower_title)
 
+    link = os.path.join("posts", final_title)
 
-def custom_markdown_class(change_list, md_text):
+    new_post = PostObject(title, link, date, summary, post_time, reading_time, private, tags, categories)
 
-    # TODO: change from array to dictionary
-
-    for i in range(0, len(change_list[0])):
-        md_text = md_text.replace("<" + change_list[0][i], "<" + change_list[0][i] +
-                                  " class=\"" + change_list[1][i] + "\"")
-
-    return md_text
+    post_objects.append(new_post)
 
 
 def add_index_to_template(number, template):
-
     template_file = template + ".html"
 
     if template == "all":
@@ -321,7 +272,6 @@ def add_index_to_template(number, template):
             for i in range(0, number):
 
                 if not sorted_list[i].private:
-
                     add_to_html += create_blurb(sorted_list[i])
 
         except IndexError:
@@ -335,7 +285,6 @@ def add_index_to_template(number, template):
             tag_html = ""
 
             for tag in tag_dict:
-
                 tag_html += create_html_tag("a", tag, css="tag_links", href="/tags/" + tag + "/") + "<br />"
 
             new_html_contents = new_html_contents.replace("{TAGS}", tag_html)
@@ -344,8 +293,77 @@ def add_index_to_template(number, template):
         new_html_file.write(new_html_contents)
 
 
-def create_projects():
+def create_tag_pages():
+    tag_dict = create_tag_dict()
 
+    for tag in tag_dict:
+
+        iter_string = ""
+
+        for i in range(0, len(tag_dict[tag])):
+
+            tag_dict[tag] = sort_by_time(tag_dict[tag])  # This somehow works.
+
+            if not tag_dict[tag][i].private:
+                iter_string += create_blurb(tag_dict[tag][i])
+
+        try:
+            os.makedirs("tags/" + tag)
+
+            directory_so_far = "tags/" + tag + "/"
+
+            template_html = get_template("tag")
+
+            title = create_html_tag("h2", "TEST", css="title_button")
+
+            title = title.replace("TEST", create_html_tag("a", "#" + tag.lower(), css="title_link", href="/"))
+
+            replacements = {
+
+                "TAGS": iter_string,
+
+                "TAGNAME": title,
+
+                "HEADTITLE": "#" + tag.lower()
+
+            }
+
+            template_html = html_replace(template_html, replacements)
+
+            new_tag_html = open(directory_so_far + "index.html", "w")
+            new_tag_html.write(template_html)
+
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
+
+
+def html_replace(original, replace_dict):
+    for key, value in replace_dict.items():
+        original = original.replace(
+            "{" + key + "}",
+            str(value)
+        )
+
+    return original
+
+
+def create_html_tag(tag, content, **kwargs):
+    html = "<" + tag
+
+    for key, value in kwargs.items():
+
+        if key == "css":
+            key = "class"
+
+        html += " " + key + "=\"" + value + "\""
+
+    html += ">" + content + "</" + tag + ">"
+
+    return html
+
+
+def create_projects():
     with open(os.path.join("projects", "list.json"), "r", encoding="utf-8") as json_file:
 
         json_data = json.load(json_file)
@@ -404,112 +422,93 @@ def create_projects():
     new_html_file.write(new_html_contents)
 
 
-def create_tag_dict():
-    tag_dict = {}
+def get_md_as_text(current_directory):
+    with open(current_directory, "r") as md_file:
+        body_text = md_file.read().split("---END_METADATA---", 1)[1]
 
-    for i in tag_list:
-        current_list = []
+        length = len(body_text)
 
-        for j in range(0, len(post_objects)):
+        word_count = length / WORD_LENGTH  # Assuming average word length is 5
 
-            if i in post_objects[j].tags:
-                current_list.append(post_objects[j])
+        reading_time = calculate_reading_time(word_count, WPM, body_text)
 
-            tag_dict[i] = current_list
+        return_list = [body_text, reading_time]
 
-    return tag_dict
-
-
-def create_blurb(post):
-
-    iter_string = "<div>"
-
-    iter_string += create_html_tag("a", post.title, css="post_link",
-                                   href="/" + post.link)
-
-    iter_string += create_html_tag("p", post.date + ". " + post.summary)
-
-    iter_string += "</div>"
-
-    return iter_string
+        return return_list  # Gets all text after END_METADATA
 
 
-def sort_by_time(post_list):
-    return sorted(post_list, key=lambda x: x.time, reverse=True)
+def process_markdown(current_directory):  # Returns [json, text]
+    return get_metadata_as_json(current_directory), get_md_as_text(current_directory)
 
 
-def create_tag_pages():
-
-    tag_dict = create_tag_dict()
-
-    for tag in tag_dict:
-
-        iter_string = ""
-
-        for i in range(0, len(tag_dict[tag])):
-
-            tag_dict[tag] = sort_by_time(tag_dict[tag])  # This somehow works.
-
-            if not tag_dict[tag][i].private:
-
-                iter_string += create_blurb(tag_dict[tag][i])
-
-        try:
-            os.makedirs("tags/" + tag)
-
-            directory_so_far = "tags/" + tag + "/"
-
-            template_html = get_template("tag")
-
-            title = create_html_tag("h2", "TEST", css="title_button")
-
-            title = title.replace("TEST", create_html_tag("a", "#" + tag.lower(), css="title_link", href="/"))
-
-            replacements = {
-
-                "TAGS": iter_string,
-
-                "TAGNAME": title,
-
-                "HEADTITLE": "#" + tag.lower()
-
-            }
-
-            template_html = html_replace(template_html, replacements)
-
-            new_tag_html = open(directory_so_far + "index.html", "w")
-            new_tag_html.write(template_html)
-
-        except OSError as e:
-            if e.errno != errno.EEXIST:
-                raise
+def md_to_html(md_string):
+    return markdown.markdown(md_string)
 
 
-def html_replace(original, replace_dict):
+def create_post_title(template, md_string, title, title_html, reading_time_html, summary, tags, categories):
+    new_tag_html = create_html_tag("p", "Tags: ", css="post_tags")
 
-    for key, value in replace_dict.items():
-        original = original.replace(
-            "{" + key + "}",
-            str(value)
-        )
+    spaceless_title = title.replace(" ", "-")
+    lower_title = spaceless_title.lower()
+    final_title = re.sub(r'[^a-zA-Z0-9-]', '', lower_title)
 
-    return original
+    for i in range(0, len(tags)):
+
+        tag_string = tags[i]
+
+        if i != len(tags) - 1:
+            tag_string += " - "
+
+        new_tag_html += create_html_tag("a", tag_string, css="post_tag_links", href="/tags/" + tags[i])
+
+    summary_string = "content=\"" + summary + "\""
+
+    directory_so_far = "posts"
+
+    replacements = {
+
+        "TABTITLE": title,
+
+        "TITLE": title_html,
+
+        "TIME": reading_time_html,
+
+        "BODY": md_string,
+
+        "TAGS": new_tag_html,
+
+        "SUMMARY": summary_string,
+
+        "CAT": categories
+
+    }
+
+    new_html_contents = html_replace(template, replacements)
+
+    try:
+
+        os.makedirs(os.path.join(directory_so_far, final_title))
+
+        new_html_location = os.path.join("posts", final_title, "index.html")
+
+        new_html_file = open(new_html_location, "w")
+        new_html_file.write(new_html_contents)
+
+    except OSError as e:
+
+        index_less_location = None
+        if e.errno != errno.EEXIST:
+            raise
 
 
-def create_html_tag(tag, content, **kwargs):
+def custom_markdown_class(change_list, md_text):
+    # TODO: change from array to dictionary
 
-    html = "<" + tag
+    for i in range(0, len(change_list[0])):
+        md_text = md_text.replace("<" + change_list[0][i], "<" + change_list[0][i] +
+                                  " class=\"" + change_list[1][i] + "\"")
 
-    for key, value in kwargs.items():
-
-        if key == "css":
-            key = "class"
-
-        html += " " + key + "=\"" + value + "\""
-
-    html += ">" + content + "</" + tag + ">"
-
-    return html
+    return md_text
 
 
 def build_lists():
@@ -523,7 +522,6 @@ def build_lists():
 
 
 def reset_dirs():
-
     folders_to_reset = ["posts", "tags"]
 
     for i in folders_to_reset:
@@ -533,13 +531,12 @@ def reset_dirs():
 
 
 def run():
-
     build_lists()
 
     reset_dirs()
 
     for i in markdown_file_locations:  # Goes through locations and creates .html files
-        create_post_html(i)
+        create_post_object(i)
 
     add_index_to_template(2, "index")
     add_index_to_template("all", "all")
