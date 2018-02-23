@@ -6,6 +6,9 @@ import re
 import shutil
 import time
 import markdown
+import requests
+
+from api_key import API_KEY
 
 start_time = time.time()
 
@@ -36,6 +39,31 @@ tag_list = []
 
 # TODO: For 'all' page, make max 8 posts per page: ethanhouston.com/all/2, etc
 # TODO: Natural Language Analysis (think more about this)
+
+
+SYNTAX_ENDPOINT = "https://language.googleapis.com/v1beta2/documents:analyzeSyntax"
+SYNTAX_ENDPOINT += ("?key=" + API_KEY)
+
+ENTITIES_ENDPOINT = "https://language.googleapis.com/v1beta2/documents:analyzeEntities"
+ENTITIES_ENDPOINT += ("?key=" + API_KEY)
+
+SENTIMENT_ENDPOINT = "https://language.googleapis.com/v1/documents:analyzeSentiment"
+SENTIMENT_ENDPOINT += ("?key=" + API_KEY)
+
+json_data_template = {"document":
+            {"type":"PLAIN_TEXT",
+             "content":
+                    "null"
+                 }
+        }
+
+
+
+
+
+#print(data)
+
+#print(syntax_json_data["documentSentiment"])
 
 
 class PostObject(object):
@@ -103,6 +131,14 @@ def get_md_as_text(current_directory):
     with open(current_directory, "r") as md_file:
 
         body_text = md_file.read().split("---END_METADATA---", 1)[1]
+
+        current_json = json_data_template
+        current_json["document"]["content"] = body_text
+
+        sentiment_request = requests.post(url=SENTIMENT_ENDPOINT, json=current_json)
+        syntax_json_data = sentiment_request.json()
+
+        print(syntax_json_data["documentSentiment"])
 
         length = len(body_text)
 
