@@ -425,11 +425,15 @@ def create_tag_pages():
 
             template_html = get_template("tag")
 
+            title = create_html_tag("h2", "TEST", css="title_button")
+
+            title = title.replace("TEST", create_html_tag("a", "#" + tag.lower(), css="title_link", href="/"))
+
             replacements = {
 
                 "TAGS": iter_string,
 
-                "TAGNAME": "#" + tag.lower(),
+                "TAGNAME": title,
 
                 "HEADTITLE": "#" + tag.lower()
 
