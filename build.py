@@ -85,6 +85,7 @@ class ProjectObject(object):
         self.platforms = platforms
         self.wip = wip
 
+
 def get_template(template):
     with open(os.path.join("templates", template + ".html"), "r") as html_file:
         return html_file.read()
@@ -446,24 +447,28 @@ def md_to_html(md_string):
 
 
 def create_post_title(template, md_string, title, title_html, reading_time_html, summary, tags, categories):
-    new_tag_html = create_html_tag("p", "Tags: ", css="post_tags")
 
     spaceless_title = title.replace(" ", "-")
     lower_title = spaceless_title.lower()
     final_title = re.sub(r'[^a-zA-Z0-9-]', '', lower_title)
 
+    new_tag_html = ""
+
     for i in range(0, len(tags)):
 
         tag_string = tags[i]
 
-        if i != len(tags) - 1:
-            tag_string += " - "
-
-        new_tag_html += create_html_tag("a", tag_string, css="post_tag_links", href="/tags/" + tags[i])
+        #  Changes post_tag_links to tag_links
+        new_tag_html += create_html_tag("a", tag_string, css="tag_links", href="/tags/" + tags[i]) + "<br />"
 
     summary_string = "content=\"" + summary + "\""
 
     directory_so_far = "posts"
+
+    cat_html = ""
+
+    for i in categories:
+        cat_html += "<p>" + i + "</p>"
 
     replacements = {
 
@@ -479,9 +484,11 @@ def create_post_title(template, md_string, title, title_html, reading_time_html,
 
         "SUMMARY": summary_string,
 
-        "CAT": categories
+        "CAT": cat_html
 
     }
+
+    print(cat_html)
 
     new_html_contents = html_replace(template, replacements)
 

@@ -262,9 +262,15 @@ body {
     flex-direction: column;
     flex-wrap: nowrap;
     align-content: space-between;
+    line-height: 30px;
 
 }
 
+.google_cat {
+    text-align: center;
+    line-height: 0px;
+
+}
 
 .post_tags {
     text-align: center;
