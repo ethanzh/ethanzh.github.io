@@ -138,6 +138,15 @@ body {
     display: inline;
 }
 
+.blurb {
+
+    padding: 15px 5px;
+}
+
+.blurb:hover {
+    background-color: #f2f2f2;
+}
+
 .post_link {
     font-family: "ProximaNovaBold", sans-serif;
     font-size: 16pt;
@@ -149,6 +158,7 @@ body {
 
 .post_link:hover {
     text-decoration: underline;
+
 }
 
 .image_link{
@@ -219,7 +229,7 @@ body {
     text-align: center;
     font-weight: bold;
     padding-top:49px;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 0px solid #e0e0e0;
 }
 
 .post_line {
@@ -379,3 +389,54 @@ color: black;
     text-align: center;
 }
 
+
+
+
+
+
+.container {
+    align-content: center;
+  position: relative;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background-color: rgba(214, 229, 255, 0.3);
+  overflow: hidden;
+  width: 100%;
+  height:0;
+
+}
+
+.container:hover .overlay {
+  bottom: 0;
+  height: 100%;
+}
+
+.text {
+  color: black;
+  font-size: 20px;
+    background-color: rgba(214, 229, 255, 0.7);
+    padding-left:20px;
+    padding-right:20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}

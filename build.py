@@ -151,7 +151,7 @@ def create_tag_dict():
 
 
 def create_blurb(post):
-    iter_string = "<div>"
+    iter_string = "<div class=\"blurb\">"
 
     iter_string += create_html_tag("a", post.title, css="post_link",
                                    href="/" + post.link)
@@ -487,8 +487,6 @@ def create_post_title(template, md_string, title, title_html, reading_time_html,
         "CAT": cat_html
 
     }
-
-    print(cat_html)
 
     new_html_contents = html_replace(template, replacements)
 
