@@ -2,6 +2,20 @@
 
 <head>
 
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBjy9RhH3obaqdhsq9_GW78swKM3rSLVtI",
+        authDomain: "personalsite-backend.firebaseapp.com",
+        databaseURL: "https://personalsite-backend.firebaseio.com",
+        projectId: "personalsite-backend",
+        storageBucket: "",
+        messagingSenderId: "379247301983"
+      };
+      firebase.initializeApp(config);
+    </script>
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-41978381-3"></script>
     <script>
@@ -158,6 +172,29 @@
         <input onclick="loadXMLDoc()" type="button">
 
 </div>
+
+firebase:<input onclick="saveToFirebase()" type="button">
+
+
+<script>
+
+
+    function saveToFirebase(email) {
+    var emailObject = {
+        email: "ethan.houston@gmail.com"
+    };
+
+    firebase.database().ref('subscription-entries').push().set(emailObject)
+        .then(function(snapshot) {
+            success(); // some success method
+        }, function(error) {
+            console.log('error' + error);
+            error(); // some error method
+        });
+    }
+
+    saveToFirebase(email);
+</script>
 
 <script>
         function loadXMLDoc() {
