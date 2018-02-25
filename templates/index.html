@@ -153,7 +153,12 @@
 </div>
 
 <div id="demo">
-    <button type="button" onclick="loadXMLDoc()">Change Content</button>
+    <form onsubmit="loadXMLDoc()">
+
+        Enter text: <input type="text">
+        <input type="submit">
+
+    </form>
 </div>
 
 <script>
@@ -168,7 +173,7 @@
             };
             xhttp.open("GET", "https://ethanhouston-personal-site.herokuapp.com/test", true);
             xhttp.setRequestHeader('Content-Type', 'text/plain');
-            xhttp.send();
+            xhttp.send(name=Test);
 
     }
 
