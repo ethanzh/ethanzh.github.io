@@ -280,7 +280,6 @@ body {
 
 .tags {
 
-
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -291,8 +290,12 @@ body {
 
 .google_cat {
     text-align: center;
-    line-height: 0;
+    margin-bottom: -80px;
+}
 
+.test {
+    overflow-wrap: break-word;
+    text-overflow: clip;
 }
 
 .post_tags {
