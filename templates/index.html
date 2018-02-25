@@ -159,7 +159,6 @@
 <script>
         function loadXMLDoc() {
             var xhttp = new XMLHttpRequest();
-            xhttp.setRequestHeader('Content-Type', 'text/plain');
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("demo").innerHTML =
@@ -167,6 +166,7 @@
                 }
             };
             xhttp.open("GET", "https://api.ethanhouston.com", true);
+            xhttp.setRequestHeader('Content-Type', 'text/plain');
             xhttp.send();
 
     }
