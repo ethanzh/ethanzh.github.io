@@ -165,15 +165,16 @@
         function loadXMLDoc() {
 
             var xhttp = new XMLHttpRequest();
+            var params = "lorem=ipsum&name=binny";
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("demo").innerHTML =
                         this.responseText;
                 }
             };
-            xhttp.open("GET", "https://ethanhouston-personal-site.herokuapp.com/test", true);
+            xhttp.open("POST", "https://ethanhouston-personal-site.herokuapp.com/test", true);
             xhttp.setRequestHeader('Content-Type', 'text/plain');
-            xhttp.send(name=Test);
+            xhttp.send(params);
 
     }
 
