@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBjy9RhH3obaqdhsq9_GW78swKM3rSLVtI",
+        authDomain: "personalsite-backend.firebaseapp.com",
+        databaseURL: "https://personalsite-backend.firebaseio.com",
+        projectId: "personalsite-backend",
+        storageBucket: "",
+        messagingSenderId: "379247301983"
+      };
+      firebase.initializeApp(config);
+    </script>
+</head>
+
+<body>
+
+
+<div id="demo">
+
+        Enter text: <input type="text">
+        <input onclick="loadXMLDoc()" type="button">
+
+</div>
+
+firebase:<input onclick="saveToFirebase()" type="button">
+
+<script>
+
+
+    function saveToFirebase(email) {
+    var emailObject = {
+        email: "ethan.houston@gmail.com"
+    };
+
+    firebase.database().ref('subscription-entries').push().set(emailObject)
+        .then(function(snapshot) {
+            success(); // some success method
+        }, function(error) {
+            console.log('error' + error);
+            error(); // some error method
+        });
+    }
+
+    saveToFirebase(email);
+</script>
+
+<script>
+        function loadXMLDoc() {
+
+            var xhttp = new XMLHttpRequest();
+            var params = JSON.stringify('{"key": "val"}');
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML =
+                        this.responseText;
+                }
+            };
+            xhttp.open("POST", "https://ethanhouston-personal-site.herokuapp.com/test", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send(params);
+
+    }
+
+
+</script>
+
+
+
+
+
+
+</body>
+
+
+</html>
