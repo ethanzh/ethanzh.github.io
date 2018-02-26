@@ -141,10 +141,9 @@ def make_classify_request(body_text):
 def translate(text):
     current_endpoint = TRANSLATION_ENDPOINT + "&q=" + text
 
-    translate_request = requests.post(url=current_endpoint)
-    returned = translate_request.json()
+    returned = requests.get(current_endpoint)
 
-    return returned['data']['translations'][0]['translatedText']
+    return returned.json()['data']['translations'][0]['translatedText']
 
 
 def create_tag_dict():
@@ -188,7 +187,6 @@ def create_post_object(path):
     text = processed[1][0]
 
     categories = make_classify_request(text)
-    # new_text = translate(text)
 
     reading_time = processed[1][1]
 
@@ -234,6 +232,8 @@ def create_post_object(path):
 
     md_html = md_html.replace("<a", "<a target=\"_blank\"")
 
+    translated_md = translate(md_html)
+
     title_html = create_html_tag("h2", "TEST", href="/", css="title_button")
 
     title_html = title_html.replace("TEST", create_html_tag("a", title, css="title_link", href="/"))
@@ -241,7 +241,7 @@ def create_post_object(path):
     reading_time_html = create_html_tag("p", reading_time + " min read", css="read_time")
 
     # Creates new file, adds markdown HTML text
-    create_post_title(template_html, md_html, title, title_html,
+    create_post_title(template_html, md_html, translated_md, title, title_html,
                       reading_time_html, summary, tags, categories)
     #  Maybe fix this mess of a line of code
 
@@ -460,7 +460,7 @@ def md_to_html(md_string):
     return markdown.markdown(md_string)
 
 
-def create_post_title(template, md_string, title, title_html, reading_time_html, summary, tags, categories):
+def create_post_title(template, md_string, translated_md, title, title_html, reading_time_html, summary, tags, categories):
 
     spaceless_title = title.replace(" ", "-")
     lower_title = spaceless_title.lower()
@@ -500,7 +500,9 @@ def create_post_title(template, md_string, title, title_html, reading_time_html,
 
         "SUMMARY": summary_string,
 
-        "CAT": cat_html
+        "CAT": cat_html,
+
+        "HERE": translated_md
 
     }
 

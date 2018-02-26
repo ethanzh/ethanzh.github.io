@@ -23,6 +23,34 @@
 
     <meta name="description" {SUMMARY} />
 
+    <script>
+
+        var text = document.getElementById("sample");
+
+        var bod = document.getElementById("bod");
+
+        var original_article = bod.innerHTML;
+
+        var chinese = "{HERE}";
+
+        function buttonClick() {
+
+            switch (text.lang) {
+                case 'en':
+                    text.setAttribute("lang", 'zh');
+                    bod.innerHTML = chinese;
+                    break;
+
+                case 'zh':
+                    text.setAttribute("lang", 'en');
+                    bod.innerHTML = original_article;
+                    break;
+
+            }
+        }
+
+    </script>
+
 </head>
 
 
@@ -48,12 +76,15 @@
 
                 <div class="above_article">
 
+
+                <button onclick="buttonClick()">Change Language</button>
+
                     {TITLE}
                     {TIME}
 
                 </div>
 
-                <div class="body_text">
+                <div id="bod" class="body_text">
 
                     {BODY}
 

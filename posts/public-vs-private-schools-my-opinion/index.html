@@ -23,6 +23,34 @@
 
     <meta name="description" content="My experience with both types of school systems" />
 
+    <script>
+
+        var text = document.getElementById("sample");
+
+        var bod = document.getElementById("bod");
+
+        var original_article = bod.innerHTML;
+
+        var chinese = "<p>在我生命的前18年，我很幸运能够在我的K-12年中体验到两种主要类型的学校。我将首先简要介绍一下我在各自的经验，然后讨论更具体的差异，最后我对两者之间的选择有何看法。 </p><p><img class="article_image" alt="图像" src="https://articles.niche.com/wp-content/uploads/2016/06/private-vs-public-schools.png" /></p><p>马上我应该注意到，我从未参加过你可能会想到的那种私立学校。我去过的所有&#39;私立&#39;学校都是国际学校，根据定义它们是私立的，但也有更广泛的用途。 </p><p>我在瑞典马尔默的<a target="_blank" href="http://bism.bladins.se/">布莱丁斯</a>国际学校开始了我的学业生涯。这只是一个月左右，所以我没有太多的补充。 </p><p>从幼儿园第二个月到中学到四年级，我参加了德克萨斯州伍德兰兹的一所公立小学。这还是一段时间以前，所以我现在没有太多想法。也许我留下的印象是（根据Facebook），现在我的很多朋友现在都<em>大量</em>参与学校游行乐队，但我真的认为这比得上公立/私立学校的东西更像德克萨斯的东西。 </p><h3>私立学校</h3><p>现在到更有趣的部分（即我清楚地记得我的生活时期）。我读完小学，在<a target="_blank" href="http://www.oslointernationalschool.no/">奥斯陆国际学校</a>完成了中学的全部<a target="_blank" href="http://www.oslointernationalschool.no/">课程</a> 。这所学校<em>很小</em> ，我的全班成绩约为40名学生。对于一些人来说，如此小的班级规模有时会出现幽闭恐惧症。这个小环境的积极意义在于，你可以很好地认识身边的每个人。缺点是你<em>真的</em>很了解每个人。作为OIS的学生，我的课程选择从来没有太多选择，除了挪威语（我选择西班牙语）外，我唯一真正的选择是外语。 </p><p>每个年级的结构都有三个“联系”班级（将其视为班级）。在传统的挪威时尚，我们留在这些小组为所有我们的类（除外语）。这些团体每年都会改变，但挪威的学校通常都会在同一班级上班十二年。 OIS是一所真正的国际学校，大约四分之一的学生是挪威学生，其余四分之三来自世界各地，来自南非，澳大利亚，特立尼达和巴基斯坦等国家。 </p><p>作为一所私立学校的OIS有一些非常好的设施，但在边缘也有些粗糙。我遗留下来的遗留问题正在搞乱在地下烧毁洞穴的化学实验，截至2017年6月（事件发生3年后），这个洞仍然存在。尽管这是一所私立学校，但它是世界上最昂贵的国家之一，可以完成任务。这就是说，它在<a target="_blank" href="https://www.google.com/maps/search/W. B. Samson - Bekkestua pizza near stabekk akershus norway/@59.9174764,10.5872009,21z?hl=en">Bekkestua的</a>位置对于一个中学生来说可能不是那么方便。 </p><p>我可能错过的最多关于学校的是我们每年要参加的为期一周的多级短途旅行。虽然我们一直呆在挪威境内，但我们有机会在山上滑雪，在峡湾航行，然后徒步穿越森林。挪威以自然为中心的观点通过这些旅行绝对闪耀。 </p><p>在8至9年级的夏季，我从OIS搬到了北京国际学校<a target="_blank" href="https://www.isb.bj.edu.cn/">ISB</a> 。 ISB与OIS完全不同，我真的不知道会发生什么。第一个明显的区别是我有一个学校任命的“同伴帮手”在我抵达北京之前与他聊天。我可以问她关于学校的任何问题，或者一般的中国问题。在我看来，这是超级有用的，有利于轻松过渡到一个全新的国家。 </p><p><img class="article_image" alt="OIS与ISB" src="https://ethanhouston.com/img/articles/schools.png" /></p>";
+
+        function buttonClick() {
+
+            switch (text.lang) {
+                case 'en':
+                    text.setAttribute("lang", 'zh');
+                    bod.innerHTML = chinese;
+                    break;
+
+                case 'zh':
+                    text.setAttribute("lang", 'en');
+                    bod.innerHTML = original_article;
+                    break;
+
+            }
+        }
+
+    </script>
+
 </head>
 
 
@@ -48,12 +76,15 @@
 
                 <div class="above_article">
 
+
+                <button onclick="buttonClick()">Change Language</button>
+
                     <h2 href="/" class="title_button"><a class="title_link" href="/">Public vs Private Schools: My Opinion</a></h2>
-                    <p class="read_time">6 min read</p>
+                    <p class="read_time">3 min read</p>
 
                 </div>
 
-                <div class="body_text">
+                <div id="bod" class="body_text">
 
                     <p>For the first 18 years of my life, I've been lucky enough to have been able to experience the two main types of schools in
 my K-12 years. I'll start by giving a brief overview of my experience in each, and then go into the more specific differences,
@@ -85,24 +116,6 @@ the forests. Norway's nature-centric viewpoint definitely shined through these t
 no idea what to expect. The first obvious difference was I had a school-appointed 'peer-helper' to chat with before I even arrived in Beijing. I was able to ask her any questions about the school,
 or China in general. In my opinion, this was super helpful and conducive towards an easy transition to a totally new country.</p>
 <p><img class="article_image" alt="OIS vs ISB" src="https://ethanhouston.com/img/articles/schools.png" /></p>
-<p>ISB has over 3 times as many students as OIS, and well over 3 times the footprint. The campus is huge, almost like a small university. The size of my grade almost tripled to around 110, but interestingly, my actual class sizes
-seemed to stay the same size, and some even shrunk (I had 4 students in my Chinese class at one point). This is (somewhat obviously) because we as students had far more choice with regards to
-the choices we could take. This freedom allowed me to take electives in photography and film, two things I probably never would have discovered if not for these electives. This was a private school, and it showed. Every teacher
-was passionate about their subject <em>and</em> great at teaching it. The facilities, whether it be the film room, weight room, gymnasiums, or photography studios, were all top-notch. We as students were also allowed free-reign over
-these facilities, we never had to book-ahead or make reservations.</p>
-<p>ISB, despite still being an international school, was far less international than OIS. An overwhelming majority of the class was Chinese (or Chinese-American/Chinese-Canadian) and Korean. There were only a small number of
-expats in a similar situation as me, and most of them were in Beijing because their parents worked for the United States embassy.</p>
-<p>I no longer got to go on week-long trips with my whole grade, but what I now had the opportunity to go on international sports trips. Scandinavian international schools <em>do</em> go on sports trips, but it's only once a year, and it
-normally involved a 8-hour bus trip each way. Sports trips at Asian international schools are on a whole 'nother level. We would almost always fly, whether it be to Shanghai, or all the way down to Manilla. One of my favorite aspects of
-these trips was that we didn't stay in hotel rooms, we instead had a 'homestay' system. Essentially, me and a team mate would sleep on someone from the host team's floor. It sounds unglamorous, and sometimes it was, but it was a great way to
-meet new people from different schools around the continent.</p>
-<p>School wasn't easy here. For the first time in my life I actually had to study for tests. If you look at my high school transcript, it's quite obvious that 9th grade me took some time to get used to this. Ultimately,
-I think it is very valuable that I had to learn <em>how</em> to study. It's a lot better to have to learn that in high school than in university. At OIS school was relatively nonchalant, and there wasn't really a drive to
-do well unless that drive came from yourself. For better or for worse, that drive is externalized at ISB, but in a healthy way. Even though we would help each other study, most of us always had 'the curve' at the back
-of our minds. It was all in good spirit, though.</p>
-<p>I could go on much, much longer about the upsides of the International School of Beijing. It pushed me academically, while also giving me the freedom to follow what I was really interested in. However, this blog post
-would be nothing without the other side.</p>
-<h3>Public school</h3>
 
                     <h4 align="center">Content Categories from Google's <a
                             target="_blank"
@@ -111,7 +124,7 @@ would be nothing without the other side.</p>
 
                     <div class="google_cat">
 
-                        <p>/Jobs & Education/Education/Colleges & Universities</p>
+                        <p>/Jobs & Education/Education</p>
 
                     </div>
 
