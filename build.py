@@ -51,6 +51,10 @@ SENTIMENT_ENDPOINT = "https://language.googleapis.com/v1/documents:analyzeSentim
 
 CLASSIFY_ENDPOINT = "https://language.googleapis.com/v1/documents:classifyText" + key_add_on
 
+TRANSLATION_ENDPOINT = "https://translation.googleapis.com/language/translate/v2" + key_add_on
+
+TRANSLATION_ENDPOINT += "&target=zh-CN&source=en"
+
 json_data_template = {"document":
                           {"type": "PLAIN_TEXT",
                            "content":
@@ -134,6 +138,15 @@ def make_classify_request(body_text):
     return categories_list
 
 
+def translate(text):
+    current_endpoint = TRANSLATION_ENDPOINT + "&q=" + text
+
+    translate_request = requests.post(url=current_endpoint)
+    returned = translate_request.json()
+
+    return returned['data']['translations'][0]['translatedText']
+
+
 def create_tag_dict():
     tag_dict = {}
 
@@ -175,6 +188,7 @@ def create_post_object(path):
     text = processed[1][0]
 
     categories = make_classify_request(text)
+    # new_text = translate(text)
 
     reading_time = processed[1][1]
 
@@ -470,6 +484,8 @@ def create_post_title(template, md_string, title, title_html, reading_time_html,
     for i in categories:
         cat_html += "<p>" + i + "</p>"
 
+
+
     replacements = {
 
         "TABTITLE": title,
@@ -496,7 +512,7 @@ def create_post_title(template, md_string, title, title_html, reading_time_html,
 
         new_html_location = os.path.join("posts", final_title, "index.html")
 
-        new_html_file = open(new_html_location, "w")
+        new_html_file = open(new_html_location, "w", encoding='utf-8')
         new_html_file.write(new_html_contents)
 
     except OSError as e:
