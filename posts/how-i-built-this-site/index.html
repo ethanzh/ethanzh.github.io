@@ -25,8 +25,6 @@
 
     <script>
 
-        var text = document.getElementById("sample");
-
         var bod = document.getElementById("bod");
 
         var original_article = bod.innerHTML;
@@ -35,14 +33,14 @@
 
         function buttonClick() {
 
-            switch (text.lang) {
+            switch (bod.lang) {
                 case 'en':
-                    text.setAttribute("lang", 'zh');
+                    bod.setAttribute("lang", 'zh');
                     bod.innerHTML = chinese;
                     break;
 
                 case 'zh':
-                    text.setAttribute("lang", 'en');
+                    bod.setAttribute("lang", 'en');
                     bod.innerHTML = original_article;
                     break;
 
@@ -84,7 +82,7 @@
 
                 </div>
 
-                <div id="bod" class="body_text">
+                <div lang='en' id="bod" class="body_text">
 
                     <p>This website was born out of my desire to try something new: web development.</p>
 <p>Make no mistake, there is no shortage of tools that make it easy and simple to create a website, like Squarespace,

@@ -25,8 +25,6 @@
 
     <script>
 
-        var text = document.getElementById("sample");
-
         var bod = document.getElementById("bod");
 
         var original_article = bod.innerHTML;
@@ -35,14 +33,14 @@
 
         function buttonClick() {
 
-            switch (text.lang) {
+            switch (bod.lang) {
                 case 'en':
-                    text.setAttribute("lang", 'zh');
+                    bod.setAttribute("lang", 'zh');
                     bod.innerHTML = chinese;
                     break;
 
                 case 'zh':
-                    text.setAttribute("lang", 'en');
+                    bod.setAttribute("lang", 'en');
                     bod.innerHTML = original_article;
                     break;
 
@@ -84,7 +82,7 @@
 
                 </div>
 
-                <div id="bod" class="body_text">
+                <div lang='en' id="bod" class="body_text">
 
                     <p>Hello World! Welcome to my website. With some encouragement from my friend <a target="_blank" href="https://gautam.cc">Gautam Mittal,</a> I've decided
 to create this website from scratch, instead of using a website builder.</p>
