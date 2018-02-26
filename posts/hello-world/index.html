@@ -23,32 +23,6 @@
 
     <meta name="description" content="I'm just hoping my Python script compiles this properly." />
 
-    <script>
-
-        var bod = document.getElementById("bod");
-
-        var original_article = bod.innerHTML;
-
-        var chinese = '<p>你好，世界！欢迎来到我的网站。在我朋友<a target="_blank" href="https://gautam.cc">Gautam Mittal的</a>鼓励下<a target="_blank" href="https://gautam.cc">，</a>我决定从头开始创建这个网站，而不是使用网站建设者。 </p><p>我从来没有想过以这种方式构建网站，但HTML文件是基于我创建的HTML模板生成的，使用我创建的<em>build.py</em>文件（其源代码在我的Github上可用！） </p><p>尽管在这一点上我已经写了五年的大部分代码，但这是我第一次真正进入Web开发。我最初被网络开发的设计方面所吓倒（我从来没有认为自己很<a target="_blank" href="http://arkpod.in/pills/">擅长</a> ），但通过CSS和一些工具，比如<a target="_blank" href="http://arkpod.in/pills/">pills.css</a> ，它变得更易于管理。 </p><p>我打算用这个博客来讨论对我来说很重要的各种问题，以及谈论我的一些个人生活经历，同时也要关注我目前正在从事的技术项目。 </p><p>该网站托管在<a target="_blank" href="https://pages.github.com/">Github Pages上</a> ，这是我直到最近才知道的一个非常有用的功能。这使我可以免费托管这个（静态）网站，而只需支付一个域名。对于需要动态发布的东西，我开始越来越多地了解Google Cloud，特别是Google Compute Engine，我觉得它比Amazon Web Service的Elastic Compute更易于使用。 </p><p>我打算主动维护这个网站，重点是它轻巧快速。这是使用Github Pages的另一个优势，因为它使用的是CDN，这无疑比我自己设定的任何事情都快。 </p><p>虽然这个网站的设计目前是相对基本的（我已经附上了一张图片以供参考），但我希望能够让这个网站变得更加独特，同时还吸取了其他人的灵感。 </p><p><img class="article_image" alt="这是我的主页在发布时的样子。" src="https://ethanhouston.com/img/articles/screencap.JPG" /></p><h6 class="caption">这是这个网站在发布时的样子</h6>';
-
-        function buttonClick() {
-
-            switch (bod.lang) {
-                case 'en':
-                    bod.setAttribute("lang", 'zh');
-                    bod.innerHTML = chinese;
-                    break;
-
-                case 'zh':
-                    bod.setAttribute("lang", 'en');
-                    bod.innerHTML = original_article;
-                    break;
-
-            }
-        }
-
-    </script>
-
 </head>
 
 
@@ -153,6 +127,32 @@ site more and more my own, while still drawing inspiration from others.</p>
 
     <!-- <script src="/instantclick.min.js" data-no-instant></script>
     <script data-no-instant>InstantClick.init();</script> -->
+
+    <script>
+
+        var bod = document.getElementById("bod");
+
+        var original_article = bod.innerHTML;
+
+        var chinese = '<p>你好，世界！欢迎来到我的网站。在我朋友<a target="_blank" href="https://gautam.cc">Gautam Mittal的</a>鼓励下<a target="_blank" href="https://gautam.cc">，</a>我决定从头开始创建这个网站，而不是使用网站建设者。 </p><p>我从来没有想过以这种方式构建网站，但HTML文件是基于我创建的HTML模板生成的，使用我创建的<em>build.py</em>文件（其源代码在我的Github上可用！） </p><p>尽管在这一点上我已经写了五年的大部分代码，但这是我第一次真正进入Web开发。我最初被网络开发的设计方面所吓倒（我从来没有认为自己很<a target="_blank" href="http://arkpod.in/pills/">擅长</a> ），但通过CSS和一些工具，比如<a target="_blank" href="http://arkpod.in/pills/">pills.css</a> ，它变得更易于管理。 </p><p>我打算用这个博客来讨论对我来说很重要的各种问题，以及谈论我的一些个人生活经历，同时也要关注我目前正在从事的技术项目。 </p><p>该网站托管在<a target="_blank" href="https://pages.github.com/">Github Pages上</a> ，这是我直到最近才知道的一个非常有用的功能。这使我可以免费托管这个（静态）网站，而只需支付一个域名。对于需要动态发布的东西，我开始越来越多地了解Google Cloud，特别是Google Compute Engine，我觉得它比Amazon Web Service的Elastic Compute更易于使用。 </p><p>我打算主动维护这个网站，重点是它轻巧快速。这是使用Github Pages的另一个优势，因为它使用的是CDN，这无疑比我自己设定的任何事情都快。 </p><p>虽然这个网站的设计目前是相对基本的（我已经附上了一张图片以供参考），但我希望能够让这个网站变得更加独特，同时还吸取了其他人的灵感。 </p><p><img class="article_image" alt="这是我的主页在发布时的样子。" src="https://ethanhouston.com/img/articles/screencap.JPG" /></p><h6 class="caption">这是这个网站在发布时的样子</h6>';
+
+        function buttonClick() {
+
+            switch (bod.lang) {
+                case 'en':
+                    bod.setAttribute("lang", 'zh');
+                    bod.innerHTML = chinese;
+                    break;
+
+                case 'zh':
+                    bod.setAttribute("lang", 'en');
+                    bod.innerHTML = original_article;
+                    break;
+
+            }
+        }
+
+    </script>
 
 </body>
 </html>
