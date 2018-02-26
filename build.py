@@ -7,6 +7,7 @@ import shutil
 import time
 import markdown
 import requests
+import math
 
 from api_key import API_KEY
 
@@ -138,12 +139,43 @@ def make_classify_request(body_text):
     return categories_list
 
 
+# Currently works for articles up to 10,000 characters
 def translate(text):
-    current_endpoint = TRANSLATION_ENDPOINT + "&q=" + text
 
-    returned = requests.get(current_endpoint)
+    trans_endpoint = TRANSLATION_ENDPOINT + "&q="
 
-    return returned.json()['data']['translations'][0]['translatedText']
+    text_array = []
+
+    char_limit = 5000
+
+    if len(text) > char_limit:
+
+        i = 5000
+
+        while text[i:i + 1] != ' ':
+            i += 1
+
+        text_array.append(text[:i])  # First
+        text_array.append(text[i:])  # Second
+
+        total = ""
+
+        for i in text_array:
+
+            current_endpoint = trans_endpoint + i
+
+            returned = requests.get(current_endpoint)
+
+            total += returned.json()['data']['translations'][0]['translatedText']
+
+        return total
+
+    else:
+        current_endpoint = trans_endpoint + text
+
+        returned = requests.get(current_endpoint)
+
+        return returned.json()['data']['translations'][0]['translatedText']
 
 
 def create_tag_dict():
@@ -228,9 +260,7 @@ def create_post_object(path):
 
     }
 
-    md_html = custom_markdown_class(change_list, md_html)
-
-    md_html = md_html.replace("<a", "<a target=\"_blank\"")
+    md_html = custom_markdown_class(change_list, md_html).replace("<a", "<a target=\"_blank\"")
 
     translated_md = translate(md_html)
 
