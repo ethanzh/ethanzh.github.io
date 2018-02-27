@@ -143,7 +143,6 @@ def translate(text):
     trans_endpoint = TRANSLATION_ENDPOINT + "&q="
 
     text_array = []
-
     char_limit = 5000
 
     if len(text) > char_limit:
