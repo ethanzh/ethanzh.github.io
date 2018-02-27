@@ -7,7 +7,6 @@ import shutil
 import time
 import markdown
 import requests
-import math
 
 from api_key import API_KEY
 
@@ -141,7 +140,6 @@ def make_classify_request(body_text):
 
 # Currently works for articles up to 10,000 characters
 def translate(text):
-
     trans_endpoint = TRANSLATION_ENDPOINT + "&q="
 
     text_array = []
@@ -161,7 +159,6 @@ def translate(text):
         total = ""
 
         for i in text_array:
-
             current_endpoint = trans_endpoint + i
 
             returned = requests.get(current_endpoint)
@@ -490,8 +487,8 @@ def md_to_html(md_string):
     return markdown.markdown(md_string)
 
 
-def create_post_title(template, md_string, translated_md, title, title_html, reading_time_html, summary, tags, categories):
-
+def create_post_title(template, md_string, translated_md, title, title_html, reading_time_html, summary, tags,
+                      categories):
     spaceless_title = title.replace(" ", "-")
     lower_title = spaceless_title.lower()
     final_title = re.sub(r'[^a-zA-Z0-9-]', '', lower_title)
@@ -499,7 +496,6 @@ def create_post_title(template, md_string, translated_md, title, title_html, rea
     new_tag_html = ""
 
     for i in range(0, len(tags)):
-
         tag_string = tags[i]
 
         #  Changes post_tag_links to tag_links
@@ -513,8 +509,6 @@ def create_post_title(template, md_string, translated_md, title, title_html, rea
 
     for i in categories:
         cat_html += "<p>" + i + "</p>"
-
-
 
     replacements = {
 
