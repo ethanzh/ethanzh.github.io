@@ -55,12 +55,12 @@ TRANSLATION_ENDPOINT = "https://translation.googleapis.com/language/translate/v2
 
 TRANSLATION_ENDPOINT += "&target=zh-CN&source=en"
 
-json_data_template = {"document":
-                          {"type": "PLAIN_TEXT",
-                           "content":
-                               "null"
-                           }
-                      }
+json_data_template = {
+    "document":
+        {"type": "PLAIN_TEXT",
+         "content":
+         "null"}
+}
 
 
 class PostObject(object):
@@ -132,8 +132,11 @@ def make_classify_request(body_text):
 
     categories_list = []
 
-    for i in classify_data["categories"]:
-        categories_list.append(i["name"])
+    try:
+        for i in classify_data["categories"]:
+            categories_list.append(i["name"])
+    except KeyError:
+        print("Error at", current_json["document"])
 
     return categories_list
 
@@ -161,6 +164,8 @@ def translate(text):
             current_endpoint = trans_endpoint + i
 
             returned = requests.get(current_endpoint)
+
+            status = returned.status_code
 
             total += returned.json()['data']['translations'][0]['translatedText']
 
