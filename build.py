@@ -7,6 +7,7 @@ import shutil
 import time
 import markdown
 import requests
+import math
 
 from api_key import API_KEY
 
@@ -143,20 +144,35 @@ def make_classify_request(body_text):
 
 # Currently works for articles up to 10,000 characters
 def translate(text):
+
     trans_endpoint = TRANSLATION_ENDPOINT + "&q="
+    char_limit = 4000
+    temp_lim = 2000
 
-    text_array = []
-    char_limit = 5000
+    if len(text) <= char_limit:
+        current_endpoint = trans_endpoint + text
 
-    if len(text) > char_limit:
+        returned = requests.get(current_endpoint)
 
-        i = 5000
+        return returned.json()['data']['translations'][0]['translatedText']
 
-        while text[i:i + 1] != ' ':
-            i += 1
+    elif len(text) > char_limit:
 
-        text_array.append(text[:i])  # First
-        text_array.append(text[i:])  # Second
+        text_array = []
+
+        iterations = math.ceil(len(text) / char_limit)
+
+        for i in range(1, int(iterations + 1)):
+            j = char_limit * i
+
+            if len(text) < j:
+                j = len(text)
+            else:
+                while text[j] != ' ':
+                    j += 1
+
+            text_array.append(text[:j])
+            text = text[j + 1:]
 
         total = ""
 
@@ -167,16 +183,13 @@ def translate(text):
 
             status = returned.status_code
 
+            if status != 200:
+                #print(current_endpoint)
+                print(len(i))
+
             total += returned.json()['data']['translations'][0]['translatedText']
 
         return total
-
-    else:
-        current_endpoint = trans_endpoint + text
-
-        returned = requests.get(current_endpoint)
-
-        return returned.json()['data']['translations'][0]['translatedText']
 
 
 def create_tag_dict():
