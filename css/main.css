@@ -73,24 +73,6 @@ footer {
 
 /* Home page icons */
 
-.social {
-    width: 42px;
-    height: 42px;
-    background-size: 42px 42px;
-    border: none initial;
-    outline:none;
-    text-indent: 100vw;
-}
-
-.social:hover {
-    width: 42px;
-    height: 42px;
-    background-size: 42px 42px;
-    border:none initial;
-    outline:none;
-    text-indent: 100vw;
-}
-
 .facebook {
     background: url("../img/logos/facebook_grey.png") no-repeat;
     border:none;
@@ -129,6 +111,24 @@ footer {
 .flickr:hover {
     background: url("../img/logos/flickr_blue.png") no-repeat;
     border:none;
+}
+
+.social {
+    width: 42px;
+    height: 42px;
+    background-size: 42px 42px;
+    border: none initial;
+    outline:none;
+    text-indent: 100vw;
+}
+
+.social:hover {
+    width: 42px;
+    height: 42px;
+    background-size: 42px 42px;
+    border:none initial;
+    outline:none;
+    text-indent: 100vw;
 }
 
 /* Adds red text to <p> */
