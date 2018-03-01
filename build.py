@@ -142,12 +142,10 @@ def make_classify_request(body_text):
     return categories_list
 
 
-# Currently works for articles up to 10,000 characters
 def translate(text):
 
     trans_endpoint = TRANSLATION_ENDPOINT + "&q="
-    char_limit = 4000
-    temp_lim = 2000
+    char_limit = 5000
 
     if len(text) <= char_limit:
         current_endpoint = trans_endpoint + text
