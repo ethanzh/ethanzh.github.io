@@ -13,16 +13,25 @@
     font-style: italic, oblique;
 }
 
-@media (min-width: 2500px) and (min-height: 500px){
-    body {
-
-    }
-}
+/* Tags */
 
 a {
     color: rgb(101, 137, 178);
     border-bottom: 1px dotted rgb(101, 137, 178);
     text-decoration: none;
+}
+
+body {
+    font-family: ProximaNova, sans-serif;
+    font-size: 14pt;
+    color: #666666;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
 }
 
 html {
@@ -36,42 +45,51 @@ header {
 
 footer {
     background-color: #1d1d1d;
-
-    flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+    flex-shrink: 0;
     padding: 30px;
 }
 
-img {
-}
-
-div {
-
-}
-
+/* Scroll bar stuff */
 
 .header {
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  width: 100%;
-  background-color: #1d1d1d;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    background-color: #1d1d1d;
 }
 
-/* The progress container (grey background) */
 .progress-container {
-  width: 100%;
-  height: 8px;
-  background: #1d1d1d;
+    width: 100%;
+    height: 8px;
+    background: #1d1d1d;
 }
 
-/* The progress bar (scroll indicator) */
 .progress-bar {
-  height: 8px;
-  background: white;
-  width: 0;
+    height: 8px;
+    background: white;
+    width: 0;
 }
 
+/* Home page icons */
 
+.social {
+    width: 42px;
+    height: 42px;
+    background-size: 42px 42px;
+    border: none initial;
+    outline:none;
+    text-indent: 100vw;
+}
+
+.social:hover {
+    width: 42px;
+    height: 42px;
+    background-size: 42px 42px;
+    border:none initial;
+    outline:none;
+    text-indent: 100vw;
+}
 
 .facebook {
     background: url("../img/logos/facebook_grey.png") no-repeat;
@@ -113,43 +131,15 @@ div {
     border:none;
 }
 
-.social {
-    width: 42px;
-    height: 42px;
-    background-size: 42px 42px;
-    border: none initial;
-    outline:none;
-    text-indent: 100vw;
-}
-
-.social:hover {
-    width: 42px;
-    height: 42px;
-    background-size: 42px 42px;
-    border:none initial;
-    outline:none;
-    text-indent: 100vw;
-}
-
-
-body {
-    font-family: ProximaNova, sans-serif;
-    font-size: 14pt;
-    color: #666666;
-    background-color: white;
-    margin: 0;
-    padding: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    display: flex;
-    flex-direction: column;
-}
+/* Adds red text to <p> */
 
 .wip {
     color: darkred;
     font-weight: bold;
     display: inline;
 }
+
+/* Creates a div that turns grey when hovered */
 
 .blurb {
 
@@ -159,6 +149,8 @@ body {
 .blurb:hover {
     background-color: #f2f2f2;
 }
+
+/* Class for <a> for post links */
 
 .post_link {
     font-family: "ProximaNovaBold", sans-serif;
@@ -174,6 +166,8 @@ body {
 
 }
 
+/* Removes decoration for images that are links <img> */
+
 .image_link{
     text-decoration: none;
     border-bottom: 0 dotted #FFFFFF;
@@ -186,10 +180,13 @@ body {
     letter-spacing: 0;
 }
 
-.above_article {
+/* Text that goes above the article (title, reading time, etc) */
 
+.above_article {
     padding-bottom: 8px;
 }
+
+/* Goes over <h6>, comes from markdown ###### */
 
 .caption {
     padding-top: 0;
@@ -199,10 +196,7 @@ body {
     font-style: italic;
 }
 
-.four {
-    margin: 0 auto;
-    padding-top: 35%;
-}
+/* <img> in an article gets restricted to 500px, centered horizontally */
 
 .article_image {
     max-height: 500px;
@@ -212,6 +206,8 @@ body {
     margin-right: auto;
     padding-bottom: 0;
 }
+
+/* Big, underlined title (goes on <h2>) */
 
 .title_button {
     font-family: "ProximaNovaBold", sans-serif;
@@ -225,6 +221,8 @@ body {
 
 }
 
+/* Class for link <a> that normally goes to homepage */
+
 .title_link {
     font-family: "ProximaNovaBold", sans-serif;
     font-size: 22pt;
@@ -234,6 +232,8 @@ body {
     border-bottom: 0;
 
 }
+
+/* Title for <h2> tags */
 
 .tags_title {
     font-family: "ProximaNovaBold", sans-serif;
@@ -245,22 +245,7 @@ body {
     border-bottom: 0 solid #e0e0e0;
 }
 
-.post_line {
-
-    width: 100%;
-    border: 0;
-    height: 1px;
-    background: #000;
-    opacity: 0.15;
-}
-
-#front_page_line {
-    width: 100%;
-    border: 0;
-    height: 1px;
-    background: #000;
-    opacity: 0.15;
-}
+/* Class for <p> that makes it reading time */
 
 .read_time {
     font-style: italic;
@@ -269,14 +254,7 @@ body {
     margin-top: -18px;
 }
 
-.name_title {
-    text-align: left;
-    font-size:20pt;
-    color: #313335;
-    padding-top: 60px;
-    text-decoration: none;
-    border-bottom: 0 solid #a5a5a5;
-}
+/* Div class for list of tags */
 
 .tags {
 
@@ -288,64 +266,27 @@ body {
 
 }
 
+/* Div class for Google NLP categories */
+
 .google_cat {
     text-align: center;
     margin-bottom: -80px;
 }
 
-.test {
-    overflow-wrap: break-word;
-    text-overflow: clip;
-}
-
-.post_tags {
-    text-align: center;
-    padding-top: 0;
-    padding-bottom: 40px;
-
-}
-
-.post_tag_links {
-    text-decoration: none;
-    border-bottom: 0;
-    color: #2d2d2d;
-    font-weight: bold;
-}
-
-.tag_name_title {
-    padding-top: 61px;
-    text-align: left;
-    font-size: 20pt;
-    color: white;
-    font-weight: bold;
-}
+/* Link <a> class for links to tag page */
 
 .tag_links {
-color: black;
+    color: black;
     margin-top:-6px;
     margin-bottom:-6px;
     line-height: 1;
     vertical-align: top;
-        text-align: center;
-    text-decoration: none;
-    border-bottom: 0;
-}
-
-.old_tag_links {
-    color: black;
-    margin-top: -4px;
-    line-height: 1;
-    vertical-align: top;
-    padding-top:10px;
-    padding-bottom:10px;
     text-align: center;
     text-decoration: none;
     border-bottom: 0;
 }
 
-.name_title:hover {
-    color: lightgray;
-}
+/* Home page Ethan Houston title */
 
 .name_title_index {
     padding-top: calc(8%);
@@ -354,6 +295,8 @@ color: black;
     color: black;
     font-weight: bold;
 }
+
+/* <h3> musings title */
 
 .musings_title {
     border-bottom: 1px solid #a5a5a5;
@@ -364,12 +307,15 @@ color: black;
     font-weight: normal;
 }
 
+/* Summary tax on index page */
+
 .summary_text {
     text-align: left;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
+/* Flex container for the social media buttons */
 
 .flex_container {
     display: flex;
@@ -378,73 +324,30 @@ color: black;
     justify-content: space-between;
 }
 
+/* Not quite sure about this. It seems to be everywhere */
+
 .wrapper {
     flex: 1 0 auto;
 }
 
+/* Bay lands image on front page */
+
 .baylands {
-      display: block;
-
-      max-width:250px;
-
-      width: auto;
-      height: auto;
+    display: block;
+    max-width:250px;
+    width: auto;
+    height: auto;
     margin: 0 auto;
 }
+
+/* Bottom of index, social media button div */
 
 #bottom {
     padding-bottom: 40px;
 }
 
+/* Link for the 'view all' that shows > */
+
 #viewall {
     text-align: right;
-}
-.centered_div {
-    display: inline-block;
-    align-content: center;
-    text-align: center;
-}
-
-.container {
-    align-content: center;
-  position: relative;
-}
-
-.image {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.overlay {
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  right: 0;
-  background-color: rgba(214, 229, 255, 0.3);
-  overflow: hidden;
-  width: 100%;
-  height:0;
-
-}
-
-.container:hover .overlay {
-  bottom: 0;
-  height: 100%;
-}
-
-.text {
-    color: black;
-    font-size: 20px;
-    background-color: rgba(214, 229, 255, 0.7);
-    padding: 10px 20px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    text-align: center;
 }

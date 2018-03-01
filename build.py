@@ -184,8 +184,7 @@ def translate(text):
             status = returned.status_code
 
             if status != 200:
-                #print(current_endpoint)
-                print(len(i))
+                print("Error code", status)
 
             total += returned.json()['data']['translations'][0]['translatedText']
 
