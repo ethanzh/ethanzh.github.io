@@ -1,9 +1,9 @@
 ---START_METADATA---
 {
-  "title": "Public vs Private Schools: My Opinion",
+  "title": "Public and Private Schools",
   "author": "Ethan Houston",
   "summary": "My experience with both types of school systems",
-  "date": "18 February 2018",
+  "date": "1 March 2018",
   "private": "True",
   "tags": ["education", "me"]
 }
@@ -25,7 +25,7 @@ From the second month of kindergarten to halfway through 4th grade, I attended a
 quite a while ago, so I don't have a whole lot to reflect on now. Maybe the one lasting impression I have is that (according to Facebook), many of my friends
 from this time are now *heavily* involved in the school marching band, but I really think that's more of a Texas thing than a public/private school thing.
 
-### Private schools
+### Private Schools
 
 Now to the more interesting part (i.e. the periods of my life that I remember with full clarity). I finished elementary school, and did the entirety of middle
 school at [Oslo International School](http://www.oslointernationalschool.no/). This school is *small*, with my entire grade being comprised of around 40 students.
@@ -73,4 +73,48 @@ of our minds. It was all in good spirit, though.
 I could go on much, much longer about the upsides of the International School of Beijing. It pushed me academically, while also giving me the freedom to follow what I was really interested in. However, this blog post
 would be nothing without the other side.
 
-### Public school
+### Public School
+
+This summer I moved from Beijing, China to Palo Alto, California. This move was super unexpected, I found out I was moving after school had already let out for the summer. It took around 5 days for the decision to be finalized, and I was
+in California later that same month. One of the implications of this move would be transitioning from the international schools which I had grown so accustomed to, to a public American high school.
+
+Public American high schools were spoken of at my time as ISB of places any of us would struggle to function. From the higher class sizes, to more competitive sports teams, they couldn't be more different. Now, public high schools come in all shapes
+and sizes, just like the international school's I've been to. My views may be a bit skewed as I attend Gunn High School, which probably isn't representative of the average public school (Gunn is [ranked number 1](https://www.niche.com/k12/search/best-public-high-schools/s/california/)
+in California).
+
+ISB is very, very predominately Asian (~95%). Gunn isn't quite there, but Asian/Asian-Americans comprise around 40-50% of the student body, making them almost a majority. This didn't take so much
+getting used to after ISB, but I've noticed a few subtle differences. The biggest being the difference in pronunciation of Chinese last names (such as Zhou being pronounced 'zao' instead of 'joe').
+
+My class sizes now are much larger, with 32 person classes not being too out of the ordinary. This took me a while to get used to (last year my Chinese class had four people). The lack of teacher-student
+interaction is definitely apparent, and it's simply a different learning environment. Asking questions is still possible, but getting lots of 1-1 time with the teacher is almost impossible.
+
+![AP vs IB](https://ethanhouston.com/img/articles/apib.jpg)
+
+I've also noticed that although AP is meant to be the IB's domestic counterpart, things are taught in a very different way. One of my main complains about AP Economics earlier this year was the testing style -
+everything is multiple choice. In theory this should make it easier to study, but it ended up making me feel claustrophobic in a way, because there's no way to justify your answer if it doesn't match the letter
+on the answer key.
+
+There is almost a much heavier emphasis on rote memorization in the American school system, from what I've seen. What this results in is students who cram material before tests, just to have it all leave their brains
+after whatever test/quiz they were studying for. I've found that I much prefer the IB's emphasis on discussion, and really *learning* the content, not just memorizing it.
+
+Both Gunn and ISB are competitive environments, there's no doubt about that. However, I've found that students at Gunn (on average) seem to be under more stress (the source of which I can
+only speculate, but I wouldn't rule parents out). Compare this to ISB where students are undoubtedly also pressured academically, however I think much more of that comes from within, rather than external forces.
+
+With regard to the athletics aspect, I've found that although Gunn is an American public school, athletics aren't exactly on the top of everyone's mind. This is clearly demonstrated by the fact that
+football, the most popular high school sport, is a no-cut sport (meaning anyone can be on the team), whereas sports like badminton have stiff competition to make the squad. Sports practices also last for around 3 hours a day,
+every weekday which was a big change for me, because ISB sports practices only take around two and a half hours a day, three days a week.
+
+![I got to play football at Gunn](https://ethanhouston.com/img/articles/fball.jpg)
+
+If I had to pick between Gunn and ISB, it would be tough. ISB definitely has nicer facilities and a tighter-knit community, but Gunn has the advantage of being much larger, making it easier to explore any
+somewhat unconventional interests you may have. Relating to this, Gunn is a much, much better school for anything involving technology (I guess this isn't much of a surprise, seeing as it's located smack-dab in
+Silicon Valley). ISB's only programming course (as far as I'm aware) is 'Web Design for Clients', which I've been told isn't the most extensive course in the world. Gunn has an entire Computer Science pathway in the
+course guide, but I've found that students I've met are by far the most valuable resource in terms of all things computer science. Any question I can't answer by Googling can be quickly resolved by one of the many
+people I know. This has been especially helpful in my foray into machine learning (and web design, as evidenced by this site's existence).
+
+### University and Beyond
+
+Although I have not received my college decisions yet, the question of private vs public universities still looms in my mind. The University of California system has the obvious advantage (to me) of being in California,
+as well as being coupled with in-state tuition. However, this comes at the expense of an over-crowded university, and limited opportunity to really get to know your professors until later years. Private universities on the other hand,
+although much more expensive, place a heavier emphasis on the undergraduate experience, as well as generally nicer campuses. Of course, take all of this with a grain of salt because this is all just what I've read and heard from
+other people, I haven't really had the opportunity to find these things out for myself (yet).

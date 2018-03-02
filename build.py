@@ -39,10 +39,9 @@ project_objects = []
 tag_list = []
 
 # TODO: For 'all' page, make max 8 posts per page: ethanhouston.com/all/2, etc
-# TODO: Natural Language Analysis (think more about this)
-#   Categorical analysis
 
-key_add_on = ("?key=" + API_KEY)
+# Grabs key from different file for privacy
+key_add_on = "?key=" + API_KEY
 
 SYNTAX_ENDPOINT = "https://language.googleapis.com/v1beta2/documents:analyzeSyntax" + key_add_on
 
@@ -54,7 +53,7 @@ CLASSIFY_ENDPOINT = "https://language.googleapis.com/v1/documents:classifyText" 
 
 TRANSLATION_ENDPOINT = "https://translation.googleapis.com/language/translate/v2" + key_add_on
 
-TRANSLATION_ENDPOINT += "&target=zh-CN&source=en"
+TRANSLATION_ENDPOINT += "&target=zh-CN&source=en&q="
 
 json_data_template = {
     "document":
@@ -142,51 +141,72 @@ def make_classify_request(body_text):
     return categories_list
 
 
+def slice_text_to_array(text, char_limit):
+    text_array = []
+
+    # Simply text length / char limit, determines how many times to 'split' the text
+    iterations = math.ceil(len(text) / char_limit)
+
+    # Checks for a ' ' at the character limit. If the character isn't a space, increment by one, etc.
+    # If text length is less than char limit, add whole text
+    # Once text is appended to text_array, it is sliced off of "text" variable
+    for i in range(1, int(iterations + 1)):
+        j = char_limit
+
+        # If current slice is less than char limit, just append the whole thing
+        if len(text) < j:
+            j = len(text)
+
+        else:
+            # Keep incrementing j until it is the index of a ' '
+            while text[j] != ' ':
+                j += 1
+
+        # Add the slice of text UP TO j to text_array, then remove that slice from 'text'
+        text_array.append(text[:j])
+        text = text[j:]
+
+    return text_array
+
+
 def translate(text):
 
-    trans_endpoint = TRANSLATION_ENDPOINT + "&q="
-    char_limit = 5000
+    # Works up to 5500, gets iffy above that. The higher, the better because it means fewer API calls
+    char_limit = 5500
 
+    # Simplest scenario, simply pass in the full text if it's under the char limit.
     if len(text) <= char_limit:
-        current_endpoint = trans_endpoint + text
 
-        returned = requests.get(current_endpoint)
-
-        return returned.json()['data']['translations'][0]['translatedText']
+        # Puts text into 1 item array
+        return make_translation_request([text])
 
     elif len(text) > char_limit:
 
-        text_array = []
+        # Takes long text, turns it into an array of (roughly) evenly sizes slices
+        text_array = slice_text_to_array(text, char_limit)
 
-        iterations = math.ceil(len(text) / char_limit)
+        # Calls Google API, returns text
+        return make_translation_request(text_array)
 
-        for i in range(1, int(iterations + 1)):
-            j = char_limit * i
 
-            if len(text) < j:
-                j = len(text)
-            else:
-                while text[j] != ' ':
-                    j += 1
+def make_translation_request(text_list):
+    # This accumulates all of the translated text
+    total = ""
 
-            text_array.append(text[:j])
-            text = text[j + 1:]
+    for text in text_list:
 
-        total = ""
+        # Add text to endpoint, make request.
+        current_endpoint = TRANSLATION_ENDPOINT + text
+        returned = requests.get(current_endpoint)
+        status = returned.status_code
 
-        for i in text_array:
-            current_endpoint = trans_endpoint + i
+        if status != 200:
+            print("Error code", status)
 
-            returned = requests.get(current_endpoint)
+        # Extract just the text out of the JSON object
+        total += returned.json()['data']['translations'][0]['translatedText']
 
-            status = returned.status_code
-
-            if status != 200:
-                print("Error code", status)
-
-            total += returned.json()['data']['translations'][0]['translatedText']
-
-        return total
+    return total
 
 
 def create_tag_dict():
