@@ -317,19 +317,73 @@ def create_post_object(path):
     post_objects.append(new_post)
 
 
+# Generates a given number of post blurb HTML
+def create_blurb_html(number):
+    try:
+
+        add_to_html = ""
+
+        sorted_list = sort_by_time(post_objects)
+
+        sorted_list = [i for i in sorted_list if not i.private]
+
+        if number == 999:
+            number = len(sorted_list) - 1
+
+        for i in range(0, number):
+
+            if not sorted_list[i].private:
+                add_to_html += create_blurb(sorted_list[i])
+
+    except IndexError:
+        pass
+
+    return add_to_html
+
+
+# Gets post blurb HTML, then feeds the appropriate number into the given template file
+def add_post_blurbs(template):
+    template_file = os.path.join("templates", template + ".html")
+
+    with open(template_file, "r") as html_template:
+        html_string = html_template.read()
+
+        change_dict = {}
+
+        blurb_num = 4
+
+        if template == "all":
+            tag_dict = create_tag_dict()
+            tag_html = ""
+
+            for tag in tag_dict:
+                tag_html += create_html_tag("a", tag, css="tag_links", href="/tags/" + tag + "/") + "<br />"
+
+            change_dict["TAGS"] = tag_html
+
+            blurb_num = 999
+
+            template = os.path.join("all", "index")
+
+        change_dict["POSTS"] = create_blurb_html(blurb_num)
+
+        new_html = html_replace(html_string, change_dict)
+
+    new_html_file = open(template + ".html", "w")
+    new_html_file.write(new_html)
+
+
 def add_index_to_template(number, template):
     template_file = template + ".html"
 
     if template == "all":
         open_template = os.path.join("templates", "all.html")
-        template = "all/index"
+        template = os.path.join("all", "index")
     else:
         open_template = os.path.join("templates", template_file)
 
     with open(open_template, "r") as html_template:
         html_string = html_template.read()
-
-        add_to_html = ""
 
         index_already_exists = os.path.exists(template_file)
 
@@ -339,20 +393,8 @@ def add_index_to_template(number, template):
         if index_already_exists:
             os.remove(template_file)
 
-        try:
 
-            sorted_list = sort_by_time(post_objects)
-
-            sorted_list = [i for i in sorted_list if not i.private]
-
-            for i in range(0, number):
-
-                if not sorted_list[i].private:
-                    add_to_html += create_blurb(sorted_list[i])
-
-        except IndexError:
-            pass
-
+        add_to_html = "4"
         new_html_contents = html_string.replace("{POSTS}", add_to_html)
 
         if template == "all/index":
@@ -619,8 +661,8 @@ def run():
     for i in markdown_file_locations:  # Goes through locations and creates .html files
         create_post_object(i)
 
-    add_index_to_template(2, "index")
-    add_index_to_template("all", "all")
+    add_post_blurbs("index")
+    add_post_blurbs("all")
 
     create_tag_pages()
     create_projects()
