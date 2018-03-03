@@ -22,11 +22,13 @@
 <div id="demo">
 
         Enter text: <input type="text">
-        <input onclick="loadXMLDoc()" type="button">
+        <input onclick="loadXMLDoc('https://ethanhouston-personal-site.herokuapp.com/test')" type="button">
 
 </div>
 
 firebase:<input onclick="saveToFirebase()" type="button">
+
+api.ethanhouston.com<input onclick="loadXMLDoc('https://api.ethanhouston.com/')" type="button">
 
 <script>
 
@@ -49,7 +51,7 @@ firebase:<input onclick="saveToFirebase()" type="button">
 </script>
 
 <script>
-        function loadXMLDoc() {
+        function loadXMLDoc(url) {
 
             var xhttp = new XMLHttpRequest();
             var params = JSON.stringify('{"key": "val"}');
@@ -59,7 +61,7 @@ firebase:<input onclick="saveToFirebase()" type="button">
                         this.responseText;
                 }
             };
-            xhttp.open("POST", "https://ethanhouston-personal-site.herokuapp.com/test", true);
+            xhttp.open("POST", url, true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send(params);
 
