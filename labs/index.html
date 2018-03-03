@@ -34,9 +34,7 @@ api.ethanhouston.com<input onclick="loadXMLDoc('https://api.ethanhouston.com/')"
 
 
     function saveToFirebase(email) {
-    var emailObject = {
-        email: "ethan.houston@gmail.com"
-    };
+    var emailObject = "ethan@houston.com"
 
     firebase.database().ref('subscription-entries').push().set(emailObject)
         .then(function(snapshot) {
