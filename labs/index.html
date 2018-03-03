@@ -2,18 +2,6 @@
 
 <head>
     <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyBjy9RhH3obaqdhsq9_GW78swKM3rSLVtI",
-        authDomain: "personalsite-backend.firebaseapp.com",
-        databaseURL: "https://personalsite-backend.firebaseio.com",
-        projectId: "personalsite-backend",
-        storageBucket: "",
-        messagingSenderId: "379247301983"
-      };
-      firebase.initializeApp(config);
-    </script>
 
     <script src="../js/labs.js"></script>
 </head>
@@ -34,6 +22,12 @@ firebase:<input onclick="saveToFirebase()" type="button">
 api.ethanhouston.com<input onclick="loadXMLDoc('https://api.ethanhouston.com/')" type="button">
 
 
+<br />
+<br />
+
+<input type="text" id="name">
+<input type="text" id="email">
+<input onclick="writeUserData(document.getElementById('name'), document.getElementById('name'))" type="button">
 
 
 

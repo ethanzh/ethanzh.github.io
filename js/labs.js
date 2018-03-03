@@ -1,4 +1,24 @@
 
+ // Initialize Firebase
+var config = {
+apiKey: "AIzaSyBjy9RhH3obaqdhsq9_GW78swKM3rSLVtI",
+authDomain: "personalsite-backend.firebaseapp.com",
+databaseURL: "https://personalsite-backend.firebaseio.com",
+projectId: "personalsite-backend",
+storageBucket: "",
+messagingSenderId: "379247301983"
+};
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
+function writeUserData(name, email) {
+
+    firebase.database().ref(`/users/test`).set({
+    username: name,
+    email: email
+    });
+}
 
 function saveToFirebase(email) {
     var emailObject = "ethan@houston.com"
@@ -28,3 +48,8 @@ function loadXMLDoc(url) {
 
 }
 
+function readDatabase() {
+
+    fire
+
+}
