@@ -12,8 +12,6 @@ function saveToFirebase(email) {
         });
 }
 
-saveToFirebase(email);
-
 function loadXMLDoc(url) {
 
     var xhttp = new XMLHttpRequest();
