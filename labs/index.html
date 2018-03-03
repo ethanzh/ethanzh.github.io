@@ -14,6 +14,8 @@
       };
       firebase.initializeApp(config);
     </script>
+
+    <script src="../js/labs.js"></script>
 </head>
 
 <body>
@@ -28,46 +30,8 @@
 
 firebase:<input onclick="saveToFirebase()" type="button">
 
+
 api.ethanhouston.com<input onclick="loadXMLDoc('https://api.ethanhouston.com/')" type="button">
-
-<script>
-
-
-    function saveToFirebase(email) {
-    var emailObject = "ethan@houston.com"
-
-    firebase.database().ref('subscription-entries').push().set(emailObject)
-        .then(function(snapshot) {
-            success(); // some success method
-        }, function(error) {
-            console.log('error' + error);
-            error(); // some error method
-        });
-    }
-
-    saveToFirebase(email);
-</script>
-
-<script>
-        function loadXMLDoc(url) {
-
-            var xhttp = new XMLHttpRequest();
-            var params = JSON.stringify('{"key": "val"}');
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("demo").innerHTML =
-                        this.responseText;
-                }
-            };
-            xhttp.open("POST", url, true);
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send(params);
-
-    }
-
-
-</script>
-
 
 
 
