@@ -327,8 +327,8 @@ def create_blurb_html(number):
 
         sorted_list = [i for i in sorted_list if not i.private]
 
-        if number == 999:
-            number = len(sorted_list) - 1
+        if number == 999 | number > len(sorted_list):
+            number = len(sorted_list)
 
         for i in range(0, number):
 
@@ -371,44 +371,6 @@ def add_post_blurbs(template):
 
     new_html_file = open(template + ".html", "w")
     new_html_file.write(new_html)
-
-
-def add_index_to_template(number, template):
-    template_file = template + ".html"
-
-    if template == "all":
-        open_template = os.path.join("templates", "all.html")
-        template = os.path.join("all", "index")
-    else:
-        open_template = os.path.join("templates", template_file)
-
-    with open(open_template, "r") as html_template:
-        html_string = html_template.read()
-
-        index_already_exists = os.path.exists(template_file)
-
-        if number == "all":
-            number = len(post_objects)
-
-        if index_already_exists:
-            os.remove(template_file)
-
-
-        add_to_html = "4"
-        new_html_contents = html_string.replace("{POSTS}", add_to_html)
-
-        if template == "all/index":
-            tag_dict = create_tag_dict()
-
-            tag_html = ""
-
-            for tag in tag_dict:
-                tag_html += create_html_tag("a", tag, css="tag_links", href="/tags/" + tag + "/") + "<br />"
-
-            new_html_contents = new_html_contents.replace("{TAGS}", tag_html)
-
-        new_html_file = open(template + ".html", "w")
-        new_html_file.write(new_html_contents)
 
 
 def create_tag_pages():
