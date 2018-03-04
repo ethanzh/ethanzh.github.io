@@ -13,6 +13,8 @@ const database = firebase.database();
 
 document.cookie = "username=John Doe; expires=Thu, 18 Dec 2020 12:00:00 UTC";
 
+var AES = require('aes.js');
+
 function writeUserData() {
 
     let profileID = Math.random().toString().slice(3, 8);
@@ -99,6 +101,8 @@ function deleteMessages(){
 
 function messageListnener() {
 
+    console.log(CryptoJS.AES.encrypt(myString, myPassword));
+
     let ref = database.ref(`messages`);
 
     ref.on(`child_added`, function (snapshot) {
@@ -110,6 +114,7 @@ function messageListnener() {
     });
 
 }
+
 
 function messageRemovedListener() {
 
