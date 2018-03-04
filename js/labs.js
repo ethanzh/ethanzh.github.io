@@ -111,6 +111,17 @@ function messageListnener() {
 
 }
 
+function messageRemovedListener() {
+
+    let ref = database.ref(`messages`);
+
+    ref.on(`child_removed`, function (snapshot) {
+
+        document.getElementById(`testblock`).innerHTML = ``;
+
+    });
+}
+
 function saveToFirebase() {
 
 
@@ -152,3 +163,4 @@ function loadXMLDoc(url) {
 
 messageFirstRun();
 messageListnener();
+messageRemovedListener();
