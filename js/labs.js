@@ -122,6 +122,7 @@ function messageRemovedListener() {
     });
 }
 
+
 function saveToFirebase() {
 
 
