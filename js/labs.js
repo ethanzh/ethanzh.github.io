@@ -162,6 +162,6 @@ function loadXMLDoc(url) {
 
 //retrieveDatabase();
 
-messageFirstRun();
+// messageFirstRun();
 messageListnener();
 messageRemovedListener();
