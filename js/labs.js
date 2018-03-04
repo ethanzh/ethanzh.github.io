@@ -9,72 +9,118 @@ var config = {
 };
 firebase.initializeApp(config);
 
-var database = firebase.database();
+const database = firebase.database();
 
 document.cookie = "username=John Doe; expires=Thu, 18 Dec 2020 12:00:00 UTC";
 
 function writeUserData() {
 
-    var profileID = Math.random().toString().slice(3,8);
-
-    var name = document.getElementById('name').value;
-    var email = document.getElementById('email').value;
+    let profileID = Math.random().toString().slice(3, 8);
+    let name = document.getElementById('name').value;
+    let email = document.getElementById('email').value;
 
     firebase.database().ref(`users`).child(profileID).set({
         username: name,
         email: email
     });
-
-    console.log(document.cookie)
 }
-
-function getIP() {
-
-    var url = 'https://api.ipify.org?format=json';
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText)
-        }
-    };
-    xhttp.open("GET", url, true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send();
-
-}
-
-getIP();
 
 function retrieveDatabase() {
 
-    var test = 12345;
+    let test = 12345;
 
 
-    var ref = database.ref(`users`).child(`12345`);
+    let ref = database.ref(`users`).child(`12345`);
 
     ref.on(`value`, function (snapshot) {
-        var json = snapshot.val();
+        let json = snapshot.val();
 
-        console.log(json[`username`])
+
+        document.getElementById(`testblock`).innerHTML += (json[`username`] + `<br />`);
+
+
     });
 
 }
 
-retrieveDatabase();
+function sendMessage() {
+
+    const timestamp = new Date().getTime().toString();
+
+    let ref = database.ref(`messages`).child(timestamp);
+
+    let message = document.getElementById(`message`).value;
+
+    ref.set(message)
+        .then(function (snapshot) {
+            // pass
+        }, function (error) {
+            console.log('error' + error);
+            // pass
+        });
+}
+
+function messageFirstRun() {
+
+
+    let ref = database.ref(`messages`);
+
+    ref.once(`value`, function (snapshot) {
+
+        let add_html = "";
+
+        try {
+
+            for (const [key, value] of Object.entries(snapshot.val())) {
+
+                add_html += (value + `<br />`);
+            }
+
+        }
+        catch(err) {
+
+        }
+
+        document.getElementById(`testblock`).innerHTML += add_html;
+
+    })
+}
+
+
+function deleteMessages(){
+
+    let ref = database.ref(`messages`);
+
+    ref.remove();
+
+    document.getElementById(`testblock`).innerHTML = ``;
+
+}
+
+function messageListnener() {
+
+    let ref = database.ref(`messages`);
+
+    ref.on(`child_added`, function (snapshot) {
+
+        let value = snapshot.val();
+
+        document.getElementById(`testblock`).innerHTML += (value + `<br />`);
+
+    });
+
+}
 
 function saveToFirebase() {
 
 
-    var thing_to_push = {
+    let thing_to_push = {
 
         username: Math.random().toString().slice(3, 8),
 
         number: Math.random().toString().slice(3, 8)
 
     };
-
-    var thing = Math.random().toString().slice(3, 8)
 
     firebase.database().ref(`users`).child((12345).toString())
         .set(thing_to_push)
@@ -88,8 +134,8 @@ function saveToFirebase() {
 
 function loadXMLDoc(url) {
 
-    var xhttp = new XMLHttpRequest();
-    var params = JSON.stringify('{"key": "val"}');
+    let xhttp = new XMLHttpRequest();
+    let params = JSON.stringify('{"key": "val"}');
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("demo").innerHTML =
@@ -102,3 +148,7 @@ function loadXMLDoc(url) {
 
 }
 
+//retrieveDatabase();
+
+messageFirstRun();
+messageListnener();
