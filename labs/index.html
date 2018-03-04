@@ -11,23 +11,17 @@
 
 <div id="demo">
 
-        Enter text: <input type="text">
-        <input onclick="loadXMLDoc('https://ethanhouston-personal-site.herokuapp.com/test')" type="button">
+        <button onclick="loadXMLDoc('https://api.ethanhouston.com/')">Call Heroku</button>
 
 </div>
 
-firebase:<input onclick="saveToFirebase()" type="button">
-
-
-api.ethanhouston.com<input onclick="loadXMLDoc('https://api.ethanhouston.com/')" type="button">
+<button onclick="saveToFirebase()">Add Firebase entry</button>
 
 
 <br />
 <br />
 
-<input type="text" id="name">
-<input type="text" id="email">
-<input onclick="writeUserData(document.getElementById('name'), document.getElementById('name'))" type="button">
+<button onclick="retrieveDatabase()">Retrieve Firebase</button>
 
 
 
