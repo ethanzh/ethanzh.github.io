@@ -98,8 +98,6 @@ function deleteMessages(){
 
 function messageListnener() {
 
-    console.log(CryptoJS.AES.encrypt(myString, myPassword));
-
     let ref = database.ref(`messages`);
 
     ref.on(`child_added`, function (snapshot) {
