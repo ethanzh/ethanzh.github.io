@@ -52,7 +52,7 @@ function sendMessage() {
 
     ref.set(message)
         .then(function (snapshot) {
-            // pass
+            console.log("message sent");
         }, function (error) {
             console.log('error' + error);
             // pass
@@ -102,6 +102,8 @@ function messageListnener() {
 
     ref.on(`child_added`, function (snapshot) {
 
+        console.log("Listening for messages");
+
         let value = snapshot.val();
 
         document.getElementById(`testblock`).innerHTML += (value + `<br />`);
@@ -116,6 +118,8 @@ function messageRemovedListener() {
     let ref = database.ref(`messages`);
 
     ref.on(`child_removed`, function (snapshot) {
+
+        console.log("Deleted messages");
 
         document.getElementById(`testblock`).innerHTML = ``;
 
