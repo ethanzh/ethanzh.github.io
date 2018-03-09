@@ -8,3 +8,6 @@ better looking, optimize its performance, as well as improving my writing skills
 
 The website is hosted for free on Github Pages, with the only thing I paid for
 being the domain name I bought from Hover.
+
+
+
