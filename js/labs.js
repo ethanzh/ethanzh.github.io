@@ -15,8 +15,8 @@ const database = firebase.database();
 
 let writeUserData = () => {
     let profileID = Math.random().toString().slice(3, 8);
-    let name = document.getElementById('name').value;
-    let email = document.getElementById('email').value;
+    let name = document.getElementById(`name`).value;
+    let email = document.getElementById(`email`).value;
 
     database.ref(`users`).child(profileID).set({
         username: name,
@@ -34,9 +34,9 @@ let sendMessage = () => {
 
     ref.set(message)
         .then(function (snapshot) {
-            console.log("message sent");
+            console.log(`'` + message + `' sent`);
         }, function (error) {
-            console.log('error' + error);
+            console.log(`Error: ` + error);
             // pass
         });
 };
@@ -58,8 +58,6 @@ let messageListener = () => {
 
     ref.on(`child_added`, function (snapshot) {
 
-        console.log("Listening for messages");
-
         let value = snapshot.val();
 
         document.getElementById(`testblock`).innerHTML += (value + `<br />`);
@@ -74,7 +72,7 @@ let messageRemovedListener = () => {
 
     ref.on(`child_removed`, function (snapshot) {
 
-        console.log("Deleted messages");
+        console.log(`Messages deleted`);
 
         document.getElementById(`testblock`).innerHTML = ``;
 
