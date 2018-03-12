@@ -470,7 +470,7 @@ def create_projects():
 
             platforms = project_objects[i].platforms.count(",")
 
-            add_to_html += "<div>"
+            add_to_html += "<div class=\"blurb\">"
 
             add_to_html += create_html_tag("a", project_objects[i].name, css="post_link",
                                            href=project_objects[i].link, target="_blank")
