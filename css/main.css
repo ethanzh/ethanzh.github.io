@@ -339,6 +339,7 @@ footer {
     width: auto;
     height: auto;
     margin: 0 auto;
+    border-radius: 1000px;
 }
 
 /* Bottom of index, social media button div */
