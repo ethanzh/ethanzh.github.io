@@ -290,8 +290,8 @@ footer {
 /* Home page Ethan Houston title */
 
 .name_title_index {
-    padding-top: calc(8%);
     text-align: left;
+    padding-left: calc(8%);
     font-size: 20pt;
     color: black;
     font-weight: bold;
@@ -319,10 +319,13 @@ footer {
 /* Flex container for the social media buttons */
 
 .flex_container {
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    max-width: 225px;
 }
 
 /* Not quite sure about this. It seems to be everywhere */
@@ -335,10 +338,10 @@ footer {
 
 .baylands {
     display: block;
-    max-width:250px;
-    width: auto;
-    height: auto;
+    max-width:200px;
+    max-height: 200px;
     margin: 0 auto;
+    border-radius: 50%;
 }
 
 /* Bottom of index, social media button div */
@@ -351,4 +354,12 @@ footer {
 
 #viewall {
     text-align: right;
+}
+
+/* Circular picture */
+.circlepic {
+    padding-top: 40px;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 30px;
 }
