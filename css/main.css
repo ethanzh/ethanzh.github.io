@@ -358,8 +358,18 @@ footer {
 
 /* Circular picture */
 .circlepic {
-    padding-top: 40px;
+    margin-top: 160px;
     align-items: center;
     justify-content: center;
-    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+@media only screen
+and (max-width : 599px) {
+    .circlepic {
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
 }
