@@ -55,6 +55,8 @@ TRANSLATION_ENDPOINT = "https://translation.googleapis.com/language/translate/v2
 
 TRANSLATION_ENDPOINT += "&target=zh-CN&source=en&q="
 
+NEW_TRANSLATION_ENDPOINT = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q="
+
 json_data_template = {
     "document":
         {"type": "PLAIN_TEXT",
@@ -171,8 +173,8 @@ def slice_text_to_array(text, char_limit):
 
 def translate(text):
 
-    # Works up to 5500, gets iffy above that. The higher, the better because it means fewer API calls
-    char_limit = 5500
+    # Works up to 4000, gets iffy above that. The higher, the better because it means fewer API calls
+    char_limit = 4000
 
     # Simplest scenario, simply pass in the full text if it's under the char limit.
     if len(text) <= char_limit:
@@ -196,15 +198,31 @@ def make_translation_request(text_list):
     for text in text_list:
 
         # Add text to endpoint, make request.
-        current_endpoint = TRANSLATION_ENDPOINT + text
+        # current_endpoint = TRANSLATION_ENDPOINT + text
+        current_endpoint = NEW_TRANSLATION_ENDPOINT + text
         returned = requests.get(current_endpoint)
+
+        try:
+            returned_array = returned.json()[0]
+
+            current_total = ""
+
+            for i in range(len(returned_array)):
+                current_total += returned_array[i][0]
+
+        except ValueError:
+            print('failed')
+
         status = returned.status_code
 
         if status != 200:
             print("Error code", status)
 
         # Extract just the text out of the JSON object
-        total += returned.json()['data']['translations'][0]['translatedText']
+        total += current_total
+
+    total = total.replace("\r", "")
+    total = total.replace("\n", "")
 
     return total
 
