@@ -311,7 +311,13 @@ def create_post_object(path):
 
     md_html = custom_markdown_class(change_list, md_html).replace("<a", "<a target=\"_blank\"")
 
-    translated_md = translate(md_html)
+    # Doesn't quite work for some reason with new API
+    # translated_md = translate(md_html)
+
+    # Puts everything into one <p>
+    # translated_md = md_to_html(translate(text))
+
+    translated_md = "Fooabar"
 
     title_html = create_html_tag("h2", "TEST", href="/", css="title_button")
 
