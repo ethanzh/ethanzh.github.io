@@ -28,7 +28,7 @@ let writeUserData = () => {
 let sendMessage = () => {
     const timestamp = new Date().getTime().toString();
 
-    let ref = database.ref(`messages`).child(timestamp);
+    let ref = database.ref(`coords`).child(timestamp);
 
     let message = document.getElementById(`message`).value;
 
@@ -44,7 +44,7 @@ let sendMessage = () => {
 
 let deleteMessages = () => {
 
-    let ref = database.ref(`messages`);
+    let ref = database.ref(`coords`);
 
     ref.remove();
 
@@ -54,7 +54,7 @@ let deleteMessages = () => {
 
 let messageListener = () => {
 
-    let ref = database.ref(`messages`);
+    let ref = database.ref(`coords`);
 
     ref.on(`child_added`, function (snapshot) {
 
@@ -68,7 +68,7 @@ let messageListener = () => {
 
 let messageRemovedListener = () => {
 
-    let ref = database.ref(`messages`);
+    let ref = database.ref(`coords`);
 
     ref.on(`child_removed`, function (snapshot) {
 
