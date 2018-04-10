@@ -51,7 +51,7 @@ let deleteMessages = () => {
 };
 
 
-let messageListener = () => {
+let initMap = () => {
 
     let ref = database.ref(`coords`);
 
@@ -59,9 +59,22 @@ let messageListener = () => {
 
         let value = snapshot.val();
 
-        document.getElementById(`testblock`).innerHTML += (value + `<br />`);
+        let new_html = `lat: ` + value[`lat`] + ` long: ` + value[`long`];
 
-        console.log(value);
+        // document.getElementById(`testblock`).innerHTML += (new_html + `<br />`)
+
+        let lat = value[`lat`];
+        let long = value[`long`];
+
+        let uluru = {lat: lat, lng: long};
+        let map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        let marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
 
     });
 };
@@ -96,5 +109,17 @@ let loadXMLDoc = (url) => {
     xhttp.send(params);
 };
 
-messageListener();
-messageRemovedListener();
+function test() {
+        let uluru = {lat: -29.363, lng: 131.044};
+        let map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        let marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+
+initMap();
+// messageRemovedListener();
