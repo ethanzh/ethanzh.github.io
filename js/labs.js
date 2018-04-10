@@ -55,6 +55,13 @@ let initMap = () => {
 
     let ref = database.ref(`coords`);
 
+    let uluru = {lat: -29, lng: 131};
+
+    const map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: uluru
+        });
+
     ref.on(`child_added`, function (snapshot) {
 
         let value = snapshot.val();
@@ -66,21 +73,22 @@ let initMap = () => {
         let lat = value[`lat`];
         let long = value[`long`];
 
-        let uluru = {lat: lat, lng: long};
-        let map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
+        new google.maps.Marker({
+            position: new google.maps.LatLng(lat, long),
+            map: map,
         });
-        let marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
+
 
     });
 };
 
 
 let messageRemovedListener = () => {
+
+    let marker = new google.maps.Marker({
+        position: uluru,
+        map: map
+    });
 
     let ref = database.ref(`coords`);
 
@@ -110,16 +118,16 @@ let loadXMLDoc = (url) => {
 };
 
 function test() {
-        let uluru = {lat: -29.363, lng: 131.044};
-        let map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
-        });
-        let marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
+    let uluru = {lat: -29.363, lng: 131.044};
+    let map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        center: uluru
+    });
+    let marker = new google.maps.Marker({
+        position: uluru,
+        map: map
+    });
+}
 
 initMap();
 // messageRemovedListener();
