@@ -95,7 +95,5 @@ let loadXMLDoc = (url) => {
     xhttp.send(params);
 };
 
-//retrieveDatabase();
-
 messageListener();
 messageRemovedListener();
