@@ -28,7 +28,7 @@ let writeUserData = () => {
 let sendMessage = () => {
     const timestamp = new Date().getTime().toString();
 
-    let ref = database.ref(`coords`).child(timestamp);
+    let ref = database.ref(`coords`)
 
     let message = document.getElementById(`message`).value;
 
