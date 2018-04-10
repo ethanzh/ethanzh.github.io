@@ -28,17 +28,16 @@ let writeUserData = () => {
 let sendMessage = () => {
     const timestamp = new Date().getTime().toString();
 
-    let ref = database.ref(`coords`)
+    let ref = database.ref(`coords`);
 
     let message = document.getElementById(`message`).value;
 
-    ref.set(message)
-        .then(function (snapshot) {
-            console.log(`'` + message + `' sent`);
-        }, function (error) {
-            console.log(`Error: ` + error);
-            // pass
-        });
+    ref.set({
+
+        test: message
+
+    })
+
 };
 
 
@@ -61,6 +60,8 @@ let messageListener = () => {
         let value = snapshot.val();
 
         document.getElementById(`testblock`).innerHTML += (value + `<br />`);
+
+        console.log(value);
 
     });
 };
