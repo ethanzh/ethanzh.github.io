@@ -27,6 +27,15 @@ let initMap = () => {
 
 
     });
+
+    ref.on(`child_removed`, function (snapshot) {
+
+        map.clear();
+
+
+    });
+
+
 };
 
-initMap()
+initMap();
