@@ -59,27 +59,45 @@ let initMap = () => {
 
 let addRandomPoints = () => {
 
+    const NorthSouth = Math.random();
+
+    let ns;
+
+    switch (true) {
+
+        case NorthSouth < 0.5:
+            ns = 1; // North
+            break;
+        case NorthSouth >= 0.5 && NorthSouth < 1:
+            ns = -1; // South
+            break;
+
+    }
+
+    const EastWest = Math.random();
+
+    let ew;
+
+    switch (true) {
+
+        case EastWest < 0.5:
+            ew = 1; // East
+            break;
+        case EastWest >= 0.5 && EastWest < 1:
+            ew = -1; // West
+            break;
+    }
+
     for (let i = 0; i < 50; i++){
 
-        let firstRandom = Math.random() * 100;
-        let secondRandom = Math.random() * 100;
+        let scaled = i / 500;
 
-        let posOrNegOne = Math.random();
-        if (posOrNegOne >= 0.5){
-            posOrNegOne = 1;
-        } else {
-            posOrNegOne = -1;
-        }
+        let newLat = orgLat + (scaled * ew);
+        let newLong = orgLong + (scaled * ns);
 
-        let posOrNegTwo = Math.random();
-        if (posOrNegTwo >= 0.5){
-            posOrNegTwo = 1;
-        } else {
-            posOrNegTwo = -1;
-        }
+        console.log(ew);
 
-        let newLat = ((firstRandom / 5000) * posOrNegOne) + orgLat;
-        let newLong = ((secondRandom / 1000) * posOrNegTwo) + orgLong;
+        console.log("hi 1");
 
         let newPoint = {
             lat: newLat,
