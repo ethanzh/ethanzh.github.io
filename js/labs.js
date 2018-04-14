@@ -40,16 +40,12 @@ let sendMessage = () => {
 
 };
 
-
 let deleteMessages = () => {
 
     let ref = database.ref(`coords`);
 
     ref.remove();
-
-    document.getElementById(`testblock`).innerHTML = ``;
 };
-
 
 let messageRemovedListener = () => {
 
@@ -85,7 +81,7 @@ let loadXMLDoc = (url) => {
     xhttp.send(params);
 };
 
-function test() {
+function hello() {
     let uluru = {lat: -29.363, lng: 131.044};
     let map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
