@@ -69,7 +69,7 @@ let addRandomPoints = () => {
             ns = 1; // North
             break;
         case NorthSouth >= 0.5 && NorthSouth < 1:
-            ns = -1; // South
+            ns = 1; // South
             break;
 
     }
@@ -84,20 +84,27 @@ let addRandomPoints = () => {
             ew = 1; // East
             break;
         case EastWest >= 0.5 && EastWest < 1:
-            ew = -1; // West
+            ew = 1; // West
             break;
     }
 
+    console.log(ns);
+
     for (let i = 0; i < 50; i++){
 
-        let scaled = i / 500;
+        let scaled = i / 1000;
 
-        let newLat = orgLat + (scaled * ew);
-        let newLong = orgLong + (scaled * ns);
+        let newLat, newLong;
 
-        console.log(ew);
+        if (i < 25){
+            newLat = orgLat + (scaled * ew);
+            newLong = orgLong + (scaled * ns);
+        } else {
+            newLat = orgLat + (scaled * ew); // Keep same
+            newLong = orgLong + ((scaled * ns) - scaled);
+        }
 
-        console.log("hi 1");
+
 
         let newPoint = {
             lat: newLat,
