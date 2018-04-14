@@ -1,44 +1,40 @@
 <html>
 
-<head>
+    <head>
 
 
-    <script defer src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+        <script defer src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
 
-    <script src="../js/labs.js" defer></script>
+        <script defer src="../js/labs.js"></script>
 
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBnKcRjguivXYObwD7jidpNTfbLmpHLTM"></script>
+        <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBnKcRjguivXYObwD7jidpNTfbLmpHLTM"></script>
 
-    <script src="../js/maps.js" defer></script>
+        <script defer src="../js/maps.js"></script>
 
+        <style>
+            #map {
+                width: 100%;
+                height: 800px;
+                background-color: grey;
+            }
 
-    <style>
-        #map {
-            width: 100%;
-            height: 800px;
-            background-color: grey;
-        }
+            .button {
+                height: 50px;
+                width: 200px;
+            }
 
-        .button {
-            height: 50px;
-            width: 200px;
-        }
+        </style>
 
-    </style>
+    </head>
 
+    <body>
 
-</head>
+        <button class="button" onclick="addRandomPoints()">Add Points</button>
+        <button class="button" onclick="deleteMessages()">Delete Points</button>
 
-<body>
+        <h3>My Google Maps Demo</h3>
+        <div id="map"></div>
 
-<button class="button" onclick="addRandomPoints()">Add Points</button>
-<button class="button" onclick="deleteMessages()">Delete Points</button>
-
-<h3>My Google Maps Demo</h3>
-<div id="map"></div>
-
-</body>
-
-
+    </body>
 
 </html>
