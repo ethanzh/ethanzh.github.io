@@ -32,9 +32,7 @@ let initMap = () => {
 
         map.clear();
 
-
     });
-
 
 };
 
