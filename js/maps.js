@@ -1,11 +1,15 @@
+
+const ref = database.ref(`coords`);
+
+const orgLat = 37.427148;
+const orgLong = -122.10964;
+
 let initMap = () => {
 
-    let ref = database.ref(`coords`);
-
-    let uluru = {lat: -29, lng: 131};
+    let uluru = {lat: orgLat, lng: orgLong};
 
     const map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
+        zoom: 14,
         center: uluru
     });
 
@@ -49,6 +53,41 @@ let initMap = () => {
         clearMarkers();
 
     });
+
+};
+
+
+let addRandomPoints = () => {
+
+    for (let i = 0; i < 50; i++){
+
+        let firstRandom = Math.random() * 100;
+        let secondRandom = Math.random() * 100;
+
+        let posOrNegOne = Math.random();
+        if (posOrNegOne >= 0.5){
+            posOrNegOne = 1;
+        } else {
+            posOrNegOne = -1;
+        }
+
+        let posOrNegTwo = Math.random();
+        if (posOrNegTwo >= 0.5){
+            posOrNegTwo = 1;
+        } else {
+            posOrNegTwo = -1;
+        }
+
+        let newLat = ((firstRandom / 5000) * posOrNegOne) + orgLat;
+        let newLong = ((secondRandom / 1000) * posOrNegTwo) + orgLong;
+
+        let newPoint = {
+            lat: newLat,
+            long: newLong
+        };
+
+        ref.push(newPoint);
+    }
 
 };
 
