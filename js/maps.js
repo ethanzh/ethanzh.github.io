@@ -9,7 +9,7 @@ let initMap = () => {
     let uluru = {lat: orgLat, lng: orgLong};
 
     const map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 14,
+        zoom: 12,
         center: uluru
     });
 
@@ -66,10 +66,10 @@ let addRandomPoints = () => {
     switch (true) {
 
         case NorthSouth < 0.5:
-            ns = 1; // North
+            ns = -1; // North
             break;
         case NorthSouth >= 0.5 && NorthSouth < 1:
-            ns = 1; // South
+            ns = -1; // South
             break;
 
     }
@@ -84,11 +84,9 @@ let addRandomPoints = () => {
             ew = 1; // East
             break;
         case EastWest >= 0.5 && EastWest < 1:
-            ew = 1; // West
+            ew = -1; // West
             break;
     }
-
-    console.log(ns);
 
     for (let i = 0; i < 50; i++){
 
@@ -100,8 +98,8 @@ let addRandomPoints = () => {
             newLat = orgLat + (scaled * ew);
             newLong = orgLong + (scaled * ns);
         } else {
-            newLat = orgLat + (scaled * ew); // Keep same
-            newLong = orgLong + ((scaled * ns) - scaled);
+            newLat = (orgLat + (scaled * ew)) + (scaled * ew) - (25/1000);
+            newLong = orgLong + (scaled * ns);
         }
 
 
