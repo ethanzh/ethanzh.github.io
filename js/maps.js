@@ -25,7 +25,6 @@ let initMap = () => {
             map: map,
         });
 
-
     });
 
     ref.on(`child_removed`, function (snapshot) {
@@ -35,5 +34,8 @@ let initMap = () => {
     });
 
 };
+
+
+
 
 initMap();
