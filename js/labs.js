@@ -1,11 +1,11 @@
 // Initialize Firebase
 const config = {
-    apiKey: "AIzaSyBjy9RhH3obaqdhsq9_GW78swKM3rSLVtI",
-    authDomain: "personalsite-backend.firebaseapp.com",
-    databaseURL: "https://personalsite-backend.firebaseio.com",
-    projectId: "personalsite-backend",
+    apiKey: "AIzaSyDR-NpXGPfiFlm9Tr9u9_eS-0D0xt_3JDs",
+    authDomain: "gps-app-c31df.firebaseapp.com",
+    databaseURL: "https://gps-app-c31df.firebaseio.com",
+    projectId: "gps-app-c31df",
     storageBucket: "",
-    messagingSenderId: "379247301983"
+    messagingSenderId: "675799163706"
 };
 
 firebase.initializeApp(config);
