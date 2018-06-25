@@ -5,3 +5,4 @@ api_key.py
 .idea/vcs.xml
 .idea/workspace.xml
 __pycache__/
+.idea

@@ -267,7 +267,8 @@ def create_post_object(path):
     processed_json = processed[0]
     text = processed[1][0]
 
-    categories = make_classify_request(text)
+    # categories = make_classify_request(text)
+    categories = []
 
     reading_time = processed[1][1]
 
