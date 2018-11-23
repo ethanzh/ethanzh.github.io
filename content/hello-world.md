@@ -2,7 +2,7 @@
 {
   "title": "Hello World!",
   "author": "Ethan Houston",
-  "summary": "I'm just hoping my Python script compiles this properly.",
+  "summary": "I'm just hoping my Python script compiles this properly",
   "date": "1 February 2018",
   "private": "False",
   "tags": ["me", "python", "web"]
