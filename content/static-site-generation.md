@@ -2,7 +2,7 @@
 {
   "title": "How I Built This Site",
   "author": "Ethan Houston",
-  "summary": "Specifics about how I set up this website",
+  "summary": "A technical explanation of this site",
   "date": "13 February 2018",
   "private": "False",
   "tags": ["html", "python", "web"]
