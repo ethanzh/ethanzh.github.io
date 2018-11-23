@@ -1,7 +1,7 @@
 
 @font-face {
     font-family: "ProximaNova";
-    src: url("/fonts/ProximaNovaSemibold.ttf");
+    src: url("/fonts/ProximaNovaRegular.ttf");
     font-weight: bold;
     font-style: italic, oblique;
 }
@@ -137,6 +137,13 @@ footer {
     color: darkred;
     font-weight: bold;
     display: inline;
+}
+
+/* Text on bottom of home page */
+#bottom_text {
+    text-align: center;
+    font-size: 13px;
+    color: #bababa;
 }
 
 /* Creates a div that turns grey when hovered */
@@ -314,6 +321,7 @@ footer {
     text-align: left;
     padding-top: 10px;
     padding-bottom: 10px;
+    line-height: 1.5;
 }
 
 /* Flex container for the social media buttons */
