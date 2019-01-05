@@ -1,13 +1,18 @@
 [
   {
-  "name": "kass.art",
-  "link": "https://kassiakarras.github.io",
-  "summary": "A website storefront for my friend's art",
-  "platforms": "Web",
+  "name": "Recorda",
+  "link": "https://nutshoo-app.apspot.com/",
+  "summary": "A handy tool for keeping track of your favorite things",
+  "platforms": "Web, Mobile",
   "wip": true
   },
-
-
+  {
+  "name": "OK Fun",
+  "link": "https://www.okfunofficial.com/",
+  "summary": "A website storefront for my friend's art",
+  "platforms": "Web",
+  "wip": false
+  },
 {
   "name": "Jiaohuan",
   "link": "https://github.com/ethanzh/jiaohuan-android",

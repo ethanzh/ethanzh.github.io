@@ -6,3 +6,4 @@ api_key.py
 .idea/workspace.xml
 __pycache__/
 .idea
+venv
