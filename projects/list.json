@@ -1,4 +1,11 @@
 [
+    {
+    "name": "Instabot",
+    "link": "https://github.com/ethanzh/instabot",
+    "summary": "ML tool to determine is an Instagram user is a bot or not",
+    "platforms": "Web",
+    "wip": true
+    },
   {
   "name": "Recorda",
   "link": "https://nutshoo-app.appspot.com/",
@@ -28,4 +35,3 @@
   "wip": false
 }
   ]
-
