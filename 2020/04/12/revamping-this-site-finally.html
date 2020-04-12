@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <base target="_blank">
 
   <title>Ethan Houston</title>
   <style type="text/css">
@@ -28,7 +27,6 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             color: #363636;
             padding: 20px;
-            margin: 0;
             -webkit-font-smoothing: antialiased;
             -webkit-text-size-adjust: 100%;
             max-width: 825px;
@@ -46,19 +44,6 @@
             margin: 0 auto
         }
 
-        .row {
-            display: flex;
-        }
-
-        .column {
-            flex: 50%;
-        }
-
-        hr.divider {
-            margin: 0em;
-            border-width: 1px;
-        }
-
         h1,
         h2 {
             margin-bottom: 1rem;
@@ -71,8 +56,13 @@
         }
 
         h2 {
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.25rem
+        }
+
+        h3 {
+            font-size: 1.75rem
+        }
+        h4 {
             font-size: 1.5rem
         }
 
@@ -91,7 +81,6 @@
         a {
             color: #0074D9;
             text-decoration: none;
-            border-bottom: 1px solid #0074D9;
         }
 
         a:hover {
@@ -107,47 +96,36 @@
             width: 100%;
         }
 
+        .navbar {
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+
   </style>
 </head>
 
 <body>
 
-    <h1>Ethan Houston</h1>
-
-    <p>
-        I'm a undergraduate studying Computer Science at UT Austin.
-        I love learning by building and am particularly interested
-        in the fields of cybersecurity and cloud computing.<br /><br />
-
-        I'm the president of the <a href="https://isss.io">
-            Information and Systems Security Society</a> and an officer
-        of <a href="https://texaslan.org">Texas LAN</a>, a co-ed technology
-        fraternity. I worked at <a href="https://chartmetric.com">
-            Chartmetric</a> last summer as an intern and will be heading to
-        <a href="https://eightfold.ai">Eightfold.ai</a> this summer. I also
-        helped build <a href="https://www.watshout.com/">Watshout</a>.
-        <br /><br />
-
-        In my free time I enjoy
-        <a href="https://www.strava.com/athletes/19690349">working out</a>,
-        taking <a href="https://www.flickr.com/photos/96015365@N02/">photos</a>,
-        and travelling.
-    </p>
-
-    <hr />
-
-    <img src="img/sf.jpeg"/>
-
-    <div class="row">
-        <div class="column">
-            <img src="img/samo.jpeg"/>
-        </div>
-        <div class="column">
-            <img src="img/half.jpeg"/>
-        </div>
+    <div class="navbar">
+        <a href="../index.html">Home</a>
+        <!--<a href="#blog">Blog</a>-->
     </div>
 
-    <img src="img/football.jpeg"/>
+    <h2>Revamping this site finally</h2>
+    <h4>Revamping this site finally</h4>
+
+    <p>Wasn't able to dedicate time to writing thoughtful posts before</p>
+<p>COVID-19 gave free time to redesign site
+    Focus on minimalism</p>
+<p>Don't be a perfectionist with posts. Better to get ideas out there
+than fester forever</p>
+<p>Want posts to be a combination of tech-focused musings,
+tutorials for non-trivial things I figure out. Social commentary
+if I'm up for it.</p>
 
 </body>
 </html>

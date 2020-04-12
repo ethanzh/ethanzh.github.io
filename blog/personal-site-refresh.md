@@ -1,3 +1,9 @@
+"""
+TITLE=Re(introduction Post)
+SUBTITLE=Revamping this site finally
+DATE=2020/04/12
+"""
+
 Wasn't able to dedicate time to writing thoughtful posts before
 
 COVID-19 gave free time to redesign site

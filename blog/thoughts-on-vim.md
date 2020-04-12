@@ -1,3 +1,9 @@
+"""
+TITLE=Thoughts on VIM
+SUBTITLE=Why simplicity is key
+DATE=2020/04/10
+"""
+
 Pros
 Customization
 Ability to edit anywhere, especially remote

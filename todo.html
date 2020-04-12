@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Markmap</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/d3@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.4/dist/view.min.js"></script>
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script>markmap.markmap('svg#mindmap', {"t":"root","d":0,"v":[],"c":[{"t":"heading","d":1,"v":[{"t":"text","v":"Content","p":{"style":{}}}],"c":[{"t":"heading","d":2,"v":[{"t":"text","v":"Blog Posts","p":{"style":{}}}],"c":[{"t":"list_item","d":3,"v":[{"t":"text","v":"Introduction post","p":{"style":{}}}]},{"t":"list_item","d":3,"v":[{"t":"text","v":"Scooter scraper","p":{"style":{}}}]},{"t":"list_item","d":3,"v":[{"t":"text","v":"Vim","p":{"style":{}}}]}]},{"t":"heading","d":2,"v":[{"t":"text","v":"Projects","p":{"style":{}}}],"c":[{"t":"list_item","d":3,"v":[{"t":"text","v":"Scooter scraper","p":{"style":{}}}]}]},{"t":"heading","d":2,"v":[{"t":"text","v":"Papers read + thoughts","p":{"style":{}}}],"c":[{"t":"list_item","d":3,"v":[{"t":"text","v":"The Tail at Scale","p":{"style":{}}}]}]}]},{"t":"heading","d":1,"v":[{"t":"text","v":"Pages","p":{"style":{}}}],"c":[{"t":"heading","d":2,"v":[{"t":"text","v":"Blog Posts","p":{"style":{}}}],"c":[{"t":"list_item","d":3,"v":[{"t":"text","v":"Have only some show on front page","p":{"style":{}}}]},{"t":"list_item","d":3,"v":[{"t":"text","v":"Tags","p":{"style":{}}}]},{"t":"list_item","d":3,"v":[{"t":"text","v":"Reading time","p":{"style":{}}}]}]},{"t":"heading","d":2,"v":[{"t":"text","v":"Projects","p":{"style":{}}}],"c":[{"t":"list_item","d":3,"v":[{"t":"text","v":"Short blurb","p":{"style":{}}}]},{"t":"list_item","d":3,"v":[{"t":"text","v":"Link to GitHub","p":{"style":{}}}]},{"t":"list_item","d":3,"v":[{"t":"text","v":"Link to demo","p":{"style":{}}}]},{"t":"list_item","d":3,"v":[{"t":"text","v":"Maybe not generated? Could be more involved","p":{"style":{}}}]}]}]},{"t":"heading","d":1,"v":[{"t":"text","v":"UI","p":{"style":{}}}],"c":[{"t":"heading","d":2,"v":[{"t":"text","v":"Homepage","p":{"style":{}}}],"c":[{"t":"list_item","d":3,"v":[{"t":"text","v":"GitHub, LinkedIn, etc. links","p":{"style":{}}}],"c":[{"t":"list_item","d":4,"v":[{"t":"text","v":"Icons","p":{"style":{}}}]}]},{"t":"list_item","d":3,"v":[{"t":"text","v":"First x blog posts","p":{"style":{}}}],"c":[{"t":"list_item","d":4,"v":[{"t":"text","v":"Have flag if hidden?","p":{"style":{}}}]}]}]},{"t":"heading","d":2,"v":[{"t":"text","v":"Blog Posts","p":{"style":{}}}],"c":[{"t":"list_item","d":3,"v":[{"t":"text","v":"CSS","p":{"style":{}}}]}]}]},{"t":"heading","d":1,"v":[{"t":"text","v":"Static site generator","p":{"style":{}}}],"c":[{"t":"list_item","d":2,"v":[{"t":"text","v":"Python?","p":{"style":{}}}]},{"t":"list_item","d":2,"v":[{"t":"text","v":"Maybe Rust to learn","p":{"style":{}}}]}]}]}).fit()</script>
+</body>
+</html>
