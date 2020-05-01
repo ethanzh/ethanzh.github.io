@@ -94,6 +94,12 @@
             border-bottom: 1px solid #0074D9;
         }
 
+        .name a {
+            color: #000;
+            text-decoration: none;
+            border-bottom: 0px;
+        }
+
         a:hover {
             color: #001f3f;
             border-color: #001f3f;
@@ -107,16 +113,73 @@
             width: 100%;
         }
 
+        ul { list-style: none; }
+
+        .nav ul {
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav ul li {
+            padding: 0 10px;
+        }
+
+        .profiles ul {
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .profiles ul li {
+            padding: 0 10px;
+        }
+
+        .profiles img {
+            height: 32px;
+            width: 32px;
+        }
+
+        .profiles {
+            margin-top: 6px;
+        }
+
+        .name {
+            text-align: center;
+            margin: 0 auto;
+        }
+
   </style>
 </head>
 
 <body>
 
-    <h1>Ethan Houston</h1>
+    <h1 class="name"><a target="_self" href="index.html">Ethan Houston</a></h1>
+
+    <div class="profiles">
+        <ul>
+            <li><a href="https://github.com/ethanzh"><img src="img/gh.png"/></a></li>
+            <li><a href="https://linkedin.com/in/ethanhouston"><img src="img/li.png"/></a></li>
+            <li><a href="https://twitter.com/ethanzhouston"><img src="img/tw.png"/></a></li>
+        </ul>
+    </div>
+
+    <!--
+    <div class="nav">
+        <ul>
+            <li><a href="">Posts</a></li>
+            <li><a href="">About</a></li>
+        </ul>
+    </div>
+    -->
 
     <p>
-        I'm a undergraduate studying Computer Science at UT Austin.
-        I love learning by building and am particularly interested
+        I'm a undergraduate studying Computer Science at
+        <a href="https://www.cs.utexas.edu">UT Austin.</a>
+        I love learning by <a href="https://github.com/ethanzh">building</a>
+        and am particularly interested
         in the fields of cybersecurity and cloud computing.<br /><br />
 
         I'm the president of the <a href="https://isss.io">
@@ -126,7 +189,7 @@
         last summer as an intern. Right now I'm working on
         <a href="https://feverbase.org">Feverbase</a> to help accelerate COVID-19
         research.
-        I also helped build <a href="https://www.watshout.com/">Watshout</a>.
+        I also worked on <a href="https://www.watshout.com/">Watshout</a>.
         <br /><br />
 
         In my free time I enjoy
