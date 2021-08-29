@@ -29,4 +29,5 @@ The building I live in finally fixed my AC.
 ## What's your pick-of-the-week or tip-of-the-week?
 Anyone who's spent a large amount of time writing Python is eventually going to run into type issues. [Mypy](http://mypy-lang.org) is a step in the right direction for solving these issues. However this week I came across [this](https://andrewbrookins.com/technology/building-implicit-interfaces-in-python-with-protocol-classes/) article that describes how to attain Golang-like interfaces in Python. To me this is huge and I can't wait to incorporate it into my own projects.
 
+
 ![Ethan](../../../img/sarosa_small.jpg)
