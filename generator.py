@@ -22,7 +22,7 @@ def process_metadata(raw_metadata):
         for field in fields:
             # check if the field is in the line, if so then split the line
             # based on the field= and rstrip it
-            if field in line:
+            if field in line and field not in metadata:
                 metadata[field] = line.split(f"{field}=")[1].rstrip()
     # assert that we must have found every value
     assert len(metadata.values()) == len(
@@ -39,12 +39,16 @@ def fill_template(data, template):
     assert "DATE" in metadata.keys()
     assert "body" in data.keys()
 
-    # simply find/replace values for template
-    formatted_template = template.replace("{TITLE}", metadata.get("TITLE"))
-    formatted_template = formatted_template.replace(
-        "{SUBTITLE}", metadata.get("SUBTITLE")
+    subtitle, title, body = (
+        metadata.get("SUBTITLE"),
+        metadata.get("TITLE"),
+        data.get("body"),
     )
-    formatted_template = formatted_template.replace("{BODY}", data.get("body"))
+    formatted_template = (
+        template.replace("{SUBTITLE}", subtitle)
+        .replace("{TITLE}", title)
+        .replace("{BODY}", body)
+    )
 
     return formatted_template
 
@@ -73,8 +77,8 @@ def read_blog_markdown(filename, template):
         Path(date).mkdir(parents=True, exist_ok=True)
 
         # format title for directory structure
-        title = metadata.get("TITLE")
-        formatted_title = title.replace(" ", "-").lower()
+        title = metadata.get("SUBTITLE")
+        formatted_title = title.replace(" ", "-").replace(":", "-").replace("--", "-").lower()
 
         # append date path with formatted title
         format_path = f"{date}/{formatted_title}.html"
