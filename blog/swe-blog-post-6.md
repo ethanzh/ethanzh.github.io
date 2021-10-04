@@ -7,7 +7,7 @@ DATE=2021/10/03
 # What did you do this past week?
 In this past week we finally got a project idea approved for our SWE project! We were able to start working on the implementation of phase one. I had the most fun working on the devops/infra side of things where I was able to employ a lot of the skills I've learnt from working at a small startup.
 # What's in your way?
-Not much is in my way right now I would say. Probably just an overall lack of time to get everything done that I'd like to, but that's life.
+Not much is in my way right now I would say. Probably just an overall lack of time to get everything done that I'd like to, but that's life. I am also frankly disappointed that several of my classes are remaining online through the end of the semester because I find it far harder to effectively learn.
 # What will you do next week?
 I think deciding on a solid database schema will likely be our biggest challenge in the coming week. This is certainly worth careful deliberation I believe as it is a schema we will be working with for the rest of the semster and I'd rather avoid having to write careful database migrations.
 # If you read it, what did you think of the Paper #6: Single Responsibility Principle?
