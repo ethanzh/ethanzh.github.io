@@ -1,7 +1,7 @@
 """
 TITLE=CS373 Fall 2021: Ethan Houston
-SUBTITLE=Python data types
-DATE=2021/09/26
+SUBTITLE=Getters and Setters
+DATE=2021/11/7
 """
 
 # What did you do this past week?
