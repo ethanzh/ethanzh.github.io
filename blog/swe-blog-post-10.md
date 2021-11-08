@@ -18,3 +18,5 @@ I had already known about =, * and ** but it was interesting to discuss them in-
 I went to Cabo Bob's. That is generally a pretty easy way to make me happy.
 # What's your pick-of-the-week or tip-of-the-week?
 [This](https://www.cs.utexas.edu/users/EWD/commemoration/EWD-commemoration-2021.pdf#page4) is a really interesting collection of anecdotes about Edsgar Dijkstra from many different famous computer scientists.
+
+![Ethan](../../../img/sarosa_small.jpg)
