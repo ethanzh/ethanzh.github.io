@@ -23,5 +23,6 @@ The React debugger
 # How did you feel about your group having to self-teach many, many technologies?
 I didn't like it. I know that software engineers need to self-teach many tools but it honestly felt like a waste to not be taught them properly. I am sure many groups had to self-teach React and taught themselves poorly. I would way rather learn React properly than getting into the nitty-gritty details of Python.
 # Give me your suggestions for improving the course, but apologies in advance; specifications grading will remain.
+Make the lectures more applicable. They were kind of interesting sometimes but I felt I didn't get a whole lot out of them.
 
 ![Ethan](../../../img/sarosa_small.jpg)
