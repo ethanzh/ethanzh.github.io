@@ -15,7 +15,7 @@ I hated the specifications grading. I could probably rant about this for hours, 
 # How did you feel about help sessions and office hours?
 I went to one help session it was pretty helpful. The night projects were due were always pretty stressful so I'm especially thankful for Jefferson helping our team out.
 # How did you feel about the support from the TAs?
-I thought they were great! Like I said above, Jeff was a huge help to our group.
+I thought they were great! Like I said above, Jeff was a huge help to our group. That being said, at a certain point it is difficult for the TAs to be helpful with the projects because everything gets very project-specific, especially in the React apps, and even the Flask backends.
 # What required tool did you not know and now find very useful?
 I had honestly used many of these tools before so there wasn't much new that I found. I guess Flask-Restless was kind of helpful but also ended up being a bit more of a pain than a help.
 # What's the most helpful Web dev tool that your group used that was not required?
