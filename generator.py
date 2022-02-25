@@ -74,14 +74,14 @@ def read_blog_markdown(filename, template):
 
         # create directory structure based on date
         date = metadata.get("DATE")
-        Path(date).mkdir(parents=True, exist_ok=True)
+        Path(f"posts/{date}").mkdir(parents=True, exist_ok=True)
 
         # format title for directory structure
         title = metadata.get("SUBTITLE")
         formatted_title = title.replace(" ", "-").replace(":", "-").replace("--", "-").lower()
 
         # append date path with formatted title
-        format_path = f"{date}/{formatted_title}.html"
+        format_path = f"posts/{date}/{formatted_title}.html"
 
         # write to html file at given directory
         formatted = fill_template(template_data, template)
@@ -98,4 +98,6 @@ if __name__ == "__main__":
 
     # create a formatted page for every blog post
     for i in posts:
+        if i == "template.md" or ".md" not in i:
+            continue
         read_blog_markdown(i, blog_template)
