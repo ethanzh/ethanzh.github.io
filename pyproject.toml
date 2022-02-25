@@ -1,0 +1,20 @@
+[mypy]
+ignore_missing_imports = true
+
+[tool.black]
+line-length = 79
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | \.toml
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''

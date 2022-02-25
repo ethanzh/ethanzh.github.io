@@ -1,6 +1,15 @@
 import os
+from typing import List
 import markdown
 from pathlib import Path
+from dataclasses import dataclass, field
+
+
+@dataclass
+class Metadata:
+    title: str = field(default="")
+    subtitle: str = field(default="")
+    date: str = field(default="")
 
 
 def get_blog_template():
@@ -12,9 +21,9 @@ def get_blog_markdown():
     return os.listdir("blog")
 
 
-def process_metadata(raw_metadata):
+def process_metadata(raw_metadata: List[str]) -> Metadata:
     fields = ["TITLE", "SUBTITLE", "DATE"]
-    metadata = {}
+    metadata = Metadata()
     # for every line, iterate through every key
     # this is not super efficient, but this will
     # also never be more than ~5 or so lines...
@@ -22,27 +31,22 @@ def process_metadata(raw_metadata):
         for field in fields:
             # check if the field is in the line, if so then split the line
             # based on the field= and rstrip it
-            if field in line and field not in metadata:
-                metadata[field] = line.split(f"{field}=")[1].rstrip()
-    # assert that we must have found every value
-    assert len(metadata.values()) == len(
-        fields
-    ), "must have every field present in metadata"
+            if field in line:
+                setattr(
+                    metadata,
+                    field.lower(),
+                    line.split(f"{field}=")[1].rstrip(),
+                )
+
     return metadata
 
 
-def fill_template(data, template):
-    assert "metadata" in data.keys()
-    metadata = data.get("metadata")
-    assert "TITLE" in metadata.keys()
-    assert "SUBTITLE" in metadata.keys()
-    assert "DATE" in metadata.keys()
-    assert "body" in data.keys()
+def fill_template(metadata: Metadata, body: str, template: str):
 
     subtitle, title, body = (
-        metadata.get("SUBTITLE"),
-        metadata.get("TITLE"),
-        data.get("body"),
+        metadata.subtitle,
+        metadata.title,
+        body,
     )
     formatted_template = (
         template.replace("{SUBTITLE}", subtitle)
@@ -69,11 +73,8 @@ def read_blog_markdown(filename, template):
         post_body = "".join(lines[upper_meta + 1 :])
         body_html = markdown.markdown(post_body)
 
-        # format data for templating
-        template_data = {"metadata": metadata, "body": body_html}
-
         # create directory structure based on date
-        date = metadata.get("DATE")
+        date = metadata.date
         Path(f"posts/{date}").mkdir(parents=True, exist_ok=True)
         filename = filename.replace(".md", "")
 
@@ -81,7 +82,7 @@ def read_blog_markdown(filename, template):
         format_path = f"posts/{date}/{filename}.html"
 
         # write to html file at given directory
-        formatted = fill_template(template_data, template)
+        formatted = fill_template(metadata, body_html, template)
         with open(format_path, "w") as outputfile:
             outputfile.write(formatted)
 
