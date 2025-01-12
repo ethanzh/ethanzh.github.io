@@ -3,6 +3,7 @@ from typing import List
 import markdown
 from pathlib import Path
 from dataclasses import dataclass, field
+from datetime import datetime
 
 
 @dataclass
@@ -20,6 +21,26 @@ def get_blog_template():
 def get_blog_markdown():
     return os.listdir("blog")
 
+def get_index_template():
+    with open("templates/index.html", "r") as inputfile:
+        return inputfile.read()
+
+def generate_index(posts_metadata: List[tuple[str, Metadata]]):
+    index_template = get_index_template()
+    # Sort posts by date, assuming date format is YYYY/MM/DD
+    sorted_posts = sorted(posts_metadata, key=lambda x: datetime.strptime(x[1].date, "%Y/%m/%d"), reverse=True)
+    # Get top 5 newest posts
+    top_posts = sorted_posts[:5]
+    # Create HTML links for the posts
+    post_links = "\n".join(
+        f'<li><a href="posts/{metadata.date}/{md_filename.replace(".md", ".html")}">{metadata.title}</a></li>'
+        for (md_filename, metadata) in top_posts
+    )
+    # Fill the template
+    formatted_index = index_template.replace("{POST_LINKS}", post_links)
+    # Write to index.html
+    with open("index.html", "w") as outputfile:
+        outputfile.write(formatted_index)
 
 def process_metadata(raw_metadata: List[str]) -> Metadata:
     fields = ["TITLE", "SUBTITLE", "DATE"]
@@ -29,9 +50,7 @@ def process_metadata(raw_metadata: List[str]) -> Metadata:
     # also never be more than ~5 or so lines...
     for line in raw_metadata:
         for field in fields:
-            # check if the field is in the line, if so then split the line
-            # based on the field= and rstrip it
-            if field in line:
+            if line.split("=")[0] == field:
                 setattr(
                     metadata,
                     field.lower(),
@@ -86,6 +105,7 @@ def read_blog_markdown(filename, template):
         with open(format_path, "w") as outputfile:
             outputfile.write(formatted)
 
+    return metadata
 
 if __name__ == "__main__":
     # get all post markdown files
@@ -94,8 +114,13 @@ if __name__ == "__main__":
     # get the single blog template to reuse
     blog_template = get_blog_template()
 
+    post_metadata: list[tuple[str, Metadata]] = []
+
     # create a formatted page for every blog post
-    for i in posts:
-        if i == "template.md" or ".md" not in i:
+    for filename in posts:
+        if filename == "template.md" or ".md" not in filename:
             continue
-        read_blog_markdown(i, blog_template)
+        metadata = read_blog_markdown(filename, blog_template)
+        post_metadata.append((filename, metadata))
+
+    generate_index(post_metadata)
