@@ -1,0 +1,6 @@
+@import url('shared.css');
+
+body {
+    max-width: 825px;
+    margin: 0 auto
+}
