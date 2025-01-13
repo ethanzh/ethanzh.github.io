@@ -1,5 +1,0 @@
-"""
-TITLE=
-SUBTITLE=
-DATE=
-"""

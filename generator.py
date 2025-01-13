@@ -1,126 +1,147 @@
-import os
-from typing import List
+from datetime import datetime
+import shutil
 import markdown
 from pathlib import Path
-from dataclasses import dataclass, field
-from datetime import datetime
+import os
+
+"""
+Objectives of this script:
+- Input: `blog/YYYY/MM/DD` (Markdown files)
+- Output:
+    - index.html
+    - `posts/YYYY/MM/DD` (HTML files)
+"""
 
 
-@dataclass
-class Metadata:
-    title: str = field(default="")
-    subtitle: str = field(default="")
-    date: str = field(default="")
+class BlogPost:
+    title: str
+    subtitle: str
+    timestamp: datetime
+    html_path: str
+    markdown: str
+    tags: list[str]
+
+    def __init__(
+        self,
+        title: str,
+        subtitle: str,
+        timestamp: datetime,
+        html_path: str,
+        markdown: str,
+        tags: list[str],
+    ) -> None:
+        self.title = title
+        self.subtitle = subtitle
+        self.timestamp = timestamp
+        self.html_path = html_path
+        self.markdown = markdown
+        self.tags = tags
 
 
-def get_blog_template():
-    with open("templates/blog.html", "r") as inputfile:
-        return inputfile.read()
+INPUT_DIR = "blog"
+OUTPUT_DIR = "posts"
 
 
-def get_blog_markdown():
-    return os.listdir("blog")
+def read_blog_posts() -> list[BlogPost]:
+    blog_posts = []
+    input_dir = Path(INPUT_DIR)
 
-def get_index_template():
-    with open("templates/index.html", "r") as inputfile:
-        return inputfile.read()
+    for md_file in input_dir.glob("**/*.md"):
+        with open(md_file, "r") as file:
+            lines = file.readlines()
+            metadata_start = lines.index("```\n") + 1
+            metadata_end = lines.index("```\n", metadata_start)
+            metadata_lines = lines[metadata_start:metadata_end]
 
-def generate_index(posts_metadata: List[tuple[str, Metadata]]):
-    index_template = get_index_template()
-    # Sort posts by date, assuming date format is YYYY/MM/DD
-    sorted_posts = sorted(posts_metadata, key=lambda x: datetime.strptime(x[1].date, "%Y/%m/%d"), reverse=True)
-    # Get top 5 newest posts
-    top_posts = sorted_posts[:5]
-    # Create HTML links for the posts
+            metadata = {}
+            for meta_line in metadata_lines:
+                key, value = meta_line.strip().split("=")
+                metadata[key] = value
+
+            title = metadata["title"]
+            subtitle = metadata["subtitle"]
+            tags = metadata["tags"].split(", ")
+
+            if not title or not subtitle or not tags:
+                raise Exception("Missing required metadata")
+
+            markdown_lines = lines[metadata_end + 1 :]
+            markdown = "\n".join(markdown_lines)
+
+            year, month, day = map(int, md_file.parts[-4:-1])
+            timestamp = datetime(year, month, day)
+            md_filename = md_file.parts[-1]
+            html_filename = md_filename.replace(".md", ".html")
+
+            blog_post = BlogPost(
+                title=title,
+                subtitle=subtitle,
+                timestamp=timestamp,
+                tags=tags,
+                markdown=markdown,
+                html_path=f"{OUTPUT_DIR}/{year}/{month}/{day}/{html_filename}",
+            )
+            blog_posts.append(blog_post)
+
+    return blog_posts
+
+
+def convert_markdown_to_html(markdown_input: str) -> str:
+    parsed_markdown = markdown.markdown(markdown_input)
+    return parsed_markdown
+
+def write_index(blog_posts: list[BlogPost]) -> None:
+    with open("templates/index.html", "r") as file:
+        index_template = file.read() 
+
     post_links = "\n".join(
-        f'<li><a href="posts/{metadata.date}/{md_filename.replace(".md", ".html")}">{metadata.title}</a></li>'
-        for (md_filename, metadata) in top_posts
+        f'<li><a href="{post.html_path}">{post.timestamp.strftime("%Y-%m-%d")} - {post.title}</a></li>'
+        for post in blog_posts
     )
-    # Fill the template
-    formatted_index = index_template.replace("{POST_LINKS}", post_links)
-    # Write to index.html
-    with open("index.html", "w") as outputfile:
-        outputfile.write(formatted_index)
+    index_content = index_template.replace("{post_links}", post_links)
 
-def process_metadata(raw_metadata: List[str]) -> Metadata:
-    fields = ["TITLE", "SUBTITLE", "DATE"]
-    metadata = Metadata()
-    # for every line, iterate through every key
-    # this is not super efficient, but this will
-    # also never be more than ~5 or so lines...
-    for line in raw_metadata:
-        for field in fields:
-            if line.split("=")[0] == field:
-                setattr(
-                    metadata,
-                    field.lower(),
-                    line.split(f"{field}=")[1].rstrip(),
-                )
-
-    return metadata
+    with open("index.html", "w") as output_file:
+        output_file.write(index_content) 
 
 
-def fill_template(metadata: Metadata, body: str, template: str):
+def main() -> None:
+    blog_posts = read_blog_posts()
 
-    subtitle, title, body = (
-        metadata.subtitle,
-        metadata.title,
-        body,
-    )
-    formatted_template = (
-        template.replace("{SUBTITLE}", subtitle)
-        .replace("{TITLE}", title)
-        .replace("{BODY}", body)
-    )
+    posts_dir = Path("posts")
+    if posts_dir.exists() and posts_dir.is_dir():
+        for file in posts_dir.iterdir():
+            if file.is_file():
+                file.unlink()
+            elif file.is_dir():
+                shutil.rmtree(file)
+        posts_dir.rmdir()
 
-    return formatted_template
+    with open("templates/blog.html", "r") as file:
+        post_template = file.read()
 
+    print(f"Found {len(blog_posts)} posts")
+    for blog_post in blog_posts:
+        html_str = convert_markdown_to_html(blog_post.markdown)
 
-def read_blog_markdown(filename, template):
-    with open(f"blog/{filename}", "r") as inputfile:
-        lines = inputfile.readlines()
+        formatted_html_str = (
+            post_template.replace("{title}", blog_post.title)
+            .replace("{subtitle}", blog_post.subtitle)
+            .replace("{body}", html_str)
+            .replace("{timestamp}", blog_post.timestamp.strftime("%Y-%m-%d"))
+            .replace("{tags}", ", ".join(blog_post.tags))
+        )
 
-        # grab the metadata from the top of each markdown file
-        break_indices = [i for i, val in enumerate(lines) if val == '"""\n']
-        assert len(break_indices) == 2, "only two seperators should exist"
-        lower_meta, upper_meta = break_indices[0] + 1, break_indices[1]
+        output_path = blog_post.html_path
+        output_dir = Path(output_path).parent
+        output_dir.mkdir(parents=True, exist_ok=True)
+        with open(output_path, "w") as output_file:
+            output_file.write(formatted_html_str)
 
-        # process lines, grab relevant information
-        metadata = process_metadata(lines[lower_meta:upper_meta])
+    num_posts_on_index = 5
+    sorted_blog_posts = sorted(blog_posts, key=lambda post: post.timestamp, reverse=True)
+    newest_blog_posts = sorted_blog_posts[:num_posts_on_index] if len(sorted_blog_posts) >= num_posts_on_index else sorted_blog_posts
+    write_index(newest_blog_posts)
 
-        # join the remaining lines together, format into HTML
-        post_body = "".join(lines[upper_meta + 1 :])
-        body_html = markdown.markdown(post_body)
-
-        # create directory structure based on date
-        date = metadata.date
-        Path(f"posts/{date}").mkdir(parents=True, exist_ok=True)
-        filename = filename.replace(".md", "")
-
-        # append date path with formatted title
-        format_path = f"posts/{date}/{filename}.html"
-
-        # write to html file at given directory
-        formatted = fill_template(metadata, body_html, template)
-        with open(format_path, "w") as outputfile:
-            outputfile.write(formatted)
-
-    return metadata
 
 if __name__ == "__main__":
-    # get all post markdown files
-    posts = get_blog_markdown()
-
-    # get the single blog template to reuse
-    blog_template = get_blog_template()
-
-    post_metadata: list[tuple[str, Metadata]] = []
-
-    # create a formatted page for every blog post
-    for filename in posts:
-        if filename == "template.md" or ".md" not in filename:
-            continue
-        metadata = read_blog_markdown(filename, blog_template)
-        post_metadata.append((filename, metadata))
-
-    generate_index(post_metadata)
+    main()
