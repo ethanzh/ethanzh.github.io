@@ -90,9 +90,10 @@ def convert_markdown_to_html(markdown_input: str) -> str:
     parsed_markdown = markdown.markdown(markdown_input)
     return parsed_markdown
 
+
 def write_index(blog_posts: list[BlogPost]) -> None:
     with open("templates/index.html", "r") as file:
-        index_template = file.read() 
+        index_template = file.read()
 
     post_links = "\n".join(
         f'<li><a href="{post.html_path}">{post.timestamp.strftime("%Y-%m-%d")} - {post.title}</a></li>'
@@ -101,7 +102,7 @@ def write_index(blog_posts: list[BlogPost]) -> None:
     index_content = index_template.replace("{post_links}", post_links)
 
     with open("index.html", "w") as output_file:
-        output_file.write(index_content) 
+        output_file.write(index_content)
 
 
 def main() -> None:
@@ -147,8 +148,14 @@ def main() -> None:
     # not doing anything with tags yet...
 
     num_posts_on_index = 5
-    sorted_blog_posts = sorted(blog_posts, key=lambda post: post.timestamp, reverse=True)
-    newest_blog_posts = sorted_blog_posts[:num_posts_on_index] if len(sorted_blog_posts) >= num_posts_on_index else sorted_blog_posts
+    sorted_blog_posts = sorted(
+        blog_posts, key=lambda post: post.timestamp, reverse=True
+    )
+    newest_blog_posts = (
+        sorted_blog_posts[:num_posts_on_index]
+        if len(sorted_blog_posts) >= num_posts_on_index
+        else sorted_blog_posts
+    )
     write_index(newest_blog_posts)
 
 
