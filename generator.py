@@ -116,8 +116,8 @@ def main() -> None:
                 shutil.rmtree(file)
         posts_dir.rmdir()
 
-    with open("templates/blog.html", "r") as file:
-        post_template = file.read()
+    with open("templates/blog.html", "r") as post_template_file:
+        post_template = post_template_file.read()
 
     print(f"Found {len(blog_posts)} posts")
     for blog_post in blog_posts:
@@ -136,6 +136,15 @@ def main() -> None:
         output_dir.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w") as output_file:
             output_file.write(formatted_html_str)
+
+    tags: dict[str, list[BlogPost]] = {}
+    for blog_post in blog_posts:
+        for post_tag in blog_post.tags:
+            if post_tag not in tags:
+                tags[post_tag] = [blog_post]
+            else:
+                tags[post_tag].append(blog_post)
+    # not doing anything with tags yet...
 
     num_posts_on_index = 5
     sorted_blog_posts = sorted(blog_posts, key=lambda post: post.timestamp, reverse=True)
