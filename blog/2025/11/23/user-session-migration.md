@@ -2,6 +2,7 @@
 title=More Performant User Sessions
 subtitle=Migrating from MySQL to Redis-backed user sessions
 tags=security-engineering, user-sessions, redis
+hidden=1
 ```
 
 At work we ran into a situation where lookups for user sessions in our

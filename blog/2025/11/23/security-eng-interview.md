@@ -2,6 +2,7 @@
 title=Interviewing Security Software Engineers
 subtitle=Scattered thoughts on how to approach hiring security engineer #2+ at a startup
 tags=security-engineering, hiring
+hidden=1
 ```
 
 I played the role as founding/solo security engineer at Lumos for around 3
