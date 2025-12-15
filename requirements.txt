@@ -2,3 +2,4 @@ markdown
 types-Markdown
 black
 pre-commit
+pygments
