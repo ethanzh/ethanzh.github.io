@@ -1,6 +1,7 @@
 from datetime import datetime
 import shutil
 import markdown
+from markdown.extensions import codehilite, fenced_code
 from pathlib import Path
 import os
 
@@ -48,25 +49,38 @@ def read_blog_posts() -> list[BlogPost]:
 
     for md_file in input_dir.glob("**/*.md"):
         with open(md_file, "r") as file:
-            lines = file.readlines()
-            metadata_start = lines.index("```\n") + 1
-            metadata_end = lines.index("```\n", metadata_start)
-            metadata_lines = lines[metadata_start:metadata_end]
-
+            content = file.read()
+            
+            # Parse metadata block (starts with ```)
+            # Find the closing ``` starting from position 3 to skip the opening ```
+            if not content.startswith("```"):
+                raise Exception(f"Expected metadata block starting with ``` in {md_file}")
+            
+            end_idx = content.find("```", 3)
+            if end_idx == -1:
+                raise Exception(f"Malformed metadata in {md_file}")
+            
+            metadata_block = content[3:end_idx].strip()
+            markdown_content = content[end_idx + 3:].lstrip("\n")
+            
+            # Parse key=value metadata
             metadata = {}
-            for meta_line in metadata_lines:
-                key, value = meta_line.strip().split("=")
-                metadata[key] = value
+            for meta_line in metadata_block.split("\n"):
+                if "=" in meta_line:
+                    key, value = meta_line.strip().split("=", 1)
+                    metadata[key] = value
 
-            title = metadata["title"]
-            subtitle = metadata["subtitle"]
-            tags = metadata["tags"].split(", ")
+            title = metadata.get("title", "")
+            subtitle = metadata.get("subtitle", "")
+            tags_str = metadata.get("tags", "")
+            tags = [tag.strip() for tag in tags_str.split(",")] if tags_str else []
+            hidden = metadata.get("hidden", "0") == "1"
+            if hidden:
+                print(f"Skipping hidden post {title}")
+                continue
 
             if not title or not subtitle or not tags:
-                raise Exception("Missing required metadata")
-
-            markdown_lines = lines[metadata_end + 1 :]
-            markdown = "\n".join(markdown_lines)
+                raise Exception(f"Missing required metadata in {md_file}")
 
             year, month, day = map(int, md_file.parts[-4:-1])
             timestamp = datetime(year, month, day)
@@ -78,7 +92,7 @@ def read_blog_posts() -> list[BlogPost]:
                 subtitle=subtitle,
                 timestamp=timestamp,
                 tags=tags,
-                markdown=markdown,
+                markdown=markdown_content,
                 html_path=f"{OUTPUT_DIR}/{year}/{month}/{day}/{html_filename}",
             )
             blog_posts.append(blog_post)
@@ -87,7 +101,17 @@ def read_blog_posts() -> list[BlogPost]:
 
 
 def convert_markdown_to_html(markdown_input: str) -> str:
-    parsed_markdown = markdown.markdown(markdown_input)
+    # Configure markdown with code highlighting extensions
+    md = markdown.Markdown(
+        extensions=[
+            "fenced_code",
+            codehilite.CodeHiliteExtension(
+                use_pygments=True,
+                css_class="highlight",
+            ),
+        ],
+    )
+    parsed_markdown = md.convert(markdown_input)
     return parsed_markdown
 
 
