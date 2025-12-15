@@ -74,6 +74,10 @@ def read_blog_posts() -> list[BlogPost]:
             subtitle = metadata.get("subtitle", "")
             tags_str = metadata.get("tags", "")
             tags = [tag.strip() for tag in tags_str.split(",")] if tags_str else []
+            hidden = metadata.get("hidden", "0") == "1"
+            if hidden:
+                print(f"Skipping hidden post {title}")
+                continue
 
             if not title or not subtitle or not tags:
                 raise Exception(f"Missing required metadata in {md_file}")
